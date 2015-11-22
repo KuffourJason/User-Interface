@@ -1,6 +1,7 @@
 
 
 import java.util.ArrayList;
+
 import com.google.gson.*;
 
 
@@ -94,6 +95,27 @@ public class JSONhandler {
 		
 		return abcd;
 	}
+	
+	
+	/**
+	 * @param array - the json field that contains the array
+	 * @param field - the json field that is in each array element to be extracted
+	 * @return - An arraylist of strings containing all the field values in the array
+	 */
+	public ArrayList<String> extractFromArray( String array, String field){
+		if( this.instance.getAsJsonArray(array).isJsonArray()){
+			
+			JsonArray temp = this.instance.getAsJsonArray(array);
+			ArrayList<String> re = new ArrayList<String>();
+			
+			for(int i = 0; i < temp.size(); i++){
+				re.add(temp.get(i).getAsJsonObject().get(field).getAsString());
+			}
+			return re;
+		}
+		return new ArrayList<String>();
+	}
+	
 	
 	/**
 	 * @param data - An arraylist
