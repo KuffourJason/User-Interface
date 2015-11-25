@@ -74,7 +74,7 @@ public class GUI {
 	private void initialize() {
 		frmEyeOfThe = new JFrame();
 		frmEyeOfThe.setResizable(false);
-		frmEyeOfThe.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\jay\\workspace\\GUI\\src\\Eye Of The Tiger Logo.png"));
+		frmEyeOfThe.setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/pics/Eye Of The Tiger Logo.png")));
 		frmEyeOfThe.setTitle("Eye of The Tiger");
 		frmEyeOfThe.setBounds(100, 100, 436, 310);
 		frmEyeOfThe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -190,7 +190,7 @@ public class GUI {
 			public void componentShown(ComponentEvent e) {
 				/////////////////////////////////////////////////////////////////////////////
 				DefaultTableModel dtm = new DefaultTableModel(0, 0);
-				String header[] = {"First Name", "Last Name", "Timetable"};
+				String header[] = {"First Name", "Last Name", "Timetable" };
 				dtm.setColumnIdentifiers(header);
 				stu_view.setModel(dtm);
 				dtm.addRow(header);

@@ -10,8 +10,8 @@ public class Call {
 	private CloudantClient client;
 	
 	public Call(){
-		String account = System.getenv("account");
-		String pass =    System.getenv("password");
+		String account = "eyeofthetiger";//System.getenv("account");
+		String pass =    "eng40000";//System.getenv("password");
     	this.client = new CloudantClient(account, account, pass);
 	}
 	
@@ -90,16 +90,16 @@ public class Call {
 			add.addData("_id", fin);
 			add.addData("user_first_name", first);
 			add.addData("user_last_name", last);
-			add.addData("user_number_of_absences", "");
-			add.addData("user_number_of_lates", "");
+			add.addData("user_number_of_absences", "0");
+			add.addData("user_number_of_lates", "0");
 			add.addData("user_timetable", table);
 			
 			JSONhandler add_dyn = new JSONhandler(new JsonObject());
 			add_dyn.addData("_id", fin);
-			add_dyn.addData("user_status", "");
-			add_dyn.addData("user_current_class", "");
-			add_dyn.addData("user_location", "");
-			add_dyn.addData("user_daily_attendance", "");
+			add_dyn.addData("user_status", "0");
+			add_dyn.addData("user_current_class", "0");
+			add_dyn.addData("user_location", "0");
+			add_dyn.addData("user_daily_attendance", "0");
 			
 			db_static.save(add.instance);
 			db_dynamic.save(add_dyn.instance);
@@ -124,7 +124,7 @@ public class Call {
 			add.addData("_id", fin);
 			add.addData("admin_first_name", first);
 			add.addData("admin_last_name", last);
-			add.addData("admin_location", "");
+			add.addData("admin_location", "0");
 			add.addData("admin_timetable", table);
 
 			db.save(add.instance);			
