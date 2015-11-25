@@ -10,8 +10,8 @@ public class Call {
 	private CloudantClient client;
 	
 	public Call(){
-		String account = "eyeofthetiger";//System.getenv("account");
-		String pass =    "eng40000";//System.getenv("password");
+		String account = System.getenv("account");
+		String pass =    System.getenv("password");
     	this.client = new CloudantClient(account, account, pass);
 	}
 	
