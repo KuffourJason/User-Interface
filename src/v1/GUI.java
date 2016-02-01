@@ -1,3 +1,5 @@
+package v1;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,7 +19,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JTable;
-
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 

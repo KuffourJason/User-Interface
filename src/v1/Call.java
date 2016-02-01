@@ -1,5 +1,8 @@
+package v1;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
