@@ -8,11 +8,11 @@ import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
 
 
-public class Call {
+public class Model {
 	
 	private CloudantClient client;
 	
-	public Call(){
+	public Model(){
 		String account = System.getenv("account");
 		String pass =    System.getenv("password");
     	this.client = new CloudantClient(account, account, pass);
