@@ -8,7 +8,12 @@ import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
 
-public class Students {
+/**
+ * @author jason
+ *
+ * This class handles all the information related to the students db 
+ */
+public class Students implements Runnable {
 
 	private Database dynam_db;
 	private Database stati_db;
@@ -31,7 +36,7 @@ public class Students {
 	/**
 	 * This method pulls all the dynamic and static information from the database
 	 */
-	private void getData(){
+	public void getData(){
 		//gets list of all students in the database and stores the result in an arraylist
 		JsonObject listDyn = new JsonObject();
     	listDyn = dynam_db.findAny(listDyn.getClass(), "https://eyeofthetiger.cloudant.com/dynamic_user_info/_all_docs");
@@ -81,9 +86,8 @@ public class Students {
 		add.addData("user_id", studentId);
 		add.addData("user_number_of_absences", "0");
 		add.addData("user_number_of_lates", "0");
+		add.addData("user_timetable", timetable); 
 		
-		/////////////////////////////////////////////////////////////////////
-		//add.addData("user_timetable", table); /////////////////////////////
 		/////////////////////////////////////////////////////////////////////
 		///DO CLASS DATABASE FIRST AND ADD A METHOD FINDS A CLASS LOCATION BY COURSE ADD
 		///THEN USE THAT METHOD TO ADD CLASS LOCATIONS TO THE TIMETABLE ARRAY AFTER EVERY LOCATION
@@ -123,12 +127,6 @@ public class Students {
 		return false;
 	}
 	
-	/**
-	 * Public method for updating the maps and stuff from the database
-	 */
-	public void update(){
-		this.getData();
-	}
 	
 	public Map<String, JSONhandler> getDynamicInfo(){
 		return this.dynamic;
@@ -136,6 +134,11 @@ public class Students {
 	
 	public Map<String, JSONhandler> getStaticInfo(){
 		return this.stati;
+	}
+
+	@Override
+	public void run() {
+		this.getData();
 	}
 	
 }
