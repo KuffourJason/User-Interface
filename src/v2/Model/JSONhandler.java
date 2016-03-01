@@ -1,4 +1,4 @@
-package v2;
+package v2.Model;
 
 
 
@@ -126,7 +126,7 @@ public class JSONhandler {
 	private String toString( ArrayList<String> data ){
 		String fin = "";
 		for( String i: data){
-			fin = fin + "," + i;
+			fin = fin + "/" + i;
 		}
 		fin = fin.substring(1, fin.length() );
 		return fin;
