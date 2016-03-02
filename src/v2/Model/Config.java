@@ -1,5 +1,7 @@
 package v2.Model;
 
+import java.util.ArrayList;
+
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
@@ -45,6 +47,11 @@ public class Config implements Runnable{
 		return Integer.parseInt( this.data.toString("num_periods") );
 	}
 	
+	public ArrayList<Integer> getPeriodTimes(){
+		this.data.toArray(null);
+		return null;
+	}
+	
 	/**
 	 * @return - the school start time
 	 * This method returns the start time of the school
@@ -76,6 +83,13 @@ public class Config implements Runnable{
 	}
 	
 	/**
+	 * @return - the starting time of the lunch period
+	 */
+	public String getLunchStart(){
+		return this.data.toString("lunch_start");
+	}
+	
+	/**
 	 * @param numLunches - the number of lunch periods that the school will have
 	 * @param lunchLength - the length of one lunch period
 	 * @param schEndHour - the hour when school should ends
@@ -84,10 +98,11 @@ public class Config implements Runnable{
 	 * @param schStartMinute - the minute school should start
 	 * @param numPeriod - the number of periods that the configuration file
 	 * should be updated with
+	 * @param grace - the time interval between the end and start of a new period
 	 * 
 	 * updates the configurations file in the database
 	 */
-	public void update(int numLunches, int lunchLength, int schEndHour, int schEndMinute, int schStartHour, int schStartMinute, int numPeriod){
+	public void update(int numLunches, int lunchLength, int schEndHour, int schEndMinute, int schStartHour, int schStartMinute, int numPeriod, int grace){
 		
 		this.data.addData("num_lunches", numLunches + "");
 		this.data.addData("lunch_length", lunchLength + "");
@@ -101,6 +116,7 @@ public class Config implements Runnable{
 		//updates the num_periods data field in the configuration field
 		this.data.addData("num_periods", numPeriod + "");
 		
+		this.data.addData("grace_period", grace + "");		
 		configDB.update(this.data.instance);
 	}
 

@@ -109,7 +109,6 @@ public class Model {
 		else{
 			result = false;
 		}
-		
 		return result;
 	}
 	
@@ -217,26 +216,58 @@ public class Model {
 		return this.courses.getCourses();
 	}
 	
+	/**
+	 * @param numLunches - the new number of lunch periods
+	 * @param lunchLength - the length of each lunch period
+	 * @param schEndHour - the hour the school ends
+	 * @param schEndMinute - the minute the school ends
+	 * @param schStartHour - the hour the school starts
+	 * @param schStartMinute - the minute the school starts
+	 * @param numPeriod - the number of periods in the school
+	 * @param grace - the time between the end and start of a period
+	 */
+	public void updateConfig(int numLunches, int lunchLength, int schEndHour, int schEndMinute, int schStartHour, int schStartMinute, int numPeriod, int grace){
+		this.config.update(numLunches, lunchLength, schEndHour, schEndMinute, schStartHour, schStartMinute, numPeriod, grace);			
+	}
+	
+	/**
+	 * @return - the number of period in the school
+	 */
 	public int getConfigNumPeriods(){
 		return this.config.getNumPeriods();
 	}
 	
+	/**
+	 * @return - the time the school starts
+	 */
 	public String getConfigSchoolStart(){
 		return this.config.getSchoolStart();
 	}
 	
+	/**
+	 * @return - the time the school ends
+	 */
 	public String getConfigSchoolEnd(){
 		return this.config.getSchoolEnd();
 	}
 
+	/**
+	 * @return - the number of lunches in the school
+	 */
 	public int getConfigNumLunches(){
 		return this.config.getNumLunches();
 	}
 
+	/**
+	 * @return - the length of each lunch period
+	 */
 	public int getConfigLunchLength(){
 		return this.config.getLunchLength();
 	}
 
+	
+	
+	
 	public static void main(String args[]){
 		Model model = new Model();
 		model.getData();
@@ -254,5 +285,8 @@ public class Model {
 		for( String h: hold.keySet() ){
 			System.out.println(hold.get(h).size());
 		}
+		
+		System.out.println( model.deleteStudent("23:23:23:23:23"));
 	}
+	
 }
