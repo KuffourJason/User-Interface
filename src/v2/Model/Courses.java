@@ -6,7 +6,7 @@ import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
 
-import v1.JSONhandler;
+import v2.Model.JSONhandler;
 
 /**
  * @author jason

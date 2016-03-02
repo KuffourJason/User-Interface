@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
  * This classes handles all things related to the configuration of the beacon software.
  * These include updating and pulling data from the database.
  */
-public class Config {
+public class Config implements Runnable{
 	
 	private Database configDB;		//the database that holds the configurations database
 	private JSONhandler data;       //the configuration data obtained from the database
@@ -38,7 +38,6 @@ public class Config {
 	
 	/**
 	 * @return - the number of periods in the school
-	 * 
 	 * This methods returns the number of periods specified in the config database
 	 */
 	public int getNumPeriods(){
@@ -47,53 +46,19 @@ public class Config {
 	}
 	
 	/**
-	 * @param period - the number of periods that the configuration file
-	 * should be updated with
-	 */
-	public void upNumPeriods(int period){
-		//updates the num_periods data field in the configuration field
-		this.data.addData("num_periods", period + "");
-	}
-	
-	/**
 	 * @return - the school start time
-	 * 
 	 * This method returns the start time of the school
 	 */
 	public String getSchoolStart(){
 		return this.data.toString("school_start");
 	}
 	
-	
-	/**
-	 * @param hour - the hour when school should start
-	 * @param minute - the minute school should start
-	 * 
-	 * This method updates the start time of the school
-	 */
-	public void upSchoolStart( int hour, int minute){
-		String fin = hour + ":" + minute;		//combines the hour and minute into time format
-		this.data.addData("school_start", fin); //updates the field accordingly
-	}
-	
 	/**
 	 * @return - the school end time
-	 * 
 	 * This method returns the end time of the school
 	 */
 	public String getSchoolEnd(){
 		return this.data.toString("school_end");
-	}
-	
-	/**
-	 * @param hour - the hour when school should ends
-	 * @param minute - the minute school should ends
-	 * 
-	 * This method updates the ends time of the school
-	 */
-	public void upSchoolEnd( int hour, int minute){
-		String fin = hour + ":" + minute;		//combines the hour and minute into time format
-		this.data.addData("school_end", fin);   //updates the field accordingly
 	}
 	
 	/**
@@ -104,15 +69,6 @@ public class Config {
 	}
 	
 	/**
-	 * @param count - the number of lunch periods that the school will have
-	 * 
-	 * This method updates the number of lunch periods the school will have
-	 */
-	public void upNumLunches( int count ){
-		this.data.addData("num_lunches", count + "");
-	}
-	
-	/**
 	 * @return - the length of one lunch period
 	 */
 	public int getLunchLength(){
@@ -120,19 +76,37 @@ public class Config {
 	}
 	
 	/**
-	 * @param minute - the length of one lunch period
+	 * @param numLunches - the number of lunch periods that the school will have
+	 * @param lunchLength - the length of one lunch period
+	 * @param schEndHour - the hour when school should ends
+	 * @param schEndMinute - the minute school should ends
+	 * @param schStartHour - the hour when school should start
+	 * @param schStartMinute - the minute school should start
+	 * @param numPeriod - the number of periods that the configuration file
+	 * should be updated with
 	 * 
-	 * Sets the length of a lunch period
+	 * updates the configurations file in the database
 	 */
-	public void upLunchLength( int minute ){
-		this.data.addData("lunch_length", minute + "");
-	}
-	
-
-	/**
-	 * Commit the changes to the main database on cloudant
-	 */
-	public void commitChanges(){
+	public void update(int numLunches, int lunchLength, int schEndHour, int schEndMinute, int schStartHour, int schStartMinute, int numPeriod){
+		
+		this.data.addData("num_lunches", numLunches + "");
+		this.data.addData("lunch_length", lunchLength + "");
+		
+		String finEnd = schEndHour + ":" + schEndMinute;		//combines the hour and minute into time format
+		this.data.addData("school_end", finEnd);   //updates the field accordingly
+		
+		String finStart = schStartHour + ":" + schStartMinute;		//combines the hour and minute into time format
+		this.data.addData("school_start", finStart); //updates the field accordingly
+		
+		//updates the num_periods data field in the configuration field
+		this.data.addData("num_periods", numPeriod + "");
+		
 		configDB.update(this.data.instance);
+	}
+
+	
+	@Override
+	public void run() {
+		this.getData();		
 	}
 }

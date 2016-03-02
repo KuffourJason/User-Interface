@@ -3,7 +3,7 @@ package v2.Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import v1.JSONhandler;
+import v2.Model.JSONhandler;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
@@ -16,10 +16,11 @@ import com.google.gson.JsonObject;
 public class Admins implements Runnable{
 
 	private Database admin_db;
-	/**
-	 * 
-	 */
 	private Map<String, JSONhandler> admins;
+	
+	//to be used for searching
+	private ArrayList<String> macs;
+	private ArrayList<String> ids;
 	
 	/**
 	 * @param con - The Cloudant database to connect to 
@@ -91,25 +92,25 @@ public class Admins implements Runnable{
 	 * @param id - the new admni's id
 	 * @return - a boolean indicating the id is already in use
 	 */
-	public boolean invalidId(String id){
-		return !this.admin_db.findByIndex("\"selector\": { \"user_id\": \" "+ id + "\" }" , JsonObject.class).isEmpty();
+	public boolean isValidId(String id){
+		return this.admin_db.findByIndex("\"selector\": { \"user_id\": \" "+ id + "\" }" , JsonObject.class).isEmpty();
 	}
 	
 	/**
 	 * @param mac - the mac address of the bluetooth tracking card
 	 * @return - a boolean indicating whether the mac address is already in use.
 	 */
-	public boolean invalidMac(String mac){
+	public boolean isValidMac(String mac){
 		
 		//checks if the mac address is already in use
 		if( this.admin_db.contains(mac) ){
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	
-	public Map<String, JSONhandler> getDynamicInfo(){
+	public Map<String, JSONhandler> getAdminInfo(){
 		return this.admins;
 	}
 	

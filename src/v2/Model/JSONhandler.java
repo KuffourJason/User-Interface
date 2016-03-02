@@ -90,7 +90,7 @@ public class JSONhandler {
 		
 		if( this.instance.has(datafield) ){
 			String a = this.instance.get(datafield).getAsString().toString();
-			String c[] = a.split(",");
+			String c[] = a.split("/");
 			
 			for( String f: c){	abcd.add(f); }
 		}

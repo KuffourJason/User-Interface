@@ -3,7 +3,7 @@ package v2.Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import v1.JSONhandler;
+import v2.Model.JSONhandler;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
@@ -55,7 +55,6 @@ public class Students implements Runnable {
     	}
 	}
 	
-	
 	/**
 	 * @param id - The student with id/mac address id to be deleted from the database
 	 * 
@@ -67,7 +66,6 @@ public class Students implements Runnable {
 		this.dynam_db.remove(this.dynamic.remove(id).instance);  		//removes the student with id from the dynamic database
 		this.stati_db.remove(this.stati.remove(id).instance  ); 		//removes the student with id from the static database
 	}
-	
 	
 	/**
 	 * @param macAddress	- the new student's bluetooth tracking tag
@@ -87,12 +85,7 @@ public class Students implements Runnable {
 		add.addData("user_number_of_absences", "0");
 		add.addData("user_number_of_lates", "0");
 		add.addData("user_timetable", timetable); 
-		
-		/////////////////////////////////////////////////////////////////////
-		///DO CLASS DATABASE FIRST AND ADD A METHOD FINDS A CLASS LOCATION BY COURSE ADD
-		///THEN USE THAT METHOD TO ADD CLASS LOCATIONS TO THE TIMETABLE ARRAY AFTER EVERY LOCATION
-		///THEN UPDATE JSONHANDLER TO APPROPIATELY PARSE THE TIMETABLE
-		
+				
 		//adds the student to the dynamic database info
 		JSONhandler add_dyn = new JSONhandler(new JsonObject());
 		add_dyn.addData("_id", macAddress);
@@ -110,28 +103,33 @@ public class Students implements Runnable {
 	 * @param id - the new student's id
 	 * @return - a boolean indicating the id is already in use
 	 */
-	public boolean invalidId(String id){
-		return !this.stati_db.findByIndex("\"selector\": { \"user_id\": \" "+ id + "\" }" , JsonObject.class).isEmpty();
+	public boolean isValidId(String id){
+		return this.stati_db.findByIndex("\"selector\": { \"user_id\": \" "+ id + "\" }" , JsonObject.class).isEmpty();
 	}
 	
 	/**
 	 * @param mac - the mac address of the bluetooth tracking card
 	 * @return - a boolean indicating whether the mac address is already in use.
 	 */
-	public boolean invalidMac(String mac){
+	public boolean isValidMac(String mac){
 		
 		//checks if the mac address is already in use
 		if( this.dynam_db.contains(mac) || this.stati_db.contains(mac) ){
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
-	
+	/**
+	 * @return - a map containing the list of all dynamic student info in the db
+	 */
 	public Map<String, JSONhandler> getDynamicInfo(){
 		return this.dynamic;
 	}
 	
+	/**
+	 * @return - a map containing the list of all static student info the db
+	 */
 	public Map<String, JSONhandler> getStaticInfo(){
 		return this.stati;
 	}
