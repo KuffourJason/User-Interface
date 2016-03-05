@@ -39,17 +39,17 @@ public class Config implements Runnable{
 	}
 	
 	/**
-	 * @return - the number of periods in the school
-	 * This methods returns the number of periods specified in the config database
+	 * @return - the start times of the four periods in the school
+	 * This methods returns the start times of each of the four periods
 	 */
-	public int getNumPeriods(){
+	public ArrayList<Integer> getPeriodStart(){
 		//obtains the number of periods in the config database
-		return Integer.parseInt( this.data.toString("num_periods") );
-	}
-	
-	public ArrayList<Integer> getPeriodTimes(){
-		this.data.toArray(null);
-		return null;
+		ArrayList<Integer> t = new ArrayList<Integer>();
+		t.add( Integer.parseInt( this.data.toString("first_period_start")) );
+		t.add( Integer.parseInt( this.data.toString("second_period_start")) );
+		t.add( Integer.parseInt( this.data.toString("third_period_start")) );
+		t.add( Integer.parseInt( this.data.toString("fourth_period_start")) );
+		return t;
 	}
 	
 	/**
@@ -69,13 +69,6 @@ public class Config implements Runnable{
 	}
 	
 	/**
-	 * @return - the number of lunch periods  the school currently has
-	 */
-	public int getNumLunches(){
-		return Integer.parseInt( this.data.toString("num_lunches") );
-	}
-	
-	/**
 	 * @return - the length of one lunch period
 	 */
 	public int getLunchLength(){
@@ -90,31 +83,28 @@ public class Config implements Runnable{
 	}
 	
 	/**
-	 * @param numLunches - the number of lunch periods that the school will have
-	 * @param lunchLength - the length of one lunch period
-	 * @param schEndHour - the hour when school should ends
-	 * @param schEndMinute - the minute school should ends
-	 * @param schStartHour - the hour when school should start
-	 * @param schStartMinute - the minute school should start
-	 * @param numPeriod - the number of periods that the configuration file
-	 * should be updated with
-	 * @param grace - the time interval between the end and start of a new period
-	 * 
+	 * @param lunchLength - the length of the lunch period
+	 * @param schoolEnd - the time the school ends
+	 * @param schoolStart	- the time school starts
+	 * @param grace	- the time between the start and end of a class
+	 * @param firstStart	- the start time of the first period
+	 * @param secondStart	- the start time of the second period
+	 * @param thirdStart	- 
+	 * @param fourthStart
+	 *
 	 * updates the configurations file in the database
 	 */
-	public void update(int numLunches, int lunchLength, int schEndHour, int schEndMinute, int schStartHour, int schStartMinute, int numPeriod, int grace){
+	public void update(int lunchLength, String schoolEnd, String schoolStart, int grace, String firstStart, String secondStart, String thirdStart, String fourthStart){
 		
-		this.data.addData("num_lunches", numLunches + "");
 		this.data.addData("lunch_length", lunchLength + "");
-		
-		String finEnd = schEndHour + ":" + schEndMinute;		//combines the hour and minute into time format
-		this.data.addData("school_end", finEnd);   //updates the field accordingly
-		
-		String finStart = schStartHour + ":" + schStartMinute;		//combines the hour and minute into time format
-		this.data.addData("school_start", finStart); //updates the field accordingly
+		this.data.addData("school_end", schoolEnd);   //updates the field accordingly
+		this.data.addData("school_start", schoolStart); //updates the field accordingly
 		
 		//updates the num_periods data field in the configuration field
-		this.data.addData("num_periods", numPeriod + "");
+		this.data.addData("first_period_start", firstStart);
+		this.data.addData("second_period_start", firstStart);
+		this.data.addData("third_period_start", firstStart);
+		this.data.addData("fourth_period_start", firstStart);
 		
 		this.data.addData("grace_period", grace + "");		
 		configDB.update(this.data.instance);

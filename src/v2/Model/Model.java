@@ -3,6 +3,7 @@ package v2.Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.cloudant.client.api.CloudantClient;
 
 /**
@@ -217,24 +218,24 @@ public class Model {
 	}
 	
 	/**
-	 * @param numLunches - the new number of lunch periods
-	 * @param lunchLength - the length of each lunch period
-	 * @param schEndHour - the hour the school ends
-	 * @param schEndMinute - the minute the school ends
-	 * @param schStartHour - the hour the school starts
-	 * @param schStartMinute - the minute the school starts
-	 * @param numPeriod - the number of periods in the school
-	 * @param grace - the time between the end and start of a period
+	 * @param lunchLength - the length of the lunch period
+	 * @param schoolEnd - the time the school ends
+	 * @param schoolStart	- the time school starts
+	 * @param grace	- the time between the start and end of a class
+	 * @param firstStart	- the start time of the first period
+	 * @param secondStart	- the start time of the second period
+	 * @param thirdStart	- 
+	 * @param fourthStart
 	 */
-	public void updateConfig(int numLunches, int lunchLength, int schEndHour, int schEndMinute, int schStartHour, int schStartMinute, int numPeriod, int grace){
-		this.config.update(numLunches, lunchLength, schEndHour, schEndMinute, schStartHour, schStartMinute, numPeriod, grace);			
+	public void updateConfig(int lunchLength, String schoolEnd, String schoolStart, int grace, String firstStart, String secondStart, String thirdStart, String fourthStart){
+		this.config.update(lunchLength, schoolEnd, schoolStart, grace, firstStart, secondStart, thirdStart, fourthStart);			
 	}
 	
 	/**
-	 * @return - the number of period in the school
+	 * @return - the start time of all four periods
 	 */
-	public int getConfigNumPeriods(){
-		return this.config.getNumPeriods();
+	public ArrayList<Integer> getConfigPeriodStart(){
+		return this.config.getPeriodStart();
 	}
 	
 	/**
@@ -252,21 +253,12 @@ public class Model {
 	}
 
 	/**
-	 * @return - the number of lunches in the school
-	 */
-	public int getConfigNumLunches(){
-		return this.config.getNumLunches();
-	}
-
-	/**
 	 * @return - the length of each lunch period
 	 */
 	public int getConfigLunchLength(){
 		return this.config.getLunchLength();
 	}
 
-	
-	
 	
 	public static void main(String args[]){
 		Model model = new Model();
