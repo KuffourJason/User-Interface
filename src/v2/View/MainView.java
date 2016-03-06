@@ -3,7 +3,7 @@ package v2.View;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
-public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
+public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
 {
     public QAction actionExit;
     public QAction actionLogout;
@@ -23,7 +23,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
     public QLabel invalidLogin;
     public QWidget bottomBar;
     public QToolButton logoutButton;
-    public QPushButton refreshButton;
+    public QToolButton refreshButton;
     public QToolButton searchButton;
     public QToolButton settingButton;
     public QToolButton fillButton;
@@ -39,7 +39,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
     public QScrollArea couScroll;
     public QWidget cScrollWidget;
     public QVBoxLayout verticalLayout_3;
-    public QPushButton pushButton;
+    public QPushButton addCourse;
     public QWidget studentsTab;
     public QWidget stuTabBack;
     public QScrollArea stuScroll;
@@ -49,8 +49,13 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
     public QMenuBar menubar;
     public QMenu fileMenu;
     public QMenu optionsMenu;
-
-    public Ui_MainWindow() { super(); }
+    
+    public Settings settings;
+    public New_student ns;
+    public New_admin na;
+    public New_course nc;
+    
+    public MainView() { super(); }
 
     public void setupUi(QMainWindow MainWindow)
     {
@@ -64,14 +69,14 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         MainWindow.setMaximumSize(new QSize(696, 560));
         MainWindow.setSizeIncrement(new QSize(1, 1));
         MainWindow.setCursor(new QCursor(Qt.CursorShape.ArrowCursor));
-        MainWindow.setWindowIcon(new QIcon(new QPixmap("../../../.designer/backup/ic_launcher-web.png")));
+        MainWindow.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png"))); ///////////////////////////////////
         MainWindow.setWindowOpacity(5);
         MainWindow.setLayoutDirection(com.trolltech.qt.core.Qt.LayoutDirection.LeftToRight);
         MainWindow.setAutoFillBackground(false);
         MainWindow.setStyleSheet("");
         actionExit = new QAction(MainWindow);
         actionExit.setObjectName("actionExit");
-        actionExit.setIcon(new QIcon(new QPixmap("classpath:com/trolltech/tools/designer/folder.png")));
+        actionExit.setIcon(new QIcon(new QPixmap("classpath:com/trolltech/tools/designer/folder.png"))); /////////////////////////////////////
         actionLogout = new QAction(MainWindow);
         actionLogout.setObjectName("actionLogout");
         actionSettings = new QAction(MainWindow);
@@ -126,7 +131,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         loginFormWidget.setSizeIncrement(new QSize(0, 0));
         loginFormWidget.setStyleSheet("QWidget#loginFormWidget{\n"+
 				"	background-color: rgba(52,52,52, 255);\n"+
-				"	background-image: url(classpath:resource/back.png);\n"+
+				"	background-image: url(classpath:resource/back.png);\n"+		////////////////////////////////////////////////
 				"    opacity: 0.1;\n"+
 				"}\n"+
 				"\n"+
@@ -187,7 +192,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 				"	background-color:rgba(220,220,220, 255);\n"+
 				"}\n"+
 				"\n"+
-				"QPushButton#refreshButton{\n"+
+				"QToolButton#refreshButton{\n"+
 				"border-style: solid;\n"+
 				"background: rgba(52, 52, 52, 155);\n"+
 				"}\n"+
@@ -205,13 +210,13 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 				"}\n"+
 				"\n"+
 				"\n"+
-				"QToolButton#logoutButton2{\n"+
+				"QToolButton#logoutButton{\n"+
 				"	border-style: solid;\n"+
 				"    background: rgba(52, 52, 52, 155);\n"+
 				"    color: white;\n"+
 				"}\n"+
 				"\n"+
-				"QPushButton#refreshButton:hover{\n"+
+				"QToolButton#refreshButton:hover{\n"+
 				"	background: rgba(52, 52, 52, 255);\n"+
 				"   color: green;\n"+
 				"}\n"+
@@ -220,7 +225,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 				"	background: rgba(52, 52, 52, 255);\n"+
 				"}\n"+
 				"\n"+
-				"QToolButton#logoutButton2:hover{\n"+
+				"QToolButton#logoutButton:hover{\n"+
 				"	background: rgba(52, 52, 52, 255);\n"+
 				"}\n"+
 				"\n"+
@@ -235,21 +240,22 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         logoutButton.setObjectName("logoutButton");
         logoutButton.setGeometry(new QRect(610, 0, 71, 41));
         logoutButton.setPopupMode(com.trolltech.qt.gui.QToolButton.ToolButtonPopupMode.InstantPopup);
-        refreshButton = new QPushButton(bottomBar);
+        refreshButton = new QToolButton(bottomBar);
         refreshButton.setObjectName("refreshButton");
         refreshButton.setGeometry(new QRect(70, 0, 81, 41));
         refreshButton.setStyleSheet("");
-        refreshButton.setIcon(new QIcon());
+        refreshButton.setIcon(new QIcon(new QPixmap("classpath:admin_resource/refesh_good.png")));			///////////////////////////////////////////////////
+       
         refreshButton.setCheckable(false);
         searchButton = new QToolButton(bottomBar);
         searchButton.setObjectName("searchButton");
         searchButton.setGeometry(new QRect(0, 0, 71, 41));
-        searchButton.setIcon(new QIcon());
+        searchButton.setIcon(new QIcon(new QPixmap("classpath:admin_resource/search_icon.png")));								/////////////////////////////////////////////////////
         searchButton.setPopupMode(com.trolltech.qt.gui.QToolButton.ToolButtonPopupMode.InstantPopup);
         settingButton = new QToolButton(bottomBar);
         settingButton.setObjectName("settingButton");
         settingButton.setGeometry(new QRect(150, 0, 71, 41));
-        settingButton.setIcon(new QIcon());
+        settingButton.setIcon(new QIcon(new QPixmap("classpath:admin_resource/save_icon.png")));								/////////////////////				
         settingButton.setPopupMode(com.trolltech.qt.gui.QToolButton.ToolButtonPopupMode.InstantPopup);
         fillButton = new QToolButton(bottomBar);
         fillButton.setObjectName("fillButton");
@@ -368,20 +374,15 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         cScrollWidget = new QWidget();
         cScrollWidget.setObjectName("cScrollWidget");
         cScrollWidget.setGeometry(new QRect(0, 0, 639, 329));
-        QSizePolicy sizePolicy6 = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.MinimumExpanding, com.trolltech.qt.gui.QSizePolicy.Policy.MinimumExpanding);
-        sizePolicy6.setHorizontalStretch((byte)0);
-        sizePolicy6.setVerticalStretch((byte)0);
-        sizePolicy6.setHeightForWidth(cScrollWidget.sizePolicy().hasHeightForWidth());
-        cScrollWidget.setSizePolicy(sizePolicy6);
+       
         verticalLayout_3 = new QVBoxLayout(cScrollWidget);
         verticalLayout_3.setSpacing(0);
         verticalLayout_3.setObjectName("verticalLayout_3");
-        verticalLayout_3.setSizeConstraint(com.trolltech.qt.gui.QLayout.SizeConstraint.SetNoConstraint);
         verticalLayout_3.setContentsMargins(0, 0, 0, 308);
         couScroll.setWidget(cScrollWidget);
-        pushButton = new QPushButton(classesTabBack);
-        pushButton.setObjectName("pushButton");
-        pushButton.setGeometry(new QRect(280, 470, 151, 31));
+        addCourse = new QPushButton(classesTabBack);
+        addCourse.setObjectName("pushButton");
+        addCourse.setGeometry(new QRect(280, 470, 151, 31));
         tabWidget.addTab(classTab, com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Classes", null));
         studentsTab = new QWidget();
         studentsTab.setObjectName("studentsTab");
@@ -449,6 +450,13 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 
     void retranslateUi(QMainWindow MainWindow)
     {
+    	settingButton.clicked.connect(this, "display()");
+    	actionSet.triggered.connect(this, "display()");
+    	
+    	this.addStu.clicked.connect(this, "addStudent()");;
+    	this.addAdminButton.clicked.connect(this, "addAdmin()");
+    	this.addCourse.clicked.connect(this, "addCourse()");    	
+    	
         MainWindow.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Eye of the tiger", null));
         actionExit.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Exit", null));
         actionExit.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<html><head/><body><p>hello</p><p><br/></p></body></html>", null));
@@ -472,7 +480,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         fillButton.setText("");
         addAdminButton.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Add Admin", null));
         tabWidget.setTabText(tabWidget.indexOf(adminTab), com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Administrators", null));
-        pushButton.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Add Course", null));
+        addCourse.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Add Course", null));
         tabWidget.setTabText(tabWidget.indexOf(classTab), com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Classes", null));
         addStu.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Add Student", null));
         tabWidget.setTabText(tabWidget.indexOf(studentsTab), com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Students", null));
@@ -480,11 +488,43 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         optionsMenu.setTitle(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Options", null));
     } // retranslateUi
 
+    public void display(){
+    	QDialog t = new QDialog();
+    	t.connectSlotsByName();
+    	this.settings = new Settings();
+    	this.settings.setupUi(t);
+    	t.exec();
+    }
+    
+    public void addStudent(){
+    	QDialog t = new QDialog();
+    	t.connectSlotsByName();
+    	this.ns = new New_student();
+    	this.ns.setupUi(t);
+    	t.exec();
+    }
+    
+    public void addAdmin(){
+    	QDialog t = new QDialog();
+    	t.connectSlotsByName();
+    	this.na = new New_admin();
+    	this.na.setupUi(t);
+    	t.exec();
+    }
+    
+    public void addCourse(){
+    	QDialog t = new QDialog();
+    	t.connectSlotsByName();
+    	this.nc = new New_course();
+    	this.nc.setupUi(t);
+    	t.exec();
+    }
+    
     /**
      * 
      */
     public void loginForm(){
-    	System.out.println("hello world crappy crap");
+    	adminScrollWidget.raise();
     	loginFormWidget.show();
         loginFormWidget.raise();
         userText.raise();
