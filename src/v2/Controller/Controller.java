@@ -10,7 +10,7 @@ import v2.Model.Model;
 import v2.View.StudentTabs;
 import v2.View.MainView;
 import v2.View.AdminTabs;
-import v2.View.Ui_Form;
+import v2.View.CourseTabs;
 
 /**
  * @author jason
@@ -45,8 +45,12 @@ public class Controller {
 	 * This methods connects the view and the model together. It connects all the slots of the
 	 * view to the model
 	 */
-	public void setUP(){
-		
+	public void setUP(){		
+
+	}
+	
+	public void hello(String y){
+		System.out.println( y);
 	}
 	
 	public void display(){
@@ -75,7 +79,7 @@ public class Controller {
 		Map<String, JSONhandler> v = model.retrieveCourses();
 		
 		for( String r: v.keySet() ){
-			Ui_Form s = new Ui_Form();
+			CourseTabs s = new CourseTabs();
 			s.setupUi(view.cScrollWidget );
    		    s.cname.connectSlotsByName();
    		    s.id.connectSlotsByName();

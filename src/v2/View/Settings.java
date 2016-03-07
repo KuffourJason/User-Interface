@@ -1,5 +1,7 @@
 package v2.View;
 
+import v2.Controller.Controller;
+
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
@@ -28,6 +30,8 @@ public class Settings implements com.trolltech.qt.QUiForm<QDialog>
     public QTimeEdit thirdtime;
     public QLabel tpl;
     public QLabel fopl;
+    
+    private QDialog dialog;
 
     public Settings() { super(); }
 
@@ -81,11 +85,13 @@ public class Settings implements com.trolltech.qt.QUiForm<QDialog>
 				"#widget{\n"+
 				"	background-color: rgba(52,52,52,10);\n"+
 				"}");
+        
         startEdit = new QTimeEdit(widget);
         startEdit.setObjectName("startEdit");
         startEdit.setGeometry(new QRect(110, 130, 131, 31));
         startEdit.setMaximumTime(new QTime(18, 59, 59));
         startEdit.setMinimumTime(new QTime(7, 0, 0));
+        
         endEdit = new QTimeEdit(widget);
         endEdit.setObjectName("endEdit");
         endEdit.setGeometry(new QRect(300, 130, 121, 31));
@@ -106,60 +112,75 @@ public class Settings implements com.trolltech.qt.QUiForm<QDialog>
         startLabel = new QLabel(widget);
         startLabel.setObjectName("startLabel");
         startLabel.setGeometry(new QRect(110, 100, 131, 31));
+        
         endLabel = new QLabel(widget);
         endLabel.setObjectName("endLabel");
         endLabel.setGeometry(new QRect(300, 100, 131, 31));
+        
         durLabel = new QLabel(widget);
         durLabel.setObjectName("durLabel");
         durLabel.setGeometry(new QRect(110, 190, 131, 31));
+        
         graceLabel = new QLabel(widget);
         graceLabel.setObjectName("graceLabel");
         graceLabel.setGeometry(new QRect(300, 190, 121, 31));
+        
         lustartLabel = new QLabel(widget);
         lustartLabel.setObjectName("lustartLabel");
         lustartLabel.setGeometry(new QRect(110, 460, 121, 31));
+        
         lunEndLabel = new QLabel(widget);
         lunEndLabel.setObjectName("lunEndLabel");
         lunEndLabel.setGeometry(new QRect(300, 460, 111, 31));
+        
         durEdit = new QSpinBox(widget);
         durEdit.setObjectName("durEdit");
         durEdit.setGeometry(new QRect(110, 220, 121, 31));
         durEdit.setMinimum(1);
         durEdit.setMaximum(120);
+        
         graceEdit = new QSpinBox(widget);
         graceEdit.setObjectName("graceEdit");
         graceEdit.setGeometry(new QRect(300, 220, 121, 31));
         graceEdit.setMinimum(1);
         graceEdit.setMaximum(10);
+        
         title = new QLabel(widget);
         title.setObjectName("title");
         title.setGeometry(new QRect(170, 10, 231, 81));
+        
         fpl = new QLabel(widget);
         fpl.setObjectName("fpl");
         fpl.setGeometry(new QRect(110, 280, 131, 31));
+        
         secondtime = new QTimeEdit(widget);
         secondtime.setObjectName("secondtime");
         secondtime.setGeometry(new QRect(300, 310, 121, 31));
         secondtime.setMaximumTime(new QTime(17, 59, 59));
         secondtime.setMinimumTime(new QTime(6, 0, 0));
+        
         firstTime = new QTimeEdit(widget);
         firstTime.setObjectName("firstTime");
         firstTime.setGeometry(new QRect(110, 310, 121, 31));
         firstTime.setMaximumTime(new QTime(17, 59, 59));
         firstTime.setMinimumTime(new QTime(6, 0, 0));
+        
         spl = new QLabel(widget);
         spl.setObjectName("spl");
         spl.setGeometry(new QRect(300, 280, 121, 31));
+        
         fourthtime = new QTimeEdit(widget);
         fourthtime.setObjectName("fourthtime");
         fourthtime.setGeometry(new QRect(300, 400, 121, 31));
         fourthtime.setMaximumTime(new QTime(17, 59, 59));
         fourthtime.setMinimumTime(new QTime(6, 0, 0));
+        
         thirdtime = new QTimeEdit(widget);
         thirdtime.setObjectName("thirdtime");
         thirdtime.setGeometry(new QRect(110, 400, 121, 31));
         thirdtime.setMaximumTime(new QTime(17, 59, 59));
         thirdtime.setMinimumTime(new QTime(6, 0, 0));
+        
         tpl = new QLabel(widget);
         tpl.setObjectName("tpl");
         tpl.setGeometry(new QRect(110, 370, 121, 31));
@@ -167,11 +188,17 @@ public class Settings implements com.trolltech.qt.QUiForm<QDialog>
         fopl.setObjectName("fopl");
         fopl.setGeometry(new QRect(300, 370, 121, 31));
         retranslateUi(Dialog);
-        buttonBox.accepted.connect(Dialog, "accept()");
+        buttonBox.accepted.connect(this, "accept()");
         buttonBox.rejected.connect(Dialog, "reject()");
 
+        dialog = Dialog;
         Dialog.connectSlotsByName();
     } // setupUi
+    
+    public void accept(){
+    	Controller.getInstance().hello(this.durEdit.text());
+    	this.dialog.close();
+    }
 
     void retranslateUi(QDialog Dialog)
     {

@@ -55,7 +55,13 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public New_admin na;
     public New_course nc;
     
-    public MainView() { super(); }
+    public MainView() { 
+    	super(); 
+    	this.settings = new Settings();
+    	this.nc = new New_course();
+    	this.na = new New_admin();
+    	this.ns = new New_student();
+    }
 
     public void setupUi(QMainWindow MainWindow)
     {
@@ -491,7 +497,6 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public void display(){
     	QDialog t = new QDialog();
     	t.connectSlotsByName();
-    	this.settings = new Settings();
     	this.settings.setupUi(t);
     	t.exec();
     }
@@ -499,7 +504,6 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public void addStudent(){
     	QDialog t = new QDialog();
     	t.connectSlotsByName();
-    	this.ns = new New_student();
     	this.ns.setupUi(t);
     	t.exec();
     }
@@ -507,7 +511,6 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public void addAdmin(){
     	QDialog t = new QDialog();
     	t.connectSlotsByName();
-    	this.na = new New_admin();
     	this.na.setupUi(t);
     	t.exec();
     }
@@ -515,7 +518,6 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public void addCourse(){
     	QDialog t = new QDialog();
     	t.connectSlotsByName();
-    	this.nc = new New_course();
     	this.nc.setupUi(t);
     	t.exec();
     }

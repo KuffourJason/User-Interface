@@ -49,39 +49,50 @@ public class New_course implements com.trolltech.qt.QUiForm<QDialog>
 				"	color: black;\n"+
 				"    font: 15pt \"Calibri\";\n"+
 				"}");
+        
         courseName = new QLineEdit(main);
         courseName.setObjectName("courseName");
         courseName.setGeometry(new QRect(180, 80, 191, 21));
+        
         courseId = new QLineEdit(main);
         courseId.setObjectName("courseId");
         courseId.setGeometry(new QRect(180, 130, 191, 21));
+        
         label = new QLabel(main);
         label.setObjectName("label");
         label.setGeometry(new QRect(60, 80, 101, 21));
         label.setStyleSheet("");
+        
         cid = new QLabel(main);
         cid.setObjectName("cid");
         cid.setGeometry(new QRect(60, 130, 81, 21));
+        
         label_3 = new QLabel(main);
         label_3.setObjectName("label_3");
         label_3.setGeometry(new QRect(60, 180, 81, 21));
+        
         banner = new QLabel(main);
         banner.setObjectName("banner");
         banner.setGeometry(new QRect(70, 10, 211, 51));
+        
         periodBox = new QComboBox(main);
         periodBox.setObjectName("periodBox");
         periodBox.setGeometry(new QRect(180, 230, 191, 22));
+        
         periodLabel = new QLabel(main);
         periodLabel.setObjectName("periodLabel");
         periodLabel.setGeometry(new QRect(60, 230, 81, 21));
+        
         locaField = new QLineEdit(main);
         locaField.setObjectName("locaField");
         locaField.setGeometry(new QRect(180, 180, 191, 21));
+        
         buttonBox = new QDialogButtonBox(main);
         buttonBox.setObjectName("buttonBox");
         buttonBox.setGeometry(new QRect(30, 270, 281, 61));
         buttonBox.setOrientation(com.trolltech.qt.core.Qt.Orientation.Horizontal);
         buttonBox.setStandardButtons(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.createQFlags(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Cancel,com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Save));
+        
         retranslateUi(Dialog);
         buttonBox.accepted.connect(Dialog, "accept()");
         buttonBox.rejected.connect(Dialog, "reject()");

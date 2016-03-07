@@ -3,7 +3,7 @@ package v2.View;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
-public class Ui_Form implements com.trolltech.qt.QUiForm<QWidget>
+public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
 {
     public QWidget holder;
     public QLabel cNameLabel;
@@ -20,7 +20,7 @@ public class Ui_Form implements com.trolltech.qt.QUiForm<QWidget>
     public QLabel startLabel;
     public QLabel start;
 
-    public Ui_Form() { super(); }
+    public CourseTabs() { super(); }
 
     public void setupUi(QWidget Form)
     {
