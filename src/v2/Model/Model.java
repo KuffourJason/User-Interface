@@ -97,13 +97,16 @@ public class Model {
 		//checks if the mac address or the admin id isn't being used
 		if( this.admins.isValidId(adminId) && this.admins.isValidMac(macAddress) ){
 			ArrayList<String> timeLoc = new ArrayList<String>();
+			timeLoc.add("hello world");
 			
+			/*
 			//adds the location of the class to after each class in the array
 			for( String classID: timetable){
 				String location = this.courses.findLocation(classID);
 				timeLoc.add(classID);
 				timeLoc.add(location);
 			}
+			*/
 			this.admins.createAdmin(macAddress, adminId, firstname, lastname, timeLoc);
 			result = true;
 		}

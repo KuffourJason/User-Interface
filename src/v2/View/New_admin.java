@@ -3,28 +3,31 @@ package v2.View;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
+import v2.Controller.Controller;
+
 public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
 {
     public QWidget main;
     public QLineEdit firstname;
     public QLineEdit lastname;
     public QLineEdit tagid;
-    public QLabel label;
-    public QLabel label_2;
-    public QLabel label_3;
+    public QLabel fnamelabel;
+    public QLabel lnamelabel;
+    public QLabel taglabel;
     public QComboBox fpcombo;
     public QLabel label_4;
     public QComboBox spcombo;
     public QComboBox tpcombo;
     public QComboBox fpcombo_2;
     public QLabel p1label;
-    public QLabel label_6;
-    public QLabel label_7;
-    public QLabel label_8;
+    public QLabel p2label;
+    public QLabel p3label;
+    public QLabel p4label;
     public QLabel banner;
     public QDialogButtonBox buttonBox;
-    public QLabel label_9;
+    public QLabel adminidlabel;
     public QLineEdit id;
+    public QDialog m;
 
     public New_admin() { super(); }
 
@@ -67,18 +70,18 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         tagid.setObjectName("tagid");
         tagid.setGeometry(new QRect(140, 230, 191, 21));
         
-        label = new QLabel(main);
-        label.setObjectName("label");
-        label.setGeometry(new QRect(40, 80, 81, 21));
-        label.setStyleSheet("");
+        fnamelabel = new QLabel(main);
+        fnamelabel.setObjectName("fnamelabel");
+        fnamelabel.setGeometry(new QRect(40, 80, 81, 21));
+        fnamelabel.setStyleSheet("");
         
-        label_2 = new QLabel(main);
-        label_2.setObjectName("label_2");
-        label_2.setGeometry(new QRect(40, 130, 81, 21));
+        lnamelabel = new QLabel(main);
+        lnamelabel.setObjectName("lnamelabel");
+        lnamelabel.setGeometry(new QRect(40, 130, 81, 21));
         
-        label_3 = new QLabel(main);
-        label_3.setObjectName("label_3");
-        label_3.setGeometry(new QRect(40, 230, 81, 21));
+        taglabel = new QLabel(main);
+        taglabel.setObjectName("taglabel");
+        taglabel.setGeometry(new QRect(40, 230, 81, 21));
         
         fpcombo = new QComboBox(main);
         fpcombo.setObjectName("fpcombo");
@@ -105,17 +108,17 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         p1label.setObjectName("p1label");
         p1label.setGeometry(new QRect(50, 320, 81, 20));
         
-        label_6 = new QLabel(main);
-        label_6.setObjectName("label_6");
-        label_6.setGeometry(new QRect(220, 320, 81, 20));
+        p2label = new QLabel(main);
+        p2label.setObjectName("p2label");
+        p2label.setGeometry(new QRect(220, 320, 81, 20));
         
-        label_7 = new QLabel(main);
-        label_7.setObjectName("label_7");
-        label_7.setGeometry(new QRect(50, 390, 81, 20));
+        p3label = new QLabel(main);
+        p3label.setObjectName("p3label");
+        p3label.setGeometry(new QRect(50, 390, 81, 20));
         
-        label_8 = new QLabel(main);
-        label_8.setObjectName("label_8");
-        label_8.setGeometry(new QRect(220, 390, 81, 20));
+        p4label = new QLabel(main);
+        p4label.setObjectName("p4label");
+        p4label.setGeometry(new QRect(220, 390, 81, 20));
         
         banner = new QLabel(main);
         banner.setObjectName("banner");
@@ -127,9 +130,9 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         buttonBox.setOrientation(com.trolltech.qt.core.Qt.Orientation.Horizontal);
         buttonBox.setStandardButtons(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.createQFlags(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Cancel,com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Save));
         
-        label_9 = new QLabel(main);
-        label_9.setObjectName("label_9");
-        label_9.setGeometry(new QRect(40, 180, 81, 21));
+        adminidlabel = new QLabel(main);
+        adminidlabel.setObjectName("adminidlabel");
+        adminidlabel.setGeometry(new QRect(40, 180, 81, 21));
         
         id = new QLineEdit(main);
         id.setObjectName("id");
@@ -140,58 +143,86 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         buttonBox.rejected.connect(Dialog, "reject()");
         
         fpcombo.addItem("-");
-        fpcombo.addItem("hello");
+        spcombo.addItem("-");
+        tpcombo.addItem("-");
+        fpcombo_2.addItem("-");
 
         Dialog.connectSlotsByName();
+        m = Dialog;
     } // setupUi
 
     void retranslateUi(QDialog Dialog)
     {
         Dialog.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Dialog", null));
-        label.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "First Name:", null));
-        label_2.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Last Name:", null));
-        label_3.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Tag id:", null));
+        fnamelabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "First Name:", null));
+        lnamelabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Last Name:", null));
+        taglabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Tag id:", null));
         label_4.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Timetable:", null));
         p1label.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period 1:", null));
-        label_6.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period 2:", null));
-        label_7.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period 3:", null));
-        label_8.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period 4:", null));
+        p2label.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period 2:", null));
+        p3label.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period 3:", null));
+        p4label.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period 4:", null));
         banner.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "                    New Administrator", null));
-        label_9.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Admin id:", null));
+        adminidlabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Admin id:", null));
     } // retranslateUi
 
     public void check(){
-    	
-    	label_6.setStyleSheet("#label_6{color: red;}"); //period 2 label
-    	
+    	    	
     	if( firstname.text().isEmpty() ){
-    		label.setStyleSheet("#label{color: red;}");
+    		fnamelabel.setStyleSheet("#fnamelabel{color: red;}");
     	}
     	else if( lastname.text().isEmpty() ){
-    		label.setStyleSheet("#label{color: black;}");
-    		label_2.setStyleSheet("#label_2{color: red;}");
+    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
+    		lnamelabel.setStyleSheet("#lnamelabel{color: red;}");
     	}
     	else if( tagid.text().isEmpty() ){
-    		label.setStyleSheet("#label{color: black;}");
-    		label_2.setStyleSheet("#label_2{color: black;}");
-    		label_3.setStyleSheet("#label_3{color: red;}");
+    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
+    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
+    		taglabel.setStyleSheet("#taglabel{color: red;}");
     	}
     	else if( id.text().isEmpty() ){
-    		label.setStyleSheet("#label{color: black;}");
-    		label_2.setStyleSheet("#label_2{color: black;}");
-    		label_3.setStyleSheet("#label_3{color: black;}");
-    		label_4.setStyleSheet("#label_4{color: red;}");
+    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
+    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
+    		taglabel.setStyleSheet("#taglabel{color: black;}");
+    		adminidlabel.setStyleSheet("#adminidlabel{color: red;}");
+    	}
+    	else if( fpcombo.currentText().equals("") ){
+    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
+    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
+    		taglabel.setStyleSheet("#taglabel{color: black;}");
+    		p1label.setStyleSheet("#p1label{color: red;}");
+    	}
+    	else if( spcombo.currentText().equals("")){
+    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
+    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
+    		taglabel.setStyleSheet("#taglabel{color: black;}");
+    		p1label.setStyleSheet("#p1label{color: black;}");
+    		p2label.setStyleSheet("#p2label{color: red;}");
+    	}
+    	else if( tpcombo.currentText().equals("")){
+    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
+    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
+    		taglabel.setStyleSheet("#taglabel{color: black;}");
+    		p1label.setStyleSheet("#p1label{color: black;}");
+    		p2label.setStyleSheet("#p2label{color: black;}");
+    		p3label.setStyleSheet("#p3label{color: red;}");
+    	}
+    	else if( fpcombo_2.currentText().equals("") ){
+    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
+    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
+    		taglabel.setStyleSheet("#taglabel{color: black;}");
+    		p1label.setStyleSheet("#p1label{color: black;}");
+    		p2label.setStyleSheet("#p2label{color: red;}");
+    		p3label.setStyleSheet("#p3label{color: black;}");
+    		p4label.setStyleSheet("#p4label{color: red;}");
+    	}
+    	else{
+    		this.m.close();
+    		System.out.println("hello world");
+    		Controller.getInstance().model.newAdmin(this.tagid.text(), this.id.text(), this.lastname.text(), this.firstname.text(), null);
     		
     	}
-    	else if( fpcombo.currentText() == "-" ){
-    		label.setStyleSheet("#label{color: black;}");
-    		label_2.setStyleSheet("#label_2{color: black;}");
-    		label_3.setStyleSheet("#label_3{color: black;}");
-    		label_4.setStyleSheet("#label_4{color: black;}");
-    	}
-    	
-    	System.out.println(fpcombo.currentText() );
-    	
+    	    	
     }
     
 }

@@ -20,7 +20,7 @@ import v2.View.CourseTabs;
 public class Controller {
 
 	private static Controller control = null; //the single instance of the Controller class
-	private Model model;	                  //the model which contains all the backend of the class
+	public Model model;	                  //the model which contains all the backend of the class
 	private MainView view;               //the view of the UI
 	
 	/**

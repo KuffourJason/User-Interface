@@ -93,7 +93,7 @@ public class Admins implements Runnable{
 	 * @return - a boolean indicating the id is already in use
 	 */
 	public boolean isValidId(String id){
-		return this.admin_db.findByIndex("\"selector\": { \"user_id\": \" "+ id + "\" }" , JsonObject.class).isEmpty();
+		return this.admin_db.findByIndex("\"selector\": { \"admin_id\": \" "+ id + "\" }" , JsonObject.class).isEmpty();
 	}
 	
 	/**
