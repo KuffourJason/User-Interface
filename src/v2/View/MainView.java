@@ -9,10 +9,20 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public QAction actionLogout;
     public QAction actionSettings;
     public QAction actionSet;
+    public QFrame mainFrame; 
     public QWidget centralwidget;
-    public QFrame mainFrame;
     public QWidget eotImage;
     public QWidget loginFormWidget;
+    public QWidget bottomBar;
+    public QWidget adminTab;
+    public QWidget adminTabBack;
+    public QWidget adminScrollWidget;
+    public QWidget studentsTab;
+    public QWidget stuTabBack;
+    public QWidget classTab;
+    public QWidget classesTabBack;
+    public QWidget cScrollWidget;
+    public QWidget stuScrollWidget; 
     public QLineEdit userText;
     public QLineEdit passText;
     public QLabel userlabel;
@@ -21,32 +31,26 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public QPushButton accountButton;
     public QLabel backlabel;
     public QLabel invalidLogin;
-    public QWidget bottomBar;
     public QToolButton logoutButton;
     public QToolButton refreshButton;
     public QToolButton searchButton;
     public QToolButton settingButton;
     public QToolButton fillButton;
     public QTabWidget tabWidget;
-    public QWidget adminTab;
-    public QWidget adminTabBack;
     public QScrollArea adminScroll;
-    public QWidget adminScrollWidget;
     public QVBoxLayout verticalLayout_4;
     public QPushButton addAdminButton;
-    public QWidget classTab;
-    public QWidget classesTabBack;
+
     public QScrollArea couScroll;
-    public QWidget cScrollWidget;
+    
     public QVBoxLayout verticalLayout_3;
     public QPushButton addCourse;
-    public QWidget studentsTab;
-    public QWidget stuTabBack;
+
     public QScrollArea stuScroll;
-    public QWidget stuScrollWidget;
     public QVBoxLayout verticalLayout;
     public QToolButton addStu;
     public QMenuBar menubar;
+    
     public QMenu fileMenu;
     public QMenu optionsMenu;
     
@@ -516,10 +520,10 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     }
     
     public void addCourse(){
-    	QDialog t = new QDialog();
-    	t.connectSlotsByName();
-    	this.nc.setupUi(t);
-    	t.exec();
+    	QDialog addC = new QDialog();
+    	addC.connectSlotsByName();
+    	this.nc.setupUi(addC);
+    	addC.exec();
     }
     
     /**

@@ -46,7 +46,7 @@ public class Controller {
 	 * view to the model
 	 */
 	public void setUP(){		
-
+		this.view.nc.label.setText("yeah boy what's up");
 	}
 	
 	public void hello(String y){
@@ -92,8 +92,8 @@ public class Controller {
 	 * The method creates and displays the UI
 	 */
 	public void activate(String args[]){
+		//this.setUP();
 		view.activate(args);
-		this.setUP();
 		this.display();
 		QApplication.execStatic();
 	}
