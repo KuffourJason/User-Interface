@@ -1,5 +1,7 @@
 package v2.View;
 
+import v2.Controller.Controller;
+
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
@@ -16,6 +18,8 @@ public class New_course implements com.trolltech.qt.QUiForm<QDialog>
     public QLabel periodLabel;
     public QLineEdit locaField;
     public QDialogButtonBox buttonBox;
+    
+    public QDialog m;
 
     public New_course() { super(); }
 
@@ -26,6 +30,8 @@ public class New_course implements com.trolltech.qt.QUiForm<QDialog>
         Dialog.setMinimumSize(new QSize(444, 337));
         Dialog.setMaximumSize(new QSize(444, 337));
         Dialog.setModal(true);
+        Dialog.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
+        Dialog.setWindowTitle("New Course");
         
         main = new QWidget(Dialog);
         main.setObjectName("main");
@@ -93,8 +99,9 @@ public class New_course implements com.trolltech.qt.QUiForm<QDialog>
         buttonBox.setOrientation(com.trolltech.qt.core.Qt.Orientation.Horizontal);
         buttonBox.setStandardButtons(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.createQFlags(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Cancel,com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Save));
         
+        m = Dialog;
         retranslateUi(Dialog);
-        buttonBox.accepted.connect(Dialog, "accept()");
+        buttonBox.accepted.connect(this, "accept()");
         buttonBox.rejected.connect(Dialog, "reject()");
 
         Dialog.connectSlotsByName();
@@ -102,6 +109,11 @@ public class New_course implements com.trolltech.qt.QUiForm<QDialog>
 
     void retranslateUi(QDialog Dialog)
     {
+    	periodBox.addItem("-");
+    	periodBox.addItem("1");
+    	periodBox.addItem("2");
+    	periodBox.addItem("3");
+    	periodBox.addItem("4");
         Dialog.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Dialog", null));
         label.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Course Name:", null));
         cid.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Course ID:", null));
@@ -109,6 +121,39 @@ public class New_course implements com.trolltech.qt.QUiForm<QDialog>
         banner.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "                    New Class", null));
         periodLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period:", null));
     } // retranslateUi
+
+    
+    public void accept(){
+    	
+    	label.setStyleSheet("#label{color: black;}");
+    	label_3.setStyleSheet("#label_3{color: black;}");
+    	cid.setStyleSheet("#cid{color: black;}");
+    	periodLabel.setStyleSheet("#periodLabel{color: black;}");
+    	
+    	if( this.courseName.text().isEmpty() ){
+    		label.setStyleSheet("#label{color: red;}");
+    		return;
+    	}
+    	
+    	if( this.courseId.text().isEmpty() ){
+    		cid.setStyleSheet("#cid{color: red;}");
+    		return;
+    	}
+    	
+    	if( locaField.text().isEmpty() ){
+    		label_3.setStyleSheet("#label_3{color: red;}");
+    		return;
+    	}
+
+    	if( this.periodBox.currentText().equals("-") ){
+    		periodLabel.setStyleSheet("#periodLabel{red: black;}");
+    		return;
+    	}
+    	
+    	Controller.getInstance().model.newCourse(courseId.text(), courseName.text(), "0", "0", locaField.text() );
+    	this.m.close();
+    }
+    
 
 }
 

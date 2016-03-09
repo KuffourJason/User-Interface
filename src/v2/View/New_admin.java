@@ -167,62 +167,58 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
     } // retranslateUi
 
     public void check(){
+    	
+		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
+		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
+		taglabel.setStyleSheet("#taglabel{color: black;}");
+		p1label.setStyleSheet("#p1label{color: black;}");
+		p2label.setStyleSheet("#p2label{color: red;}");
+		p3label.setStyleSheet("#p3label{color: black;}");
+		p4label.setStyleSheet("#p4label{color: black;}");
     	    	
     	if( firstname.text().isEmpty() ){
     		fnamelabel.setStyleSheet("#fnamelabel{color: red;}");
+    		return;
     	}
-    	else if( lastname.text().isEmpty() ){
-    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
+    	
+    	if( lastname.text().isEmpty() ){
     		lnamelabel.setStyleSheet("#lnamelabel{color: red;}");
+    		return;
     	}
-    	else if( tagid.text().isEmpty() ){
-    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
-    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
+    	
+    	if( tagid.text().isEmpty() ){
     		taglabel.setStyleSheet("#taglabel{color: red;}");
+    		return;
     	}
-    	else if( id.text().isEmpty() ){
-    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
-    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
-    		taglabel.setStyleSheet("#taglabel{color: black;}");
+    	
+    	if( id.text().isEmpty() ){
     		adminidlabel.setStyleSheet("#adminidlabel{color: red;}");
+    		return;
     	}
-    	else if( fpcombo.currentText().equals("") ){
-    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
-    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
-    		taglabel.setStyleSheet("#taglabel{color: black;}");
+    	
+    	if( fpcombo.currentText().equals("") ){
     		p1label.setStyleSheet("#p1label{color: red;}");
+    		return;
     	}
-    	else if( spcombo.currentText().equals("")){
-    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
-    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
-    		taglabel.setStyleSheet("#taglabel{color: black;}");
-    		p1label.setStyleSheet("#p1label{color: black;}");
+    	
+    	if( spcombo.currentText().equals("")){
     		p2label.setStyleSheet("#p2label{color: red;}");
+    		return;
     	}
-    	else if( tpcombo.currentText().equals("")){
-    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
-    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
-    		taglabel.setStyleSheet("#taglabel{color: black;}");
-    		p1label.setStyleSheet("#p1label{color: black;}");
-    		p2label.setStyleSheet("#p2label{color: black;}");
+    	if( tpcombo.currentText().equals("")){
     		p3label.setStyleSheet("#p3label{color: red;}");
+    		return;
     	}
-    	else if( fpcombo_2.currentText().equals("") ){
-    		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
-    		lnamelabel.setStyleSheet("#lnamelabel{color: black;}");
-    		taglabel.setStyleSheet("#taglabel{color: black;}");
-    		p1label.setStyleSheet("#p1label{color: black;}");
-    		p2label.setStyleSheet("#p2label{color: red;}");
-    		p3label.setStyleSheet("#p3label{color: black;}");
+    	
+    	if( fpcombo_2.currentText().equals("") ){
     		p4label.setStyleSheet("#p4label{color: red;}");
+    		return;
     	}
-    	else{
-    		this.m.close();
-    		System.out.println("hello world");
-    		Controller.getInstance().model.newAdmin(this.tagid.text(), this.id.text(), this.lastname.text(), this.firstname.text(), null);
-    		
-    	}
-    	    	
+    	
+    	
+    	this.m.close();
+    	System.out.println("hello world");
+    	Controller.getInstance().model.newAdmin(this.tagid.text(), this.id.text(), this.lastname.text(), this.firstname.text(), null);   	
     }
     
 }

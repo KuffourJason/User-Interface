@@ -98,6 +98,19 @@ public class JSONhandler {
 		return abcd;
 	}
 	
+	/**
+	 * @param field - the json field that contains the array
+	 * @return - An arraylist of strings containing all the field values in the array
+	 */
+	public String[] extractToArray( String field){
+		
+		if( this.instance.has(field)){
+			String[] t = this.instance.get(field).getAsString().toString().split("/");
+			return t;
+		}
+		String[] f = {"hello", "boy"};
+		return f;
+	}
 	
 	/**
 	 * @param array - the json field that contains the array

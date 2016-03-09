@@ -58,8 +58,11 @@ public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
 				"}\n"+
 				"\n"+
 				"QPushButton:hover{\n"+
-				"	background-color: rgb(220, 220, 220);\n"+
-				"}");
+				"	background-color: rgb(220, 220, 220); }\n"+
+				"#holder:hover{\n"+
+				"	    border-width: 4px; background-color:rgba(30, 30, 30, 255);\n"+
+				"}\n"+
+				"");
         cNameLabel = new QLabel(holder);
         cNameLabel.setObjectName("cNameLabel");
         cNameLabel.setGeometry(new QRect(10, 0, 101, 31));
@@ -106,7 +109,7 @@ public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
     } // setupUi
 
     void retranslateUi(QWidget Form)
-    {
+    {    	
         cNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Course name:", null));
         idLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Course ID:", null));
         peLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Period:", null));

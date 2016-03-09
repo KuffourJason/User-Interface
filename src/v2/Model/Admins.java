@@ -80,8 +80,6 @@ public class Admins implements Runnable{
 		add.addData("admin_first_name", firstname);
 		add.addData("admin_last_name", lastname);
 		add.addData("admin_id", adminId);
-		add.addData("admin_number_of_absences", "0");
-		add.addData("admin_number_of_lates", "0");
 		add.addData("admin_timetable", timetable); 
 		add.addData("admin_location", "0"); 
 		

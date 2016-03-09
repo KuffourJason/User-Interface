@@ -39,8 +39,8 @@ public class Settings implements com.trolltech.qt.QUiForm<QDialog>
     {	
         Dialog.setObjectName("Dialog");
         Dialog.resize(new QSize(488, 610).expandedTo(Dialog.minimumSizeHint()));
-        Dialog.setMinimumSize(new QSize(100, 527));
-        Dialog.setMaximumSize(new QSize(1000, 610));
+        Dialog.setMinimumSize(new QSize(488, 610));
+        Dialog.setMaximumSize(new QSize(488, 610));
         Dialog.setWindowTitle("Configuration Settings");
         Dialog.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
         Dialog.setWindowFlags( Qt.WindowType.WindowContextHelpButtonHint );

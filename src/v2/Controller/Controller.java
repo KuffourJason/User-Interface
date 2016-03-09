@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.trolltech.qt.gui.QApplication;
-
 import v2.Model.JSONhandler;
 import v2.Model.Model;
 import v2.View.StudentTabs;
@@ -54,37 +53,89 @@ public class Controller {
 	}
 	
 	public void display(){
-		Map<String, ArrayList<JSONhandler>> t = model.retrieveStudents();
 		
+		Map<String, ArrayList<JSONhandler>> t = model.retrieveStudents();
 		for( String r: t.keySet() ){
 			StudentTabs s = new StudentTabs();
 			s.setupUi(view.stuScrollWidget);
    		    s.fname.connectSlotsByName();
    		    s.lname.connectSlotsByName();
+   		    s.absents.connectSlotsByName();
+   		    s.lates.connectSlotsByName();
+   		    s.id.connectSlotsByName();
 			s.fname.setText(t.get(r).get(1).toString("user_first_name") );
 			s.lname.setText(t.get(r).get(1).toString("user_last_name") );
+			s.lates.setText(t.get(r).get(1).toString("user_number_of_lates"));
+			s.absents.setText(t.get(r).get(1).toString("user_number_of_absences"));
+			s.id.setText(t.get(r).get(1).toString("user_id"));
+			
+			s.cStatus.connectSlotsByName();
+			s.currClass.connectSlotsByName();
+			s.curLocation.connectSlotsByName();
+			s.p1.connectSlotsByName();
+			s.p2.connectSlotsByName();
+			s.p3.connectSlotsByName();
+			s.p4.connectSlotsByName();
+			//s.timeTable.connectSlotsByName();
+			s.cStatus.setText(t.get(r).get(0).toString("user_status"));
+			s.currClass.setText(t.get(r).get(0).toString("user_current_class"));
+			s.curLocation.setText(t.get(r).get(0).toString("user_location"));
+			
+			String time[] = t.get(r).get(1).extractToArray("user_timetable");
+			if( time.length > 2){
+				s.p1.setText(time[0]);
+				s.p2.setText(time[1]);
+			}
 		}
 		
 		Map<String, JSONhandler> u = model.retrieveAdmin();
-		
 		for( String r: u.keySet() ){
 			AdminTabs s = new AdminTabs();
 			s.setupUi(view.adminScrollWidget );
+			
    		    s.fname.connectSlotsByName();
    		    s.lname.connectSlotsByName();
+   		    s.id.connectSlotsByName();
 			s.fname.setText(u.get(r).toString("admin_first_name") );
 			s.lname.setText(u.get(r).toString("admin_last_name") );
+			s.id.setText(u.get(r).toString("admin_id"));
+			
+			s.cStatus.connectSlotsByName();
+			s.currclass.connectSlotsByName();
+			s.location.connectSlotsByName();
+			s.p1.connectSlotsByName();
+			s.p2.connectSlotsByName();
+			s.p3.connectSlotsByName();
+			s.p4.connectSlotsByName();
+			s.cStatus.setText(u.get(r).toString("admin_status"));
+			s.currclass.setText(u.get(r).toString("admin_current_class"));
+			s.location.setText(u.get(r).toString("admin_location"));
+			
+			String time[] = u.get(r).extractToArray("admin_timetable");
+			if( time.length > 2){
+				s.p1.setText(time[0]);
+				s.p2.setText(time[1]);
+			}
 		}
 		
-		Map<String, JSONhandler> v = model.retrieveCourses();
 		
+		Map<String, JSONhandler> v = model.retrieveCourses();
 		for( String r: v.keySet() ){
 			CourseTabs s = new CourseTabs();
 			s.setupUi(view.cScrollWidget );
    		    s.cname.connectSlotsByName();
    		    s.id.connectSlotsByName();
+   		    s.period.connectSlotsByName();
+   		    s.start.connectSlotsByName();
+   		    s.location.connectSlotsByName();
+   		    s.duration.connectSlotsByName();
+   		    
 			s.cname.setText(v.get(r).toString("class_name") );
+			s.start.setText(v.get(r).toString("class_time_start") );
 			s.id.setText(v.get(r).toString("_id") );
+			s.duration.setText(v.get(r).toString("duration") );
+			s.location.setText(v.get(r).toString("class_location") );
+			s.period.setText(v.get(r).toString("period") );
 		}
 	}
 	

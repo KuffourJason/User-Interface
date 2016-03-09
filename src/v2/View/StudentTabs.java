@@ -25,7 +25,10 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     public QLabel curLocation;
     public QLabel curclaslab;
     public QLabel currClass;
-    public QTableView timeTable;
+    public QLabel p1;
+    public QLabel p2;
+    public QLabel p3;
+    public QLabel p4;
     
     private boolean expand;
 
@@ -68,7 +71,22 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
 				"}\n"+
 				"\n"+
 				"QPushButton:hover{\n"+
-				"	background-color: rgb(220, 220, 220);\n"+
+				"	background-color: rgb(220, 220, 220); background-color:white;}\n"+
+				"#holder:hover{\n"+
+				"	    border-width: 4px; background-color:rgba(30, 30, 30, 255);\n"+
+				"}\n"+
+				"\n"+
+				"#p1, #p2, #p3, #p4{\n"+
+				"	border-style: solid;\n"+
+				"	border-color: rgba(0,0,0,0);\n"+
+				"    border-width: 3px;\n"+
+				"    background-color: white;\n"+
+				"    color: black;\n"+
+				"}\n"+
+				"\n"+
+				"#p1, #p2, #p3{\n"+
+				"	border-right-color: rgb(0, 0, 0);\n"+
+				"\n"+
 				"}");
         fNameLabel = new QLabel(holder);
         fNameLabel.setObjectName("fNameLabel");
@@ -130,14 +148,20 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         currClass.setObjectName("currClass");
         currClass.setGeometry(new QRect(430, 0, 111, 31));
         currClass.setStyleSheet("");
-        timeTable = new QTableView(holder);
-        timeTable.setObjectName("timeTable");
-        timeTable.setGeometry(new QRect(130, 110, 431, 31));
-        QSizePolicy sizePolicy2 = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed);
-        sizePolicy2.setHorizontalStretch((byte)0);
-        sizePolicy2.setVerticalStretch((byte)0);
-        sizePolicy2.setHeightForWidth(timeTable.sizePolicy().hasHeightForWidth());
-        timeTable.setSizePolicy(sizePolicy2);
+        
+        p1 = new QLabel(holder);
+        p1.setObjectName("p1");
+        p1.setGeometry(new QRect(130, 110, 101, 31));
+        p2 = new QLabel(holder);
+        p2.setObjectName("p2");
+        p2.setGeometry(new QRect(230, 110, 101, 31));
+        p3 = new QLabel(holder);
+        p3.setObjectName("p3");
+        p3.setGeometry(new QRect(330, 110, 101, 31));
+        p4 = new QLabel(holder);
+        p4.setObjectName("p4");
+        p4.setGeometry(new QRect(430, 110, 101, 31));
+        
         retranslateUi(Form);
 
         //Form.connectSlotsByName();
@@ -145,7 +169,6 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
 
     void retranslateUi(QWidget Form)
     {
-    	this.timeTable.hide();
     	this.tAbsentLabel.hide();
     	this.tLatesLabel.hide();
     	this.absents.hide();
@@ -171,12 +194,15 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         curLocation.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
         curclaslab.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Current class:", null));
         currClass.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
+        p1.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
+        p2.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
+        p3.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
+        p4.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
     } // retranslateUi
 
     public void big(){
     	if( !expand ){
         	holder.setFixedHeight(191);
-        	this.timeTable.show();
         	this.tAbsentLabel.show();
         	this.tLatesLabel.show();
         	this.absents.show();
@@ -187,7 +213,6 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     	}
     	else{
         	holder.setFixedHeight(101);
-        	this.timeTable.hide();
         	this.tAbsentLabel.hide();
         	this.tLatesLabel.hide();
         	this.absents.hide();
