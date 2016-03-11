@@ -60,7 +60,8 @@ public class Admins implements Runnable{
 	 * 
 	 */
 	public void deleteAdmin(String id){
-		this.getData();	//updates the maps to the latest revision number
+		JSONhandler d = new JSONhandler( admin_db.find(JsonObject.class, id) );	//updates the maps to the latest revision number
+		this.admins.put(id, d);
 		this.admin_db.remove(this.admins.remove(id).instance);  		//removes the admni with id from the dynamic database
 	}
 	
@@ -82,6 +83,8 @@ public class Admins implements Runnable{
 		add.addData("admin_id", adminId);
 		add.addData("admin_timetable", timetable); 
 		add.addData("admin_location", "0"); 
+		add.addData("admin_status", "0"); 
+		add.addData("admin_current_class", "0"); 
 		
 		this.admin_db.save(add.instance);
 	}

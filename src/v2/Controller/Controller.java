@@ -1,15 +1,13 @@
 package v2.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.trolltech.qt.gui.QApplication;
 import v2.Model.JSONhandler;
 import v2.Model.Model;
-import v2.View.StudentTabs;
-import v2.View.MainView;
-import v2.View.AdminTabs;
-import v2.View.CourseTabs;
+import v2.View.*;
 
 /**
  * @author jason
@@ -19,8 +17,10 @@ import v2.View.CourseTabs;
 public class Controller {
 
 	private static Controller control = null; //the single instance of the Controller class
-	public Model model;	                  //the model which contains all the backend of the class
-	private MainView view;               //the view of the UI
+	protected Model model;	                  //the model which contains all the backend of the class
+	protected MainView view;               //the view of the UI
+	
+	private Map<String, AdminTabs> adminTab;
 	
 	/**
 	 * The constructor creates instances of the model and the main UI view
@@ -28,6 +28,7 @@ public class Controller {
 	private Controller(){
 		model = new Model();
 		view = new MainView();
+		adminTab = new HashMap<String, AdminTabs>();
 	}
 	
 	/**
@@ -60,6 +61,26 @@ public class Controller {
 		return model.deleteCourse(courseId);
 	}
 	
+	public boolean deleteStudent(String id){
+		return model.deleteStudent(id);
+	}
+	
+	public boolean createCourse(String id, String name, String period, String location){
+		return model.newCourse(id, name, period, location);
+	}
+	
+	public boolean createStudent(String macAddress, String studentId, String firstname, String lastname, ArrayList<String> timetable){
+		return model.newStudent(macAddress, studentId, firstname, lastname, timetable);
+	}
+	
+	public boolean createAdmin( String macAddress, String adminId, String firstname, String lastname, ArrayList<String> timetable  ){
+		return model.newAdmin(macAddress, adminId, firstname, lastname, timetable);
+	}
+	
+	public Map<String, String> getPeriods(int period){
+		return model.getPeriods(period);
+	}
+	
 	public void initial_display(){
 		
 		Map<String, ArrayList<JSONhandler>> t = model.retrieveStudents();
@@ -90,15 +111,43 @@ public class Controller {
 			s.cStatus.setText(t.get(r).get(0).toString("user_status"));
 			s.currClass.setText(t.get(r).get(0).toString("user_current_class"));
 			s.curLocation.setText(t.get(r).get(0).toString("user_location"));
+			s._id = t.get(r).get(0).toString("_id");
 			
 			String time[] = t.get(r).get(1).extractToArray("user_timetable");
-			if( time.length > 2){
+			if( time.length > 6){
 				s.p1.setText(time[0]);
-				s.p2.setText(time[1]);
+				s.p2.setText(time[2]);
+				s.p3.setText(time[4]);
+				s.p4.setText(time[6]);
 			}
 		}
 		
-		Map<String, JSONhandler> u = model.retrieveAdmin();
+		
+		
+		
+		Map<String, JSONhandler> v = model.retrieveCourses();
+		for( String r: v.keySet() ){
+			
+			if( v.get(r).toString("class_name").equals("nothing")) continue;
+			CourseTabs s = new CourseTabs();
+			s.setupUi(view.cScrollWidget );
+   		    s.cname.connectSlotsByName();
+   		    s.id.connectSlotsByName();
+   		    s.period.connectSlotsByName();
+   		    s.start.connectSlotsByName();
+   		    s.location.connectSlotsByName();
+   		    s.duration.connectSlotsByName();
+   		    
+			s.cname.setText(v.get(r).toString("class_name") );
+			s.start.setText(v.get(r).toString("class_time_start") );
+			s.id.setText(v.get(r).toString("_id") );
+			s.duration.setText(v.get(r).toString("duration") );
+			s.location.setText(v.get(r).toString("class_location") );
+			s.period.setText(v.get(r).toString("class_period") );
+			s._id = v.get(r).toString("_id") ;
+		}
+		
+		Map<String, JSONhandler> u = Controller.getInstance().model.retrieveAdmin();
 		for( String r: u.keySet() ){
 			
 			if( u.get(r).toString("admin_first_name").equals("nothing")) continue;
@@ -124,32 +173,23 @@ public class Controller {
 			s.location.setText(u.get(r).toString("admin_location"));
 			
 			String time[] = u.get(r).extractToArray("admin_timetable");
-			if( time.length > 2){
+			if( time.length > 5){
 				s.p1.setText(time[0]);
-				s.p2.setText(time[1]);
+				s.p2.setText(time[2]);
+				s.p3.setText(time[4]);
+				s.p4.setText(time[6]);
 			}
+			AdminTabs wt = s;
+			adminTab.put(s._id, wt);
 		}
-		
-		
-		Map<String, JSONhandler> v = model.retrieveCourses();
-		for( String r: v.keySet() ){
-			
-			if( v.get(r).toString("class_name").equals("nothing")) continue;
-			CourseTabs s = new CourseTabs();
-			s.setupUi(view.cScrollWidget );
-   		    s.cname.connectSlotsByName();
-   		    s.id.connectSlotsByName();
-   		    s.period.connectSlotsByName();
-   		    s.start.connectSlotsByName();
-   		    s.location.connectSlotsByName();
-   		    s.duration.connectSlotsByName();
-   		    
-			s.cname.setText(v.get(r).toString("class_name") );
-			s.start.setText(v.get(r).toString("class_time_start") );
-			s.id.setText(v.get(r).toString("_id") );
-			s.duration.setText(v.get(r).toString("duration") );
-			s.location.setText(v.get(r).toString("class_location") );
-			s.period.setText(v.get(r).toString("period") );
+	}
+	
+	public void updateAdminView(){
+		System.out.println(adminTab.size());
+		for( String k: adminTab.keySet() ){
+			AdminTabs bye = adminTab.remove(k);
+			bye.holder.hide();
+			bye.holder.close();
 		}
 	}
 	
@@ -169,24 +209,6 @@ public class Controller {
 	}
 	
 }
-
-
-
-
-/*
- * 	IMPLEMENT THE SEARCH FUNCTIONALITY
- *  ADD THE MAIN UI WINDOW TO THE VIEW PACKAGE
- *  EDIT THE CONFIG DATABASE AND USE A SPECIFIC NUMBER OF PERIODS
- *  ADD METHOD IN THE CONFIG FILE THAT RETURNS THE START TIME FOR EACH PERIOD
- *  EDIT THE OTHER UI PAGES TO REFLECT THE CHANGES IN THE DB
- *  CREATE METHODS IN THE MODEL THAT WILL UPDATE 
- * 
- */
-
-
-
-
-
 
 
 

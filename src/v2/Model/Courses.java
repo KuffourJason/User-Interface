@@ -50,21 +50,19 @@ public class Courses implements Runnable {
 	/**
 	 * @param id	- the id of the new course
 	 * @param name	- the name of the new course
-	 * @param start	- the start time to the course
-	 * @param end	- the end of the new course
+	 * @param period - the period of the class
 	 * @param location - the location of the new course
 	 * 
 	 * This method creates a new course in the database. You must first check if
 	 * the id is valid before running this method
 	 */
-	public void createCourse(String id, String name, String start, String end, String location){
+	public void createCourse(String id, String name, String period, String location){
 		
 		//this creates a new course and sends it to the database
 		JSONhandler add = new JSONhandler(new JsonObject());
 		add.addData("_id", id);
 		add.addData("class_name", name);
-		add.addData("class_time_start", start);
-		add.addData("class_time_end", end);
+		add.addData("class_period", period);
 		add.addData("class_location", location);
 
 		//saves the new course in the db
@@ -77,8 +75,9 @@ public class Courses implements Runnable {
 	 * his method must first update the database to ensure the latest revision value is up to date
 	 */
 	public void deleteCourse(String id){
-		this.getData();
-		this.class_db.remove( this.courses.remove(id) );
+		JSONhandler d = new JSONhandler( class_db.find(JsonObject.class, id) );	//updates the maps to the latest revision number
+		this.courses.put(id, d);
+		this.class_db.remove( this.courses.remove(id).instance );
 	}
 	
 	/**
@@ -100,6 +99,17 @@ public class Courses implements Runnable {
 	
 	public Map<String, JSONhandler> getCourses(){
 		return this.courses;
+	}
+	
+	public Map<String, String> getPeriods( int period ){
+		Map<String, String> result = new HashMap<String, String>();
+		for( String key: courses.keySet() ){
+			if( courses.get(key).toString("class_period").equals(period + "") && !courses.get(key).toString("class_name").equals("nothing") ){
+				result.put(key, courses.get(key).toString("class_name"));
+			}
+		}
+		
+		return result;
 	}
 	
 	@Override

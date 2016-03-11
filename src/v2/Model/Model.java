@@ -66,15 +66,21 @@ public class Model {
 		
 		//checks if the mac address or the admin id isn't being used
 		if( this.students.isValidId(studentId) && this.students.isValidMac(macAddress) ){
-			ArrayList<String> t = new ArrayList<String>();
+			ArrayList<String> timeLoc = new ArrayList<String>();
 			
 			//adds the location of the class to after each class in the array
 			for( String classID: timetable){
-				String location = this.courses.findLocation(classID);
-				t.add(classID);
-				t.add(location);
+				if( classID == null) {
+					timeLoc.add("spare");
+					timeLoc.add("-");
+				}
+				else{
+					String location = this.courses.findLocation(classID);
+					timeLoc.add(classID);
+					timeLoc.add(location);
+				}
 			}
-			this.students.createStudent(macAddress, studentId, firstname, lastname, t);
+			this.students.createStudent(macAddress, studentId, firstname, lastname, timeLoc);
 			result = true;
 		}
 		else{
@@ -97,16 +103,20 @@ public class Model {
 		//checks if the mac address or the admin id isn't being used
 		if( this.admins.isValidId(adminId) && this.admins.isValidMac(macAddress) ){
 			ArrayList<String> timeLoc = new ArrayList<String>();
-			timeLoc.add("hello world");
 			
-			/*
 			//adds the location of the class to after each class in the array
 			for( String classID: timetable){
-				String location = this.courses.findLocation(classID);
-				timeLoc.add(classID);
-				timeLoc.add(location);
+				if( classID == null) {
+					timeLoc.add("spare");
+					timeLoc.add("-");
+				}
+				else{
+					String location = this.courses.findLocation(classID);
+					timeLoc.add(classID);
+					timeLoc.add(location);
+				}
 			}
-			*/
+			
 			this.admins.createAdmin(macAddress, adminId, firstname, lastname, timeLoc);
 			result = true;
 		}
@@ -119,17 +129,16 @@ public class Model {
 	/**
 	 * @param id	- the id of the new course
 	 * @param name	- the name of the new course
-	 * @param start - the start time of the course
-	 * @param end	- the end time of the course
+	 * @param period - the peroid of the class
 	 * @param location	- the location of the course
 	 * @return	- a boolean indicating whether the update was successful or not
 	 */
-	public boolean newCourse(String id, String name, String start, String end, String location){
+	public boolean newCourse(String id, String name, String period, String location){
 		boolean result;
 		
 		//checks if the course id isn't being used
 		if( this.courses.isValid(id) ){
-			this.courses.createCourse(id, name, start, end, location);
+			this.courses.createCourse(id, name, period, location);
 			result = true;
 		}
 		else{
@@ -261,27 +270,8 @@ public class Model {
 	public int getConfigLunchLength(){
 		return this.config.getLunchLength();
 	}
-
 	
-	public static void main(String args[]){
-		Model model = new Model();
-		model.getData();
-		
-		System.out.println(model.newCourse("phys3050", "physics", "10:30am", "14:50", "LAS1006") );
-		
-		ArrayList<String> t = new ArrayList<String>();
-		t.add("phys3050");
-		t.add("biology");
-		
-		System.out.println( model.newStudent("23:23:23:23:23", "15636345", "Slade", "Wilson", t) );
-		
-		Map<String, ArrayList<JSONhandler> > hold = model.retrieveStudents();
-		
-		for( String h: hold.keySet() ){
-			System.out.println(hold.get(h).size());
-		}
-		
-		System.out.println( model.deleteStudent("23:23:23:23:23"));
+	public Map<String, String> getPeriods(int period){
+		return courses.getPeriods(period);
 	}
-	
 }

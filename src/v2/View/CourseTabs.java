@@ -86,7 +86,7 @@ public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
         deleteButton.setGeometry(new QRect(580, 10, 31, 31));
         cname = new QLabel(holder);
         cname.setObjectName("cname");
-        cname.setGeometry(new QRect(130, 0, 101, 31));
+        cname.setGeometry(new QRect(130, 0, 135, 31));
         id = new QLabel(holder);
         id.setObjectName("id");
         id.setGeometry(new QRect(130, 30, 101, 31));
@@ -113,6 +113,8 @@ public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
 
     void retranslateUi(QWidget Form)
     {    	
+    	this.deleteButton.clicked.connect(this, "delete()");
+    	
         cNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Course name:", null));
         idLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Course ID:", null));
         peLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Period:", null));
@@ -129,15 +131,21 @@ public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
     } // retranslateUi
 
     public void delete(){
-    	System.out.println("the button is clicked");  	
     	boolean status = Controller.getInstance().deleteCourse(_id);
-    	
+		QMessageBox t = new QMessageBox();
+		t.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
+
     	if( status ){
     		holder.hide();
     		holder.close();
+    		t.setText("The deletion was a success");
+    		t.setWindowTitle("Success");
+    		t.exec();
     	}
     	else{
-    		
+    		t.setText("The deletion failed");
+    		t.setWindowTitle("Failed");
+    		t.exec();
     	}
     }
 }

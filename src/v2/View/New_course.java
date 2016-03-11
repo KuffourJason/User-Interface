@@ -130,28 +130,45 @@ public class New_course implements com.trolltech.qt.QUiForm<QDialog>
     	cid.setStyleSheet("#cid{color: black;}");
     	periodLabel.setStyleSheet("#periodLabel{color: black;}");
     	
+    	boolean check = true;
+    	
     	if( this.courseName.text().isEmpty() ){
     		label.setStyleSheet("#label{color: red;}");
-    		return;
+    		check = false;
     	}
     	
     	if( this.courseId.text().isEmpty() ){
     		cid.setStyleSheet("#cid{color: red;}");
-    		return;
+    		check = false;
     	}
     	
     	if( locaField.text().isEmpty() ){
     		label_3.setStyleSheet("#label_3{color: red;}");
-    		return;
+    		check = false;
     	}
 
     	if( this.periodBox.currentText().equals("-") ){
-    		periodLabel.setStyleSheet("#periodLabel{red: black;}");
-    		return;
+    		periodLabel.setStyleSheet("#periodLabel{color: red}");
+    		check = false;
     	}
     	
-    	Controller.getInstance().model.newCourse(courseId.text(), courseName.text(), "0", "0", locaField.text() );
-    	this.m.close();
+    	if( check ){
+        	boolean status = Controller.getInstance().createCourse(courseId.text(), courseName.text(), this.periodBox.currentText() ,locaField.text() );
+        	QMessageBox t = new QMessageBox();
+        	t.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
+        	
+        	if(status){
+        		t.setText("Course added");
+        		t.setWindowTitle("Success");
+            	this.m.close();
+        		t.exec();
+        	}
+        	else{
+           		t.setText("Course not added. Try changing id");
+        		t.setWindowTitle("Failed");
+        		t.exec();
+        	}
+    	}
     }
     
 

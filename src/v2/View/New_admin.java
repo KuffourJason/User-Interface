@@ -1,5 +1,8 @@
 package v2.View;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
@@ -36,6 +39,7 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         Dialog.setObjectName("Dialog");
         Dialog.resize(new QSize(397, 514).expandedTo(Dialog.minimumSizeHint()));
         Dialog.setModal(true);
+        Dialog.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
         
         main = new QWidget(Dialog);
         main.setObjectName("main");
@@ -143,10 +147,25 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         buttonBox.rejected.connect(Dialog, "reject()");
         
         fpcombo.addItem("-");
-        spcombo.addItem("-");
-        tpcombo.addItem("-");
-        fpcombo_2.addItem("-");
-
+        fpcombo.addItem("Spare");
+    	Map<String, String> p1 = Controller.getInstance().getPeriods(1);
+    	for( String key: p1.keySet() ){		fpcombo.addItem(p1.get(key), key);     	}
+    	
+    	spcombo.addItem("-");
+    	spcombo.addItem("Spare");
+    	Map<String, String> p2 = Controller.getInstance().getPeriods(2);
+    	for( String key: p2.keySet() ){		spcombo.addItem(p2.get(key), key);     	}
+    	
+    	tpcombo.addItem("-");
+    	tpcombo.addItem("Spare");
+    	Map<String, String> p3 = Controller.getInstance().getPeriods(3);
+    	for( String key: p3.keySet() ){		tpcombo.addItem(p3.get(key), key);     	}
+    	
+    	fpcombo_2.addItem("-");
+    	fpcombo_2.addItem("Spare");
+    	Map<String, String> p4 = Controller.getInstance().getPeriods(4);
+    	for( String key: p4.keySet() ){		fpcombo_2.addItem(p4.get(key), key);     	}
+        
         Dialog.connectSlotsByName();
         m = Dialog;
     } // setupUi
@@ -176,49 +195,72 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
 		p3label.setStyleSheet("#p3label{color: black;}");
 		p4label.setStyleSheet("#p4label{color: black;}");
     	    	
+		boolean check = true;
+		
     	if( firstname.text().isEmpty() ){
     		fnamelabel.setStyleSheet("#fnamelabel{color: red;}");
-    		return;
+    		check = false;
     	}
     	
     	if( lastname.text().isEmpty() ){
     		lnamelabel.setStyleSheet("#lnamelabel{color: red;}");
-    		return;
+    		check = false;
     	}
     	
     	if( tagid.text().isEmpty() ){
     		taglabel.setStyleSheet("#taglabel{color: red;}");
-    		return;
+    		check = false;
     	}
     	
     	if( id.text().isEmpty() ){
     		adminidlabel.setStyleSheet("#adminidlabel{color: red;}");
-    		return;
+    		check = false;
     	}
     	
-    	if( fpcombo.currentText().equals("") ){
+    	if( fpcombo.currentText().equals("-") ){
     		p1label.setStyleSheet("#p1label{color: red;}");
-    		return;
+    		check = false;
     	}
     	
-    	if( spcombo.currentText().equals("")){
+    	if( spcombo.currentText().equals("-")){
     		p2label.setStyleSheet("#p2label{color: red;}");
-    		return;
+    		check = false;
     	}
-    	if( tpcombo.currentText().equals("")){
+    	if( tpcombo.currentText().equals("-")){
     		p3label.setStyleSheet("#p3label{color: red;}");
-    		return;
+    		check = false;
     	}
     	
-    	if( fpcombo_2.currentText().equals("") ){
+    	if( fpcombo_2.currentText().equals("-") ){
     		p4label.setStyleSheet("#p4label{color: red;}");
-    		return;
+    		check = false;
     	}
     	
+    	if( check ){
+    		ArrayList<String> timetable = new ArrayList<String>();
+    		timetable.add((String)fpcombo.itemData(fpcombo.currentIndex()) );
+    		timetable.add((String)spcombo.itemData(spcombo.currentIndex()));
+    		timetable.add((String)tpcombo.itemData(tpcombo.currentIndex()));
+    		timetable.add((String)fpcombo_2.itemData(fpcombo_2.currentIndex()));
+    		boolean add = Controller.getInstance().createAdmin(this.tagid.text(), this.id.text(), this.firstname.text(), this.lastname.text(), timetable);   	
+
+    		QMessageBox t = new QMessageBox();
+    		t.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
+    		
+    		if(add){
+    			t.setText("Admin Added");
+    			t.setWindowTitle("Success");
+    	    	this.m.close();
+    	    	//Controller.getInstance().updateAdminView();
+    	    	t.exec();
+    		}
+    		else{
+    			t.setText("Admin not added. Try changing tag id");
+    			t.setWindowTitle("Fail");
+    			t.exec();
+    		}
+    	}
     	
-    	this.m.close();
-    	System.out.println("hello world");
-    	Controller.getInstance().model.newAdmin(this.tagid.text(), this.id.text(), this.lastname.text(), this.firstname.text(), null);   	
     }
     
 }

@@ -194,15 +194,21 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
     }
     
     public void delete(){
-    	System.out.println("the button is clicked");  	
     	boolean status = Controller.getInstance().deleteAdmin(_id);
-    	
+		QMessageBox t = new QMessageBox();
+		t.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
+
     	if( status ){
     		holder.hide();
     		holder.close();
+    		t.setText("The deletion was a success");
+    		t.setWindowTitle("Success");
+    		t.exec();
     	}
     	else{
-    		
+    		t.setText("The deletion failed");
+    		t.setWindowTitle("Failed");
+    		t.exec();
     	}
     }
 }

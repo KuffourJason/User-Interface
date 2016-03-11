@@ -1,5 +1,7 @@
 package v2.View;
 
+import v2.Controller.Controller;
+
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
@@ -29,6 +31,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     public QLabel p2;
     public QLabel p3;
     public QLabel p4;
+    public String _id;
     
     private boolean expand;
 
@@ -174,6 +177,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     	this.absents.hide();
     	this.lates.hide();
     	this.expandButton.clicked.connect(this, "big()");
+    	this.deleteButton.clicked.connect(this, "delete()");
     	
         fNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "First name:", null));
         lNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Last name:", null));
@@ -200,6 +204,25 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         p4.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
     } // retranslateUi
 
+    public void delete(){
+    	boolean status = Controller.getInstance().deleteStudent(_id);
+		QMessageBox t = new QMessageBox();
+		t.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
+
+    	if( status ){
+    		holder.hide();
+    		holder.close();
+    		t.setText("The deletion was a success");
+    		t.setWindowTitle("Success");
+    		t.exec();
+    	}
+    	else{
+    		t.setText("The deletion failed");
+    		t.setWindowTitle("Failed");
+    		t.exec();
+    	}
+    }
+    
     public void big(){
     	if( !expand ){
         	holder.setFixedHeight(191);

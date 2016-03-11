@@ -62,7 +62,10 @@ public class Students implements Runnable {
 	 * 
 	 */
 	public void deleteStudent(String id){
-		this.getData();	//updates the maps to the latest revision number
+		JSONhandler d = new JSONhandler( dynam_db.find(JsonObject.class, id) );	//updates the maps to the latest revision number
+		this.dynamic.put(id, d);
+		d = new JSONhandler( stati_db.find(JsonObject.class, id) );	//updates the maps to the latest revision number
+		this.stati.put(id, d);
 		this.dynam_db.remove(this.dynamic.remove(id).instance);  		//removes the student with id from the dynamic database
 		this.stati_db.remove(this.stati.remove(id).instance  ); 		//removes the student with id from the static database
 	}
