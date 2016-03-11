@@ -179,6 +179,9 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     	this.expandButton.clicked.connect(this, "big()");
     	this.deleteButton.clicked.connect(this, "delete()");
     	
+    	this.expandButton.raise();
+    	this.deleteButton.raise();
+    	
         fNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "First name:", null));
         lNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Last name:", null));
         tLatesLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Total Lates:", null));

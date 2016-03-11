@@ -114,6 +114,7 @@ public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
     void retranslateUi(QWidget Form)
     {    	
     	this.deleteButton.clicked.connect(this, "delete()");
+    	this.deleteButton.raise();
     	
         cNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Course name:", null));
         idLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Course ID:", null));
