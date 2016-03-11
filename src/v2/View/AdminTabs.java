@@ -3,6 +3,8 @@ package v2.View;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
+import v2.Controller.Controller;
+
 public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
 {
     public QWidget holder;
@@ -25,6 +27,7 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
     public QLabel p2;
     public QLabel p3;
     public QLabel p4;
+    public String _id;
     
     private Boolean expand;
     
@@ -152,6 +155,7 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
     void retranslateUi(QWidget Form)
     {
     	this.expandButton.clicked.connect(this, "big()");
+    	this.deleteButton.clicked.connect(this, "delete()");
     	
         fNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "First name:", null));
         lNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Last name:", null));
@@ -187,7 +191,19 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
         	expandButton.setGeometry(expandButton.x(), 60, expandButton.width(), expandButton.height());
         	expand = false;
     	}
-
+    }
+    
+    public void delete(){
+    	System.out.println("the button is clicked");  	
+    	boolean status = Controller.getInstance().deleteAdmin(_id);
+    	
+    	if( status ){
+    		holder.hide();
+    		holder.close();
+    	}
+    	else{
+    		
+    	}
     }
 }
 

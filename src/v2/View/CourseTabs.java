@@ -3,6 +3,8 @@ package v2.View;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
+import v2.Controller.Controller;
+
 public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
 {
     public QWidget holder;
@@ -19,6 +21,7 @@ public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
     public QLabel location;
     public QLabel startLabel;
     public QLabel start;
+    public String _id;
 
     public CourseTabs() { super(); }
 
@@ -125,5 +128,17 @@ public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
         start.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
     } // retranslateUi
 
+    public void delete(){
+    	System.out.println("the button is clicked");  	
+    	boolean status = Controller.getInstance().deleteCourse(_id);
+    	
+    	if( status ){
+    		holder.hide();
+    		holder.close();
+    	}
+    	else{
+    		
+    	}
+    }
 }
 

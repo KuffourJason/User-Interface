@@ -52,10 +52,20 @@ public class Controller {
 		System.out.println( y);
 	}
 	
-	public void display(){
+	public boolean deleteAdmin(String macAddress){
+		return model.deleteAdmin(macAddress);
+	}
+	
+	public boolean deleteCourse(String courseId){
+		return model.deleteCourse(courseId);
+	}
+	
+	public void initial_display(){
 		
 		Map<String, ArrayList<JSONhandler>> t = model.retrieveStudents();
 		for( String r: t.keySet() ){
+			
+			if( t.get(r).get(1).toString("user_first_name").equals("nothing")) continue;
 			StudentTabs s = new StudentTabs();
 			s.setupUi(view.stuScrollWidget);
    		    s.fname.connectSlotsByName();
@@ -76,7 +86,7 @@ public class Controller {
 			s.p2.connectSlotsByName();
 			s.p3.connectSlotsByName();
 			s.p4.connectSlotsByName();
-			//s.timeTable.connectSlotsByName();
+
 			s.cStatus.setText(t.get(r).get(0).toString("user_status"));
 			s.currClass.setText(t.get(r).get(0).toString("user_current_class"));
 			s.curLocation.setText(t.get(r).get(0).toString("user_location"));
@@ -90,16 +100,18 @@ public class Controller {
 		
 		Map<String, JSONhandler> u = model.retrieveAdmin();
 		for( String r: u.keySet() ){
+			
+			if( u.get(r).toString("admin_first_name").equals("nothing")) continue;
 			AdminTabs s = new AdminTabs();
 			s.setupUi(view.adminScrollWidget );
 			
    		    s.fname.connectSlotsByName();
    		    s.lname.connectSlotsByName();
    		    s.id.connectSlotsByName();
-			s.fname.setText(u.get(r).toString("admin_first_name") );
+			s.fname.setText(u.get(r).toString("admin_first_name") );			
 			s.lname.setText(u.get(r).toString("admin_last_name") );
 			s.id.setText(u.get(r).toString("admin_id"));
-			
+			s._id = u.get(r).toString("_id");
 			s.cStatus.connectSlotsByName();
 			s.currclass.connectSlotsByName();
 			s.location.connectSlotsByName();
@@ -121,6 +133,8 @@ public class Controller {
 		
 		Map<String, JSONhandler> v = model.retrieveCourses();
 		for( String r: v.keySet() ){
+			
+			if( v.get(r).toString("class_name").equals("nothing")) continue;
 			CourseTabs s = new CourseTabs();
 			s.setupUi(view.cScrollWidget );
    		    s.cname.connectSlotsByName();
@@ -145,7 +159,7 @@ public class Controller {
 	public void activate(String args[]){
 		//this.setUP();
 		view.activate(args);
-		this.display();
+		this.initial_display();
 		QApplication.execStatic();
 	}
 	
