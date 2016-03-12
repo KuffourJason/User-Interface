@@ -1,5 +1,7 @@
 package v2.View;
 
+import v2.Controller.Controller;
+
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
@@ -463,6 +465,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     	settingButton.clicked.connect(this, "display()");
     	actionSet.triggered.connect(this, "display()");
     	
+    	this.refreshButton.clicked.connect(this, "refresh()");
     	this.addStu.clicked.connect(this, "addStudent()");;
     	this.addAdminButton.clicked.connect(this, "addAdmin()");
     	this.addCourse.clicked.connect(this, "addCourse()");    	
@@ -498,6 +501,10 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         optionsMenu.setTitle(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Options", null));
     } // retranslateUi
 
+    public void refresh(){
+    	Controller.getInstance().refresh(this.tabWidget.currentIndex());
+    }
+    
     public void display(){
     	QDialog t = new QDialog();
     	t.connectSlotsByName();

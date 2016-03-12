@@ -274,4 +274,16 @@ public class Model {
 	public Map<String, String> getPeriods(int period){
 		return courses.getPeriods(period);
 	}
+	
+	public void refreshAdminData(){
+		this.admins.run();
+	}
+	
+	public void refreshClassData(){
+		this.courses.run();
+	}
+	
+	public void refreshStudentData(){
+		this.students.run();
+	}
 }

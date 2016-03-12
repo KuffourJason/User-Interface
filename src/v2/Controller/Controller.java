@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.trolltech.qt.core.QObject;
 import com.trolltech.qt.gui.QApplication;
+import com.trolltech.qt.gui.QIcon;
+import com.trolltech.qt.gui.QMessageBox;
+import com.trolltech.qt.gui.QPixmap;
+
 import v2.Model.JSONhandler;
 import v2.Model.Model;
 import v2.View.*;
@@ -20,15 +25,13 @@ public class Controller {
 	protected Model model;	                  //the model which contains all the backend of the class
 	protected MainView view;               //the view of the UI
 	
-	private Map<String, AdminTabs> adminTab;
-	
 	/**
 	 * The constructor creates instances of the model and the main UI view
 	 */
 	private Controller(){
 		model = new Model();
 		view = new MainView();
-		adminTab = new HashMap<String, AdminTabs>();
+		new HashMap<String, AdminTabs>();
 	}
 	
 	/**
@@ -49,40 +52,157 @@ public class Controller {
 		this.view.nc.label.setText("yeah boy what's up");
 	}
 	
+	/**
+	 * @param y
+	 */
 	public void hello(String y){
 		System.out.println( y);
 	}
 	
+	/**
+	 * @param macAddress
+	 * @return
+	 */
 	public boolean deleteAdmin(String macAddress){
 		return model.deleteAdmin(macAddress);
 	}
 	
+	/**
+	 * @param courseId
+	 * @return
+	 */
 	public boolean deleteCourse(String courseId){
 		return model.deleteCourse(courseId);
 	}
 	
+	/**
+	 * @param id
+	 * @return
+	 */
 	public boolean deleteStudent(String id){
 		return model.deleteStudent(id);
 	}
 	
+	/**
+	 * @param id
+	 * @param name
+	 * @param period
+	 * @param location
+	 * @return
+	 */
 	public boolean createCourse(String id, String name, String period, String location){
 		return model.newCourse(id, name, period, location);
 	}
 	
+	/**
+	 * @param macAddress
+	 * @param studentId
+	 * @param firstname
+	 * @param lastname
+	 * @param timetable
+	 * @return
+	 */
 	public boolean createStudent(String macAddress, String studentId, String firstname, String lastname, ArrayList<String> timetable){
 		return model.newStudent(macAddress, studentId, firstname, lastname, timetable);
 	}
 	
+	/**
+	 * @param macAddress
+	 * @param adminId
+	 * @param firstname
+	 * @param lastname
+	 * @param timetable
+	 * @return
+	 */
 	public boolean createAdmin( String macAddress, String adminId, String firstname, String lastname, ArrayList<String> timetable  ){
 		return model.newAdmin(macAddress, adminId, firstname, lastname, timetable);
 	}
 	
+	/**
+	 * @param period
+	 * @return
+	 */
 	public Map<String, String> getPeriods(int period){
 		return model.getPeriods(period);
 	}
 	
+	/**
+	 * 
+	 */
 	public void initial_display(){
+		this.studentDisplay();
+		this.classDisplay();
+		this.adminDisplay();
+	}
+	
+	/**
+	 * 
+	 */
+	public void updateAdminView(){
+		for( QObject t: view.adminScrollWidget.findChildren() ){
+			if( t.getClass().getName().equals("com.trolltech.qt.gui.QWidget") ){
+				t.dispose();
+			}
+		}
+		model.refreshAdminData();
+		this.adminDisplay();
+	}
+	
+	/**
+	 * 
+	 */
+	public void updateClassView(){
+		for( QObject t: view.cScrollWidget.findChildren() ){
+			if( t.getClass().getName().equals("com.trolltech.qt.gui.QWidget") ){
+				t.dispose();
+			}
+		}
+		model.refreshClassData();
+		this.classDisplay();
+	}
+	
+	/**
+	 * 
+	 */
+	public void updateStudentView(){
+		for( QObject t: view.stuScrollWidget.findChildren() ){
+			if( t.getClass().getName().equals("com.trolltech.qt.gui.QWidget") ){
+				t.dispose();
+			}
+		}
+		model.refreshStudentData();
+		this.studentDisplay();
+	}
+	
+	/**
+	 * @param index
+	 */
+	public void refresh(int index){
+		QMessageBox t = new QMessageBox();
+		t.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
+		t.setWindowTitle("Refreshed");
 		
+		if( index == 0){
+			t.setText("Administrator Info Refreshed");
+			this.updateAdminView();
+			t.exec();			
+		}
+		else if( index == 1){
+			t.setText("Course Info Refreshed");
+			this.updateClassView();
+			t.exec();
+		}
+		else{
+			t.setText("Student Info Refreshed");
+			this.updateStudentView();
+			t.exec();
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void studentDisplay(){
 		Map<String, ArrayList<JSONhandler>> t = model.retrieveStudents();
 		for( String r: t.keySet() ){
 			
@@ -121,10 +241,12 @@ public class Controller {
 				s.p4.setText(time[6]);
 			}
 		}
-		
-		
-		
-		
+	}
+	
+	/**
+	 * 
+	 */
+	public void classDisplay(){
 		Map<String, JSONhandler> v = model.retrieveCourses();
 		for( String r: v.keySet() ){
 			
@@ -146,7 +268,12 @@ public class Controller {
 			s.period.setText(v.get(r).toString("class_period") );
 			s._id = v.get(r).toString("_id") ;
 		}
-		
+	}
+	
+	/**
+	 * 
+	 */
+	public void adminDisplay(){
 		Map<String, JSONhandler> u = Controller.getInstance().model.retrieveAdmin();
 		for( String r: u.keySet() ){
 			
@@ -179,20 +306,9 @@ public class Controller {
 				s.p3.setText(time[4]);
 				s.p4.setText(time[6]);
 			}
-			AdminTabs wt = s;
-			adminTab.put(s._id, wt);
 		}
 	}
-	
-	public void updateAdminView(){
-		System.out.println(adminTab.size());
-		for( String k: adminTab.keySet() ){
-			AdminTabs bye = adminTab.remove(k);
-			bye.holder.hide();
-			bye.holder.close();
-		}
-	}
-	
+
 	/**
 	 * The method creates and displays the UI
 	 */
@@ -204,6 +320,11 @@ public class Controller {
 	}
 	
 	public static void main(String args[]){
+	    com.trolltech.qt.Utilities.loadQtLibrary("QtCore");
+	    com.trolltech.qt.Utilities.loadQtLibrary("QtGui");
+	    com.trolltech.qt.Utilities.loadQtLibrary("QtXml");
+	    com.trolltech.qt.Utilities.loadQtLibrary("QtSql");
+	    com.trolltech.qt.Utilities.loadQtLibrary("QtSvg");
 		Controller t = Controller.getInstance();
 		t.activate(args);
 	}

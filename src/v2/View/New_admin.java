@@ -251,7 +251,7 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
     			t.setText("Admin Added");
     			t.setWindowTitle("Success");
     	    	this.m.close();
-    	    	//Controller.getInstance().updateAdminView();
+    	    	Controller.getInstance().updateAdminView();
     	    	t.exec();
     		}
     		else{

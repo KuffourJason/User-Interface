@@ -74,7 +74,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
 				"}\n"+
 				"\n"+
 				"QPushButton:hover{\n"+
-				"	background-color: rgb(220, 220, 220); background-color:white;}\n"+
+				"	background-color: rgb(220, 220, 220); }\n"+
 				"#holder:hover{\n"+
 				"	    border-width: 4px; background-color:rgba(30, 30, 30, 255);\n"+
 				"}\n"+
@@ -181,6 +181,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     	
     	this.expandButton.raise();
     	this.deleteButton.raise();
+    	holder.lower();
     	
         fNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "First name:", null));
         lNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Last name:", null));

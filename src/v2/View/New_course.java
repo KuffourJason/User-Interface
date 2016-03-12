@@ -161,6 +161,7 @@ public class New_course implements com.trolltech.qt.QUiForm<QDialog>
         		t.setText("Course added");
         		t.setWindowTitle("Success");
             	this.m.close();
+            	Controller.getInstance().updateClassView();
         		t.exec();
         	}
         	else{

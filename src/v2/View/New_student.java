@@ -247,6 +247,7 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
     			t.setText("Student Added");
     			t.setWindowTitle("Success");
     	    	this.m.close();
+    	    	Controller.getInstance().updateStudentView();
     	    	t.exec();
     		}
     		else{
