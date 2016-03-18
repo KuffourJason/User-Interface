@@ -185,17 +185,17 @@ public class Controller {
 		if( index == 0){
 			t.setText("Administrator Info Refreshed");
 			this.updateAdminView();
-			t.exec();			
+			//t.exec();			
 		}
 		else if( index == 1){
 			t.setText("Course Info Refreshed");
 			this.updateClassView();
-			t.exec();
+			//t.exec();
 		}
 		else{
 			t.setText("Student Info Refreshed");
 			this.updateStudentView();
-			t.exec();
+			//t.exec();
 		}
 	}
 	
@@ -214,6 +214,8 @@ public class Controller {
    		    s.absents.connectSlotsByName();
    		    s.lates.connectSlotsByName();
    		    s.id.connectSlotsByName();
+   		    s.deleteButton.connectSlotsByName();
+   		    s.expandButton.connectSlotsByName();
 			s.fname.setText(t.get(r).get(1).toString("user_first_name") );
 			s.lname.setText(t.get(r).get(1).toString("user_last_name") );
 			s.lates.setText(t.get(r).get(1).toString("user_number_of_lates"));
@@ -240,6 +242,8 @@ public class Controller {
 				s.p3.setText(time[4]);
 				s.p4.setText(time[6]);
 			}
+			s.holder.lower();
+			view.stuScrollWidget.lower();
 		}
 	}
 	

@@ -37,11 +37,18 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
 
     public void setupUi(QWidget Form)
     {
-        
         holder = new QWidget(Form);
         Form.layout().addWidget(holder);
         holder.setObjectName("holder");
         holder.setGeometry(new QRect(0, 0, 621, 101));
+        
+        QImage b = new QImage();
+        b.load("classpath:admin_resource/eot_icon.png");
+        QLabel image = new QLabel(holder);
+        image.setGeometry(new QRect(470, 10, 100, 80));
+        image.setObjectName("image");
+        image.setScaledContents(true);
+        image.setPixmap(QPixmap.fromImage(b));
 
         QSizePolicy sizePolicy1 = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed);
         sizePolicy1.setHorizontalStretch((byte)0);
@@ -106,10 +113,10 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
         deleteButton.setGeometry(new QRect(580, 10, 31, 31));
         fname = new QLabel(holder);
         fname.setObjectName("fname");
-        fname.setGeometry(new QRect(130, 0, 101, 31));
+        fname.setGeometry(new QRect(120, 0, 101, 31));
         lname = new QLabel(holder);
         lname.setObjectName("lname");
-        lname.setGeometry(new QRect(130, 30, 101, 31));
+        lname.setGeometry(new QRect(120, 30, 101, 31));
         cStatus = new QLabel(holder);
         cStatus.setObjectName("cStatus");
         cStatus.setGeometry(new QRect(430, 60, 101, 31));
@@ -127,7 +134,7 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
         idLabel.setGeometry(new QRect(10, 60, 111, 31));
         id = new QLabel(holder);
         id.setObjectName("id");
-        id.setGeometry(new QRect(130, 60, 101, 31));
+        id.setGeometry(new QRect(120, 60, 101, 31));
         currclassLab = new QLabel(holder);
         currclassLab.setObjectName("currclassLab");
         currclassLab.setGeometry(new QRect(290, 0, 111, 31));
@@ -147,7 +154,7 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
         p4 = new QLabel(holder);
         p4.setObjectName("p4");
         p4.setGeometry(new QRect(430, 110, 101, 31));
-        
+                
         retranslateUi(Form);
 
     } // setupUi

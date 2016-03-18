@@ -16,8 +16,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/qtjambi-4.8.6/qtjambi-4.8.6.jar"/>
-	<classpathentry kind="lib" path="C:/qtjambi-4.8.6/qtjambi-native-win32-msvc2012-4.8.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jason/git/User-Interface/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jay/git/User-Interface/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jay/git/User-Interface/qtjambi-4.8.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jay/git/User-Interface/qtjambi-native-win64-msvc2013x64-4.8.7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -42,8 +42,15 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         holder = new QWidget(Form);
         Form.layout().addWidget(holder);
         holder.setObjectName("holder");
-        
         holder.setGeometry(new QRect(0, 0, 621, 101));
+        
+        QImage b = new QImage();
+        b.load("classpath:admin_resource/eot_icon.png");
+        QLabel image = new QLabel(holder);
+        image.setGeometry(new QRect(470, 10, 100, 80));
+        image.setObjectName("image");
+        image.setScaledContents(true);
+        image.setPixmap(QPixmap.fromImage(b));
         
         QSizePolicy sizePolicy = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed);
         sizePolicy.setHorizontalStretch((byte)0);
@@ -111,16 +118,16 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         deleteButton.setGeometry(new QRect(580, 10, 31, 31));
         fname = new QLabel(holder);
         fname.setObjectName("fname");
-        fname.setGeometry(new QRect(130, 0, 131, 31));
+        fname.setGeometry(new QRect(120, 0, 131, 31));
         lname = new QLabel(holder);
         lname.setObjectName("lname");
-        lname.setGeometry(new QRect(130, 30, 131, 31));
+        lname.setGeometry(new QRect(120, 30, 131, 31));
         cStatus = new QLabel(holder);
         cStatus.setObjectName("cStatus");
         cStatus.setGeometry(new QRect(430, 60, 121, 31));
         lates = new QLabel(holder);
         lates.setObjectName("lates");
-        lates.setGeometry(new QRect(130, 150, 111, 31));
+        lates.setGeometry(new QRect(120, 150, 111, 31));
         absents = new QLabel(holder);
         absents.setObjectName("absents");
         absents.setGeometry(new QRect(430, 150, 111, 31));
@@ -136,7 +143,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         idLabel.setGeometry(new QRect(10, 60, 111, 31));
         id = new QLabel(holder);
         id.setObjectName("id");
-        id.setGeometry(new QRect(130, 60, 131, 31));
+        id.setGeometry(new QRect(120, 60, 131, 31));
         curLoclabel = new QLabel(holder);
         curLoclabel.setObjectName("curLoclabel");
         curLoclabel.setGeometry(new QRect(290, 30, 121, 31));
@@ -165,6 +172,10 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         p4.setObjectName("p4");
         p4.setGeometry(new QRect(430, 110, 101, 31));
         
+    	this.expandButton.clicked.connect(this, "big()");
+    	this.deleteButton.clicked.connect(this, "delete()");
+    	System.out.println( "connects");
+
         retranslateUi(Form);
 
         //Form.connectSlotsByName();
@@ -176,13 +187,11 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     	this.tLatesLabel.hide();
     	this.absents.hide();
     	this.lates.hide();
-    	this.expandButton.clicked.connect(this, "big()");
-    	this.deleteButton.clicked.connect(this, "delete()");
-    	
+
     	this.expandButton.raise();
     	this.deleteButton.raise();
     	holder.lower();
-    	
+    	    	
         fNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "First name:", null));
         lNameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Last name:", null));
         tLatesLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Total Lates:", null));
@@ -228,6 +237,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     }
     
     public void big(){
+		System.out.println("hello world");
     	if( !expand ){
         	holder.setFixedHeight(191);
         	this.tAbsentLabel.show();
