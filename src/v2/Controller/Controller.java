@@ -1,7 +1,6 @@
 package v2.Controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.trolltech.qt.core.QObject;
@@ -24,14 +23,13 @@ public class Controller {
 	private static Controller control = null; //the single instance of the Controller class
 	protected Model model;	                  //the model which contains all the backend of the class
 	protected MainView view;               //the view of the UI
-	
+	 
 	/**
 	 * The constructor creates instances of the model and the main UI view
 	 */
 	private Controller(){
 		model = new Model();
 		view = new MainView();
-		new HashMap<String, AdminTabs>();
 	}
 	
 	/**
@@ -94,6 +92,11 @@ public class Controller {
 		return model.newCourse(id, name, period, location);
 	}
 	
+	public Map<String, String> getConfigSettings(){
+		
+		return null;
+	}
+	
 	/**
 	 * @param macAddress
 	 * @param studentId
@@ -118,6 +121,13 @@ public class Controller {
 		return model.newAdmin(macAddress, adminId, firstname, lastname, timetable);
 	}
 	
+	public void updateConfig(String schoolEnd, String schoolStart, String firstStart, String secondStart, String luStart, String thirdStart, String fourthStart){
+		model.updateConfig( schoolEnd, schoolStart, firstStart, secondStart, luStart, thirdStart, fourthStart);
+	}
+	
+	public Map<String, String> getConfigInfo(){
+		return model.getConfig();
+	}
 	/**
 	 * @param period
 	 * @return
@@ -174,6 +184,12 @@ public class Controller {
 		this.studentDisplay();
 	}
 	
+	public void work(){
+		view.notifyAll();
+		view.tabWidget.setEnabled(true);
+		view.tabWidget.notifyAll();
+	}
+	
 	/**
 	 * @param index
 	 */
@@ -185,17 +201,17 @@ public class Controller {
 		if( index == 0){
 			t.setText("Administrator Info Refreshed");
 			this.updateAdminView();
-			//t.exec();			
+			t.exec();			
 		}
 		else if( index == 1){
 			t.setText("Course Info Refreshed");
 			this.updateClassView();
-			//t.exec();
+			t.exec();
 		}
 		else{
 			t.setText("Student Info Refreshed");
 			this.updateStudentView();
-			//t.exec();
+			t.exec();
 		}
 	}
 	
@@ -209,11 +225,13 @@ public class Controller {
 			if( t.get(r).get(1).toString("user_first_name").equals("nothing")) continue;
 			StudentTabs s = new StudentTabs();
 			s.setupUi(view.stuScrollWidget);
+		
    		    s.fname.connectSlotsByName();
    		    s.lname.connectSlotsByName();
    		    s.absents.connectSlotsByName();
    		    s.lates.connectSlotsByName();
    		    s.id.connectSlotsByName();
+
    		    s.deleteButton.connectSlotsByName();
    		    s.expandButton.connectSlotsByName();
 			s.fname.setText(t.get(r).get(1).toString("user_first_name") );
@@ -225,12 +243,21 @@ public class Controller {
 			s.cStatus.connectSlotsByName();
 			s.currClass.connectSlotsByName();
 			s.curLocation.connectSlotsByName();
+   		    s.entryTime.connectSlotsByName();
+   		    s.exitTime.connectSlotsByName();
+			/*
 			s.p1.connectSlotsByName();
 			s.p2.connectSlotsByName();
 			s.p3.connectSlotsByName();
+			*/
 			s.p4.connectSlotsByName();
-
-			s.cStatus.setText(t.get(r).get(0).toString("user_status"));
+			
+			ArrayList<String> status = t.get(r).get(0).toArray("user_status");
+			if( status.size() > 1){
+				s.cStatus.setText(status.get(0));
+				s.entryTime.setText(status.get(1));
+				s.exitTime.setText(status.get(2));
+			}
 			s.currClass.setText(t.get(r).get(0).toString("user_current_class"));
 			s.curLocation.setText(t.get(r).get(0).toString("user_location"));
 			s._id = t.get(r).get(0).toString("_id");
@@ -244,6 +271,7 @@ public class Controller {
 			}
 			s.holder.lower();
 			view.stuScrollWidget.lower();
+			
 		}
 	}
 	
@@ -252,8 +280,10 @@ public class Controller {
 	 */
 	public void classDisplay(){
 		Map<String, JSONhandler> v = model.retrieveCourses();
+		Map<String, String> info = this.getConfigInfo();
+		
 		for( String r: v.keySet() ){
-			
+
 			if( v.get(r).toString("class_name").equals("nothing")) continue;
 			CourseTabs s = new CourseTabs();
 			s.setupUi(view.cScrollWidget );
@@ -265,12 +295,27 @@ public class Controller {
    		    s.duration.connectSlotsByName();
    		    
 			s.cname.setText(v.get(r).toString("class_name") );
-			s.start.setText(v.get(r).toString("class_time_start") );
 			s.id.setText(v.get(r).toString("_id") );
-			s.duration.setText(v.get(r).toString("duration") );
 			s.location.setText(v.get(r).toString("class_location") );
 			s.period.setText(v.get(r).toString("class_period") );
 			s._id = v.get(r).toString("_id") ;
+			
+			if( v.get(r).toString("class_period").equals("1") ){
+				s.start.setText(info.get("first"));
+				s.duration.setText(info.get("second"));
+			}
+			else if( v.get(r).toString("class_period").equals("2") ){
+				s.start.setText(info.get("second"));
+				s.duration.setText(info.get("third") );
+			}
+			else if( v.get(r).toString("class_period").equals("3") ){
+				s.start.setText(info.get("third"));
+				s.duration.setText(info.get("lunchStart") );
+			}
+			else if( v.get(r).toString("class_period").equals("4") ){
+				s.start.setText(info.get("fourth"));
+				s.duration.setText(info.get("end") );
+			}
 		}
 	}
 	

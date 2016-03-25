@@ -30,7 +30,6 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public QLabel userlabel;
     public QLabel passLabel;
     public QPushButton loginButton;
-    public QPushButton accountButton;
     public QLabel backlabel;
     public QLabel invalidLogin;
     public QToolButton logoutButton;
@@ -78,7 +77,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         sizePolicy.setVerticalStretch((byte)0);
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth());
         MainWindow.setSizePolicy(sizePolicy);
-        MainWindow.setMaximumSize(new QSize(696, 560));
+        MainWindow.setMaximumSize(new QSize(679, 560));
         MainWindow.setSizeIncrement(new QSize(1, 1));
         MainWindow.setCursor(new QCursor(Qt.CursorShape.ArrowCursor));
         MainWindow.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png"))); ///////////////////////////////////
@@ -143,7 +142,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         loginFormWidget.setSizeIncrement(new QSize(0, 0));
         loginFormWidget.setStyleSheet("QWidget#loginFormWidget{\n"+
 				"	background-color: rgba(52,52,52, 255);\n"+
-				"	background-image: url(classpath:resource/back.png);\n"+		////////////////////////////////////////////////
+				"	background-image: url(classpath:admin_resource/tiger_white_updated.png);\n"+		////////////////////////////////////////////////
 				"    opacity: 0.1;\n"+
 				"}\n"+
 				"\n"+
@@ -159,44 +158,45 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
 				"");
         userText = new QLineEdit(loginFormWidget);
         userText.setObjectName("userText");
-        userText.setGeometry(new QRect(290, 210, 231, 41));
+        userText.setGeometry(new QRect(290, 230, 231, 41));
         userText.setStyleSheet("QLineEdit#userText{\n"+
-        		"	background-color: rgb(229, 229, 229);\n"+
+        		"	background-color: rgb(229, 229, 229); font: 12pt \"MS Shell Dlg 2\";\n"+
         		"}");
         passText = new QLineEdit(loginFormWidget);
         passText.setObjectName("passText");
-        passText.setGeometry(new QRect(290, 270, 231, 41));
+        passText.setGeometry(new QRect(290, 290, 231, 41));
         passText.setStyleSheet("QLineEdit#passText{\n"+
-        		"	background-color: rgb(229, 229, 229);\n"+
+        		"	background-color: rgb(229, 229, 229); font: 12pt \"MS Shell Dlg 2\";\n"+
         		"}");
         passText.setEchoMode(com.trolltech.qt.gui.QLineEdit.EchoMode.Password);
         userlabel = new QLabel(loginFormWidget);
         userlabel.setObjectName("userlabel");
-        userlabel.setGeometry(new QRect(180, 220, 101, 21));
+        userlabel.setGeometry(new QRect(180, 240, 101, 16));
         userlabel.setStyleSheet("QLabel#userlabel{\n"+
-        		"	font: 12pt \"MS Shell Dlg 2\";\n"+
+        		"	font: 14pt \"MS Shell Dlg 2\";\n"+
         		"	color: rgb(255, 255, 255);\n"+
         		"}");
         passLabel = new QLabel(loginFormWidget);
         passLabel.setObjectName("passLabel");
-        passLabel.setGeometry(new QRect(180, 280, 101, 21));
+        passLabel.setGeometry(new QRect(180, 300, 101, 16));
         passLabel.setStyleSheet("QLabel#passLabel{\n"+
 				"	color: rgb(255, 255, 255);\n"+
-				"	font: 12pt \"MS Shell Dlg 2\";\n"+
+				"	font: 14pt \"MS Shell Dlg 2\";\n"+
 				"}");
         loginButton = new QPushButton(loginFormWidget);
         loginButton.setObjectName("loginButton");
-        loginButton.setGeometry(new QRect(220, 360, 111, 31));
-        accountButton = new QPushButton(loginFormWidget);
-        accountButton.setObjectName("accountButton");
-        accountButton.setGeometry(new QRect(360, 360, 111, 31));
+        loginButton.setGeometry(new QRect(310, 365, 111, 31));
         backlabel = new QLabel(loginFormWidget);
         backlabel.setObjectName("backlabel");
         backlabel.setGeometry(new QRect(20, 20, 681, 541));
         backlabel.setStyleSheet("");
         invalidLogin = new QLabel(loginFormWidget);
         invalidLogin.setObjectName("invalidLogin");
-        invalidLogin.setGeometry(new QRect(145, 412, 451, 51));
+        invalidLogin.setGeometry(new QRect(255, 417, 451, 51));
+        invalidLogin.setStyleSheet("QLabel#invalidLogin{\n"+
+				"	color: rgb(255, 255, 255);\n"+
+				"	font: 13pt \"MS Shell Dlg 2\";\n"+
+				"}");
         bottomBar = new QWidget(eotImage);
         bottomBar.setObjectName("bottomBar");
         bottomBar.setGeometry(new QRect(10, 510, 701, 101));
@@ -252,6 +252,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         logoutButton.setObjectName("logoutButton");
         logoutButton.setGeometry(new QRect(610, 0, 71, 41));
         logoutButton.setPopupMode(com.trolltech.qt.gui.QToolButton.ToolButtonPopupMode.InstantPopup);
+        logoutButton.setIcon(new QIcon(new QPixmap("classpath:admin_resource/logout.png")));
         refreshButton = new QToolButton(bottomBar);
         refreshButton.setObjectName("refreshButton");
         refreshButton.setGeometry(new QRect(70, 0, 81, 41));
@@ -448,9 +449,9 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         optionsMenu.addAction(actionSet);
         retranslateUi(MainWindow);
         userText.returnPressed.connect(passText, "selectAll()");
-        loginButton.clicked.connect(loginFormWidget, "hide()");
+        loginButton.clicked.connect(this, "login()");
         logoutButton.clicked.connect(loginFormWidget, "show()");
-
+        passText.returnPressed.connect(this, "login()");
         tabWidget.setCurrentIndex(0);
         bottomBar.raise();	//raises the bottom bar
         
@@ -481,7 +482,6 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         userlabel.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Username", null));
         passLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Password", null));
         loginButton.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Login", null));
-        accountButton.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Create Account", null));
         backlabel.setText("");
         invalidLogin.setText("");
         logoutButton.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "logout", null));
@@ -501,6 +501,21 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         optionsMenu.setTitle(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Options", null));
     } // retranslateUi
 
+    public void login(){
+    	
+    	if( passText.text().equals("admin") && userText.text().equals("admin") ){
+    		this.invalidLogin.setText("");
+    		this.passText.setText("");
+    		this.userText.setText("");
+        	loginFormWidget.hide();
+    	}
+    	else{
+    		this.passText.setText("");
+    		this.userText.setText("");
+    		this.invalidLogin.setText("Invalid username and password");
+    	}
+    }
+    
     public void refresh(){
     	Controller.getInstance().refresh(this.tabWidget.currentIndex());
     }
@@ -545,7 +560,6 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         passText.raise();
         passLabel.raise();
         invalidLogin.raise();
-        accountButton.raise();
         loginButton.raise();
     }
     

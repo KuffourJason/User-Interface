@@ -3,7 +3,9 @@ package v2.Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import v2.Model.JSONhandler;
+
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
@@ -40,6 +42,7 @@ public class Students implements Runnable {
 		//gets list of all students in the database and stores the result in an arraylist
 		JsonObject listDyn = new JsonObject();
     	listDyn = dynam_db.findAny(listDyn.getClass(), "https://eyeofthetiger.cloudant.com/dynamic_user_info/_all_docs");
+    	//dynam_db.findAny(InputStream.class, "https://eyeofthetiger.cloudant.com/static_user_info/80:ea:ca:00:00:01/Goku_Dragon_Ball_Z.png");
     	JSONhandler ad = new JSONhandler( listDyn );
     	ArrayList<String> list = ad.extractFromArray( "rows", "id");
     	
@@ -49,7 +52,7 @@ public class Students implements Runnable {
     	for( String f: list ){
     		d = new JSONhandler( dynam_db.find(JsonObject.class, f) );
     		s = new JSONhandler( stati_db.find(JsonObject.class, f) );
-    		
+    		//System.out.println(s.instance.getAsJsonObject("_attachments").getAsString() );
     		this.dynamic.put(f, d);
     		this.stati.put(f, s);
     	}
@@ -92,10 +95,10 @@ public class Students implements Runnable {
 		//adds the student to the dynamic database info
 		JSONhandler add_dyn = new JSONhandler(new JsonObject());
 		add_dyn.addData("_id", macAddress);
-		add_dyn.addData("user_status", "0");
-		add_dyn.addData("user_current_class", "0");
-		add_dyn.addData("user_location", "0");
-		add_dyn.addData("user_daily_attendance", "0");
+		add_dyn.addData("user_status", "ABSENT/-/-");
+		add_dyn.addData("user_current_class", "-");
+		add_dyn.addData("user_location", "-");
+		add_dyn.addData("user_daily_attendance", "-");
 		add_dyn.addData("rssi", "0");
 		
 		this.stati_db.save(add.instance);

@@ -23,12 +23,18 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
     public QLabel id;
     public QLabel currclassLab;
     public QLabel currclass;
+    public QLabel entryLabel;
+    public QLabel exitLabel;
+    public QLabel entryTime;
+    public QLabel exitTime;
     public QLabel p1;
     public QLabel p2;
     public QLabel p3;
     public QLabel p4;
     public String _id;
     
+    public QPixmap b;
+    QLabel im;
     private Boolean expand;
     
     
@@ -42,13 +48,14 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
         holder.setObjectName("holder");
         holder.setGeometry(new QRect(0, 0, 621, 101));
         
-        QImage b = new QImage();
-        b.load("classpath:admin_resource/eot_icon.png");
-        QLabel image = new QLabel(holder);
-        image.setGeometry(new QRect(470, 10, 100, 80));
-        image.setObjectName("image");
-        image.setScaledContents(true);
-        image.setPixmap(QPixmap.fromImage(b));
+        /*
+        b = new QPixmap("classpath:admin_resource/eot_icon.png");
+        im = new QLabel(holder);
+        im.setGeometry(new QRect(470, 10, 100, 80));
+        im.setObjectName("im");
+        im.setScaledContents(true);
+        im.setPixmap(b);
+        */
 
         QSizePolicy sizePolicy1 = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed);
         sizePolicy1.setHorizontalStretch((byte)0);

@@ -259,6 +259,7 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
     			t.setWindowTitle("Fail");
     			t.exec();
     		}
+    		Controller.getInstance().work();
     	}
     	
     }

@@ -239,36 +239,12 @@ public class Model {
 	 * @param thirdStart	- 
 	 * @param fourthStart
 	 */
-	public void updateConfig(int lunchLength, String schoolEnd, String schoolStart, int grace, String firstStart, String secondStart, String thirdStart, String fourthStart){
-		this.config.update(lunchLength, schoolEnd, schoolStart, grace, firstStart, secondStart, thirdStart, fourthStart);			
+	public void updateConfig(String schoolEnd, String schoolStart,  String firstStart,  String secondStart, String luStart, String thirdStart, String fourthStart){
+		this.config.update(schoolEnd, schoolStart, firstStart, secondStart, luStart, thirdStart, fourthStart);			
 	}
 	
-	/**
-	 * @return - the start time of all four periods
-	 */
-	public ArrayList<Integer> getConfigPeriodStart(){
-		return this.config.getPeriodStart();
-	}
-	
-	/**
-	 * @return - the time the school starts
-	 */
-	public String getConfigSchoolStart(){
-		return this.config.getSchoolStart();
-	}
-	
-	/**
-	 * @return - the time the school ends
-	 */
-	public String getConfigSchoolEnd(){
-		return this.config.getSchoolEnd();
-	}
-
-	/**
-	 * @return - the length of each lunch period
-	 */
-	public int getConfigLunchLength(){
-		return this.config.getLunchLength();
+	public Map<String, String> getConfig(){
+		return this.config.getConfig();
 	}
 	
 	public Map<String, String> getPeriods(int period){

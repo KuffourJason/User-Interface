@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="GUI">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../Desktop/eclipse-java-luna-SR2-win32-x86_64/eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <path id="Maven Dependencies.libraryclasspath">
+        <pathelement location="../../.m2/repository/com/cloudant/cloudant-client/1.1.2/cloudant-client-1.1.2.jar"/>
+        <pathelement location="../../.m2/repository/org/apache/httpcomponents/httpclient/4.3.3/httpclient-4.3.3.jar"/>
+        <pathelement location="../../.m2/repository/org/apache/httpcomponents/httpcore/4.3.2/httpcore-4.3.2.jar"/>
+        <pathelement location="../../.m2/repository/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar"/>
+        <pathelement location="../../.m2/repository/commons-codec/commons-codec/1.6/commons-codec-1.6.jar"/>
+        <pathelement location="../../.m2/repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar"/>
+    </path>
+    <path id="GUI.classpath">
+        <pathelement location="target/classes"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+        <pathelement location="miglayout15-swing.jar"/>
+        <pathelement location="qtjambi-4.8.7.jar"/>
+        <pathelement location="qtjambi-native-win64-msvc2013x64-4.8.7.jar"/>
+    </path>
+    <path id="run.Config.classpath">
+        <path refid="GUI.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <path id="run.Controller.classpath">
+        <path refid="GUI.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <path id="run.GUI.classpath">
+        <path refid="GUI.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <path id="run.MainView (2).classpath">
+        <path refid="GUI.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <path id="run.Model.classpath">
+        <path refid="GUI.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <path id="run.Students.classpath">
+        <path refid="GUI.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="target/classes"/>
+        <copy includeemptydirs="false" todir="target/classes">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.xtend"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="target/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="target/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="GUI.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="Config">
+        <java classname="v2.Model.Config" failonerror="true" fork="yes">
+            <classpath refid="run.Config.classpath"/>
+        </java>
+    </target>
+    <target name="Controller">
+        <java classname="v2.Controller.Controller" failonerror="true" fork="yes">
+            <classpath refid="run.Controller.classpath"/>
+        </java>
+    </target>
+    <target name="GUI">
+        <java classname="v1.GUI" failonerror="true" fork="yes">
+            <env key="password" value="eng40000"/>
+            <env key="account" value="eyeofthetiger"/>
+            <classpath refid="run.GUI.classpath"/>
+        </java>
+    </target>
+    <target name="MainView (2)">
+        <java classname="v2.View.MainView" failonerror="true" fork="yes">
+            <classpath refid="run.MainView (2).classpath"/>
+        </java>
+    </target>
+    <target name="Model">
+        <java classname="v2.Model.Model" failonerror="true" fork="yes">
+            <classpath refid="run.Model.classpath"/>
+        </java>
+    </target>
+    <target name="Students">
+        <java classname="v2.Model.Students" failonerror="true" fork="yes">
+            <classpath refid="run.Students.classpath"/>
+        </java>
+    </target>
+</project>

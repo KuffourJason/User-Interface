@@ -169,6 +169,7 @@ public class New_course implements com.trolltech.qt.QUiForm<QDialog>
         		t.setWindowTitle("Failed");
         		t.exec();
         	}
+    		Controller.getInstance().work();
     	}
     }
     

@@ -27,6 +27,10 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     public QLabel curLocation;
     public QLabel curclaslab;
     public QLabel currClass;
+    public QLabel entryLabel;
+    public QLabel exitLabel;
+    public QLabel entryTime;
+    public QLabel exitTime;
     public QLabel p1;
     public QLabel p2;
     public QLabel p3;
@@ -44,6 +48,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         holder.setObjectName("holder");
         holder.setGeometry(new QRect(0, 0, 621, 101));
         
+        /*
         QImage b = new QImage();
         b.load("classpath:admin_resource/eot_icon.png");
         QLabel image = new QLabel(holder);
@@ -51,6 +56,9 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         image.setObjectName("image");
         image.setScaledContents(true);
         image.setPixmap(QPixmap.fromImage(b));
+        //image.setMask( QPixmap.fromImage(b).mask()  );
+         
+         */
         
         QSizePolicy sizePolicy = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed);
         sizePolicy.setHorizontalStretch((byte)0);
@@ -71,7 +79,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
 				"    color: white;\n"+
 				"}\n"+
 				"\n"+
-				"#fNameLabel, #lNameLabel, #tLatesLabel, #tAbsentLabel, #cStatusLabel, #timeLabel, #idLabel, #curclaslab, #curLoclabel{\n"
+				"#fNameLabel, #lNameLabel, #tLatesLabel, #tAbsentLabel, #cStatusLabel, #timeLabel, #idLabel, #curclaslab, #curLoclabel, #entryLabel, #exitLabel{\n"
 				+ "font: 12pt \"Calibri\";\n"+
 				"    color: white;\n"+
 				"}\n" +
@@ -106,75 +114,101 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         lNameLabel.setGeometry(new QRect(10, 30, 81, 31));
         tLatesLabel = new QLabel(holder);
         tLatesLabel.setObjectName("tLatesLabel");
-        tLatesLabel.setGeometry(new QRect(10, 150, 111, 31));
+        tLatesLabel.setGeometry(new QRect(10, 130, 111, 31));
         tAbsentLabel = new QLabel(holder);
         tAbsentLabel.setObjectName("tAbsentLabel");
-        tAbsentLabel.setGeometry(new QRect(290, 150, 111, 31));
+        tAbsentLabel.setGeometry(new QRect(270, 130, 111, 31));
         cStatusLabel = new QLabel(holder);
         cStatusLabel.setObjectName("cStatusLabel");
-        cStatusLabel.setGeometry(new QRect(290, 60, 111, 31));
+        cStatusLabel.setGeometry(new QRect(270, 0, 111, 31));
+        
         deleteButton = new QPushButton(holder);
         deleteButton.setObjectName("deleteButton");
         deleteButton.setGeometry(new QRect(580, 10, 31, 31));
+        
         fname = new QLabel(holder);
         fname.setObjectName("fname");
         fname.setGeometry(new QRect(120, 0, 131, 31));
+       
         lname = new QLabel(holder);
         lname.setObjectName("lname");
         lname.setGeometry(new QRect(120, 30, 131, 31));
+       
         cStatus = new QLabel(holder);
         cStatus.setObjectName("cStatus");
-        cStatus.setGeometry(new QRect(430, 60, 121, 31));
+        cStatus.setGeometry(new QRect(390, 0, 71, 31));
+       
         lates = new QLabel(holder);
         lates.setObjectName("lates");
-        lates.setGeometry(new QRect(120, 150, 111, 31));
+        lates.setGeometry(new QRect(120, 130, 111, 31));
+       
         absents = new QLabel(holder);
         absents.setObjectName("absents");
-        absents.setGeometry(new QRect(430, 150, 111, 31));
+        absents.setGeometry(new QRect(390, 130, 111, 31));
         absents.setStyleSheet("");
+       
         expandButton = new QPushButton(holder);
         expandButton.setObjectName("expandButton");
         expandButton.setGeometry(new QRect(580, 60, 31, 31));
+        
         timeLabel = new QLabel(holder);
         timeLabel.setObjectName("timeLabel");
-        timeLabel.setGeometry(new QRect(10, 110, 111, 31));
+        timeLabel.setGeometry(new QRect(10, 170, 111, 31));
+        
         idLabel = new QLabel(holder);
         idLabel.setObjectName("idLabel");
         idLabel.setGeometry(new QRect(10, 60, 111, 31));
         id = new QLabel(holder);
         id.setObjectName("id");
         id.setGeometry(new QRect(120, 60, 131, 31));
+        
         curLoclabel = new QLabel(holder);
         curLoclabel.setObjectName("curLoclabel");
-        curLoclabel.setGeometry(new QRect(290, 30, 121, 31));
+        curLoclabel.setGeometry(new QRect(270, 100, 111, 31));
         curLocation = new QLabel(holder);
         curLocation.setObjectName("curLocation");
-        curLocation.setGeometry(new QRect(430, 30, 111, 31));
+        curLocation.setGeometry(new QRect(390, 100, 121, 31));
         curLocation.setStyleSheet("");
+        
         curclaslab = new QLabel(holder);
         curclaslab.setObjectName("curclaslab");
-        curclaslab.setGeometry(new QRect(290, 0, 111, 31));
+        curclaslab.setGeometry(new QRect(10, 100, 111, 31));
         currClass = new QLabel(holder);
         currClass.setObjectName("currClass");
-        currClass.setGeometry(new QRect(430, 0, 111, 31));
+        currClass.setGeometry(new QRect(120, 100, 121, 31));
         currClass.setStyleSheet("");
+        
+        entryLabel = new QLabel(holder);
+        entryLabel.setObjectName("entryLabel");
+        entryLabel.setGeometry(new QRect(270, 30, 121, 31));
+        
+        exitLabel = new QLabel(holder);
+        exitLabel.setObjectName("exitLabel");
+        exitLabel.setGeometry(new QRect(270, 60, 111, 31));
+        
+        entryTime = new QLabel(holder);
+        entryTime.setObjectName("entryTime");
+        entryTime.setGeometry(new QRect(390, 30, 71, 31));
+        
+        exitTime = new QLabel(holder);
+        exitTime.setObjectName("exitTime");
+        exitTime.setGeometry(new QRect(390, 60, 71, 31));
         
         p1 = new QLabel(holder);
         p1.setObjectName("p1");
-        p1.setGeometry(new QRect(130, 110, 101, 31));
+        p1.setGeometry(new QRect(120, 170, 101, 31));
         p2 = new QLabel(holder);
         p2.setObjectName("p2");
-        p2.setGeometry(new QRect(230, 110, 101, 31));
+        p2.setGeometry(new QRect(220, 170, 101, 31));
         p3 = new QLabel(holder);
         p3.setObjectName("p3");
-        p3.setGeometry(new QRect(330, 110, 101, 31));
+        p3.setGeometry(new QRect(320, 170, 101, 31));
         p4 = new QLabel(holder);
         p4.setObjectName("p4");
-        p4.setGeometry(new QRect(430, 110, 101, 31));
+        p4.setGeometry(new QRect(420, 170, 101, 31));
         
     	this.expandButton.clicked.connect(this, "big()");
     	this.deleteButton.clicked.connect(this, "delete()");
-    	System.out.println( "connects");
 
         retranslateUi(Form);
 
@@ -211,6 +245,11 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         curLocation.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
         curclaslab.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Current class:", null));
         currClass.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
+        
+        entryLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Entry Time:", null));
+        exitLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Exit Time:", null));
+        entryTime.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Text Label", null));
+        exitTime.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Text Label", null));
         p1.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
         p2.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
         p3.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
@@ -228,24 +267,25 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     		t.setText("The deletion was a success");
     		t.setWindowTitle("Success");
     		t.exec();
+    		Controller.getInstance().work();
     	}
     	else{
     		t.setText("The deletion failed");
     		t.setWindowTitle("Failed");
     		t.exec();
+    		Controller.getInstance().work();
     	}
     }
     
     public void big(){
-		System.out.println("hello world");
     	if( !expand ){
-        	holder.setFixedHeight(191);
+        	holder.setFixedHeight(215);
         	this.tAbsentLabel.show();
         	this.tLatesLabel.show();
         	this.absents.show();
         	this.lates.show();
         	expandButton.setText("/\\");
-        	expandButton.setGeometry(expandButton.x(), 150, expandButton.width(), expandButton.height());
+        	expandButton.setGeometry(expandButton.x(), 170, expandButton.width(), expandButton.height());
         	expand = true;
     	}
     	else{
@@ -262,4 +302,3 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     }
 
 }
-

@@ -18,10 +18,6 @@ public class Admins implements Runnable{
 	private Database admin_db;
 	private Map<String, JSONhandler> admins;
 	
-	//to be used for searching
-	private ArrayList<String> macs;
-	private ArrayList<String> ids;
-	
 	/**
 	 * @param con - The Cloudant database to connect to 
 	 * 
@@ -82,9 +78,9 @@ public class Admins implements Runnable{
 		add.addData("admin_last_name", lastname);
 		add.addData("admin_id", adminId);
 		add.addData("admin_timetable", timetable); 
-		add.addData("admin_location", "0"); 
-		add.addData("admin_status", "0"); 
-		add.addData("admin_current_class", "0"); 
+		add.addData("admin_location", "-"); 
+		add.addData("admin_status", "-/-/-"); 
+		add.addData("admin_current_class", "-"); 
 		
 		this.admin_db.save(add.instance);
 	}
