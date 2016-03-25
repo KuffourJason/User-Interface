@@ -126,7 +126,7 @@ public class AdminTabs implements com.trolltech.qt.QUiForm<QWidget>
         lname.setGeometry(new QRect(120, 30, 101, 31));
         cStatus = new QLabel(holder);
         cStatus.setObjectName("cStatus");
-        cStatus.setGeometry(new QRect(430, 60, 101, 31));
+        cStatus.setGeometry(new QRect(430, 60, 111, 31));
         location = new QLabel(holder);
         location.setObjectName("location");
         location.setGeometry(new QRect(430, 30, 111, 31));

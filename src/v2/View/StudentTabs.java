@@ -136,7 +136,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
        
         cStatus = new QLabel(holder);
         cStatus.setObjectName("cStatus");
-        cStatus.setGeometry(new QRect(390, 0, 71, 31));
+        cStatus.setGeometry(new QRect(390, 0, 101, 31));
        
         lates = new QLabel(holder);
         lates.setObjectName("lates");
