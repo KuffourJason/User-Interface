@@ -1,5 +1,7 @@
 package v2.View;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -31,20 +33,26 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
     public QLabel adminidlabel;
     public QLineEdit id;
     public QDialog m;
+    public QLabel imStat;
+    public String filename;
+    public QPushButton im;
 
     public New_admin() { super(); }
 
     public void setupUi(QDialog Dialog)
     {
+    	filename ="";
         Dialog.setObjectName("Dialog");
-        Dialog.resize(new QSize(397, 514).expandedTo(Dialog.minimumSizeHint()));
+        Dialog.resize(new QSize(398, 514).expandedTo(Dialog.minimumSizeHint()));
+        Dialog.setMinimumSize(new QSize(398, 551));
+        Dialog.setMaximumSize(new QSize(398, 551));
         Dialog.setModal(true);
         Dialog.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
         
         main = new QWidget(Dialog);
         main.setObjectName("main");
-        main.setGeometry(new QRect(0, 0, 511, 531));
-        main.setMaximumSize(new QSize(511, 531));
+        main.setGeometry(new QRect(0, 0, 398, 551));
+        main.setMaximumSize(new QSize(398, 551));
         main.setStyleSheet("#main{\n"+
 				"	background-color: rgba(52,52,52,52);\n"+
 				"}\n"+
@@ -89,40 +97,40 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         
         fpcombo = new QComboBox(main);
         fpcombo.setObjectName("fpcombo");
-        fpcombo.setGeometry(new QRect(50, 340, 121, 22));
+        fpcombo.setGeometry(new QRect(50, 380, 121, 22));
         
         label_4 = new QLabel(main);
         label_4.setObjectName("label_4");
-        label_4.setGeometry(new QRect(160, 285, 261, 21));
+        label_4.setGeometry(new QRect(160, 320, 261, 21));
         label_4.setMinimumSize(new QSize(261, 21));
         
         spcombo = new QComboBox(main);
         spcombo.setObjectName("spcombo");
-        spcombo.setGeometry(new QRect(220, 340, 121, 22));
+        spcombo.setGeometry(new QRect(220, 380, 121, 22));
         
         tpcombo = new QComboBox(main);
         tpcombo.setObjectName("tpcombo");
-        tpcombo.setGeometry(new QRect(50, 410, 121, 22));
+        tpcombo.setGeometry(new QRect(50, 450, 121, 22));
         
         fpcombo_2 = new QComboBox(main);
         fpcombo_2.setObjectName("fpcombo_2");
-        fpcombo_2.setGeometry(new QRect(220, 410, 121, 22));
+        fpcombo_2.setGeometry(new QRect(220, 450, 121, 22));
         
         p1label = new QLabel(main);
         p1label.setObjectName("p1label");
-        p1label.setGeometry(new QRect(50, 320, 81, 20));
+        p1label.setGeometry(new QRect(50, 360, 81, 20));
         
         p2label = new QLabel(main);
         p2label.setObjectName("p2label");
-        p2label.setGeometry(new QRect(220, 320, 81, 20));
+        p2label.setGeometry(new QRect(220, 360, 81, 20));
         
         p3label = new QLabel(main);
         p3label.setObjectName("p3label");
-        p3label.setGeometry(new QRect(50, 390, 81, 20));
+        p3label.setGeometry(new QRect(50, 430, 81, 20));
         
         p4label = new QLabel(main);
         p4label.setObjectName("p4label");
-        p4label.setGeometry(new QRect(220, 390, 81, 20));
+        p4label.setGeometry(new QRect(220, 430, 81, 20));
         
         banner = new QLabel(main);
         banner.setObjectName("banner");
@@ -130,7 +138,7 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         
         buttonBox = new QDialogButtonBox(main);
         buttonBox.setObjectName("buttonBox");
-        buttonBox.setGeometry(new QRect(90, 450, 191, 61));
+        buttonBox.setGeometry(new QRect(90, 490, 191, 61));
         buttonBox.setOrientation(com.trolltech.qt.core.Qt.Orientation.Horizontal);
         buttonBox.setStandardButtons(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.createQFlags(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Cancel,com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Save));
         
@@ -141,6 +149,14 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         id = new QLineEdit(main);
         id.setObjectName("id");
         id.setGeometry(new QRect(140, 180, 191, 21));
+        
+        im = new QPushButton(main);
+        im.setObjectName("im");
+        im.setGeometry(new QRect(40, 280, 81, 23));
+        
+        imStat = new QLabel(main);
+        imStat.setObjectName("imStat");
+        imStat.setGeometry(new QRect(155, 282, 171, 21) );
         
         retranslateUi(Dialog);
         buttonBox.accepted.connect(this, "check()");
@@ -172,6 +188,8 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
 
     void retranslateUi(QDialog Dialog)
     {
+    	im.clicked.connect(this, "uploadIm()");
+
         Dialog.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Dialog", null));
         fnamelabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "First Name:", null));
         lnamelabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Last Name:", null));
@@ -183,8 +201,15 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
         p4label.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period 4:", null));
         banner.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "                    New Administrator", null));
         adminidlabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Admin id:", null));
+        imStat.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "No picture uploaded", null));
+        im.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Picture", null));
     } // retranslateUi
 
+    public void uploadIm(){
+   	 this.filename = QFileDialog.getOpenFileName(m,"Open Image", "/home", new QFileDialog.Filter("Image Files (*.png *.jpg *.bmp)"));
+   	 imStat.setText("Image Uploaded");
+    }
+    
     public void check(){
     	
 		fnamelabel.setStyleSheet("#fnamelabel{color: black;}");
@@ -194,6 +219,7 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
 		p2label.setStyleSheet("#p2label{color: red;}");
 		p3label.setStyleSheet("#p3label{color: black;}");
 		p4label.setStyleSheet("#p4label{color: black;}");
+		imStat.setStyleSheet("#imStat{color: black;}");
     	    	
 		boolean check = true;
 		
@@ -236,13 +262,24 @@ public class New_admin implements com.trolltech.qt.QUiForm<QDialog>
     		check = false;
     	}
     	
+    	if( this.filename.equals("") ){
+    		imStat.setStyleSheet("#imStat{color: red;}");
+    		check = false;
+    	}
+    	
     	if( check ){
     		ArrayList<String> timetable = new ArrayList<String>();
     		timetable.add((String)fpcombo.itemData(fpcombo.currentIndex()) );
     		timetable.add((String)spcombo.itemData(spcombo.currentIndex()));
     		timetable.add((String)tpcombo.itemData(tpcombo.currentIndex()));
     		timetable.add((String)fpcombo_2.itemData(fpcombo_2.currentIndex()));
-    		boolean add = Controller.getInstance().createAdmin(this.tagid.text(), this.id.text(), this.firstname.text(), this.lastname.text(), timetable);   	
+    		
+    		FileInputStream test = null;
+    		try {
+				test = new FileInputStream(this.filename);
+			} catch (FileNotFoundException e) { }
+    		
+    		boolean add = Controller.getInstance().createAdmin(this.tagid.text(), this.id.text(), this.firstname.text(), this.lastname.text(), timetable, test);   	
 
     		QMessageBox t = new QMessageBox();
     		t.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));

@@ -1,11 +1,6 @@
 package v2.View;
-/********************************************************************************
- ** Form generated from reading ui file 'StuDialog.jui'
- **
- ** Created by: Qt User Interface Compiler version 4.8.6
- **
- ** WARNING! All changes made in this file will be lost when recompiling ui file!
- ********************************************************************************/
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -36,16 +31,20 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
     public QLabel idLabel;
     public QLineEdit stuidedit;
     public QDialogButtonBox buttonBox;
+    public QPushButton im;
+    public QLabel imStat;
     public QDialog m;
+    public String filename;
 
     public New_student() { super(); }
 
     public void setupUi(QDialog Dialog)
     {
         Dialog.setObjectName("Dialog");
+        filename = "";
         Dialog.resize(new QSize(398, 514).expandedTo(Dialog.minimumSizeHint()));
-        Dialog.setMinimumSize(new QSize(0, 507));
-        Dialog.setMaximumSize(new QSize(497, 600));
+        Dialog.setMinimumSize(new QSize(398, 551));
+        Dialog.setMaximumSize(new QSize(398, 551));
         Dialog.setModal(true);
         Dialog.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
         main = new QWidget(Dialog);
@@ -90,31 +89,31 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
         tagLabel.setGeometry(new QRect(40, 180, 81, 21));
         fpcombo = new QComboBox(main);
         fpcombo.setObjectName("fpcombo");
-        fpcombo.setGeometry(new QRect(50, 340, 121, 22));
+        fpcombo.setGeometry(new QRect(50, 380, 121, 22));
         timeLabel = new QLabel(main);
         timeLabel.setObjectName("timeLabel");
-        timeLabel.setGeometry(new QRect(160, 280, 171, 21));
+        timeLabel.setGeometry(new QRect(160, 320, 171, 21));
         spcombo = new QComboBox(main);
         spcombo.setObjectName("spcombo");
-        spcombo.setGeometry(new QRect(220, 340, 121, 22));
+        spcombo.setGeometry(new QRect(220, 380, 121, 22));
         tpcombo = new QComboBox(main);
         tpcombo.setObjectName("tpcombo");
-        tpcombo.setGeometry(new QRect(50, 410, 121, 22));
+        tpcombo.setGeometry(new QRect(50, 450, 121, 22));
         fopcombo = new QComboBox(main);
         fopcombo.setObjectName("fopcombo");
-        fopcombo.setGeometry(new QRect(220, 410, 121, 22));
+        fopcombo.setGeometry(new QRect(220, 450, 121, 22));
         p1Label = new QLabel(main);
         p1Label.setObjectName("p1Label");
-        p1Label.setGeometry(new QRect(50, 320, 81, 20));
+        p1Label.setGeometry(new QRect(50, 360, 81, 20));
         p2Label = new QLabel(main);
         p2Label.setObjectName("p2Label");
-        p2Label.setGeometry(new QRect(220, 320, 81, 20));
+        p2Label.setGeometry(new QRect(220, 360, 81, 20));
         p3Label = new QLabel(main);
         p3Label.setObjectName("p3Label");
-        p3Label.setGeometry(new QRect(50, 390, 81, 21));
+        p3Label.setGeometry(new QRect(50, 430, 81, 21));
         p4Label = new QLabel(main);
         p4Label.setObjectName("p4Label");
-        p4Label.setGeometry(new QRect(220, 390, 81, 20));
+        p4Label.setGeometry(new QRect(220, 430, 81, 20));
         banner = new QLabel(main);
         banner.setObjectName("banner");
         banner.setGeometry(new QRect(50, 20, 241, 51));
@@ -126,9 +125,17 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
         stuidedit.setGeometry(new QRect(140, 230, 191, 21));
         buttonBox = new QDialogButtonBox(main);
         buttonBox.setObjectName("buttonBox");
-        buttonBox.setGeometry(new QRect(30, 450, 251, 61));
+        buttonBox.setGeometry(new QRect(30, 490, 251, 61));
         buttonBox.setOrientation(com.trolltech.qt.core.Qt.Orientation.Horizontal);
         buttonBox.setStandardButtons(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.createQFlags(com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Cancel,com.trolltech.qt.gui.QDialogButtonBox.StandardButton.Save));
+        
+        im = new QPushButton(main);
+        im.setObjectName("im");
+        im.setGeometry(new QRect(40, 280, 81, 23));
+        
+        imStat = new QLabel(main);
+        imStat.setObjectName("imStat");
+        imStat.setGeometry(new QRect(155, 282, 171, 21) );
         retranslateUi(Dialog);
         
         m = Dialog;
@@ -161,6 +168,7 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
 
     void retranslateUi(QDialog Dialog)
     {
+    	im.clicked.connect(this, "uploadIm()");
     	
         Dialog.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Dialog", null));
         fnameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "First Name:", null));
@@ -173,10 +181,16 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
         p4Label.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Period 4:", null));
         banner.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "                    New Student", null));
         idLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Student id:", null));
+        imStat.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "No picture uploaded", null));
+        im.setText(com.trolltech.qt.core.QCoreApplication.translate("Dialog", "Picture", null));
     } // retranslateUi
 
     
-    
+ public void uploadIm(){
+	 this.filename = QFileDialog.getOpenFileName(m,"Open Image", "/home", new QFileDialog.Filter("Image Files (*.png *.jpg *.bmp)"));
+	 imStat.setText("Image Uploaded");
+ }
+ 
  public void check(){
     	
 		p3Label.setStyleSheet("#label_7{color: black;}");
@@ -187,6 +201,7 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
 		fnameLabel.setStyleSheet("#fnameLabel{color: black;}");
 		idLabel.setStyleSheet("#idLabel{color: black;}");
 		p4Label.setStyleSheet("#p4Label{color: black;}");
+		imStat.setStyleSheet("#imStat{color: black;}");
 		
 		boolean check = true;
 
@@ -232,13 +247,24 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
     		check = false;
     	}
     	
+    	if( this.filename.equals("") ){
+    		imStat.setStyleSheet("#imStat{color: red;}");
+    		check = false;
+    	}
+    	
     	if( check ){
     		ArrayList<String> timetable = new ArrayList<String>();
     		timetable.add((String)fpcombo.itemData(fpcombo.currentIndex()) );
     		timetable.add((String)spcombo.itemData(spcombo.currentIndex()));
     		timetable.add((String)tpcombo.itemData(tpcombo.currentIndex()));
     		timetable.add((String)fopcombo.itemData(fopcombo.currentIndex()));
-    		boolean add = Controller.getInstance().createStudent(this.tagidedit.text(),this.stuidedit.text(), this.namefedit.text(), this.nameledit.text(), timetable);
+    		
+    		FileInputStream test = null;
+    		try {
+				test = new FileInputStream(this.filename);
+			} catch (FileNotFoundException e) { }
+    		
+    		boolean add = Controller.getInstance().createStudent(this.tagidedit.text(),this.stuidedit.text(), this.namefedit.text(), this.nameledit.text(), timetable, test);
     		
     		QMessageBox t = new QMessageBox();
     		t.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
@@ -255,7 +281,6 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
     			t.setWindowTitle("Fail");
     			t.exec();
     		}
-    		
     		Controller.getInstance().work();
     	}    	
     }

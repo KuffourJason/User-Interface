@@ -37,6 +37,8 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     public QLabel p4;
     public String _id;
     
+    public QLabel label;
+    
     private boolean expand;
 
     public StudentTabs() { super(); expand=false;}
@@ -47,18 +49,6 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         Form.layout().addWidget(holder);
         holder.setObjectName("holder");
         holder.setGeometry(new QRect(0, 0, 621, 101));
-        
-        /*
-        QImage b = new QImage();
-        b.load("classpath:admin_resource/eot_icon.png");
-        QLabel image = new QLabel(holder);
-        image.setGeometry(new QRect(470, 10, 100, 80));
-        image.setObjectName("image");
-        image.setScaledContents(true);
-        image.setPixmap(QPixmap.fromImage(b));
-        //image.setMask( QPixmap.fromImage(b).mask()  );
-         
-         */
         
         QSizePolicy sizePolicy = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed);
         sizePolicy.setHorizontalStretch((byte)0);
@@ -207,6 +197,14 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         p4.setObjectName("p4");
         p4.setGeometry(new QRect(420, 170, 101, 31));
         
+        /*
+        label = new QLabel(holder);
+        label.setObjectName("label");
+        label.setGeometry(new QRect(480, 10, 81, 71));
+        label.setPixmap(new QPixmap(("classpath:admin_resource/logout.png")));
+        label.setScaledContents(true);
+        */
+        
     	this.expandButton.clicked.connect(this, "big()");
     	this.deleteButton.clicked.connect(this, "delete()");
 
@@ -254,6 +252,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         p2.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
         p3.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
         p4.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
+        
     } // retranslateUi
 
     public void delete(){

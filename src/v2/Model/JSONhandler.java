@@ -1,7 +1,5 @@
 package v2.Model;
 
-
-
 import java.util.ArrayList;
 
 import com.google.gson.*;
@@ -131,7 +129,6 @@ public class JSONhandler {
 		return new ArrayList<String>();
 	}
 	
-	
 	/**
 	 * @param data - An arraylist
 	 * @return - A string that contains the items in the arraylist as a comma delimited list
@@ -144,6 +141,5 @@ public class JSONhandler {
 		fin = fin.substring(1, fin.length() );
 		return fin;
 	}
-	
 }
 

@@ -1,11 +1,15 @@
 package v2.Model;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import v2.Model.JSONhandler;
+
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
+import com.cloudant.client.api.model.Response;
 import com.google.gson.JsonObject;
 
 /**
@@ -69,7 +73,7 @@ public class Admins implements Runnable{
 	 * @param lastname		- the new admni's last name
 	 * @param timetable		- the new admni's timetable
 	 */
-	public void createAdmin( String macAddress, String adminId, String firstname, String lastname, ArrayList<String> timetable ){
+	public void createAdmin( String macAddress, String adminId, String firstname, String lastname, ArrayList<String> timetable, InputStream image ){
 		
 		//adds the new admni to the static info database
 		JSONhandler add = new JSONhandler(new JsonObject());
@@ -82,7 +86,9 @@ public class Admins implements Runnable{
 		add.addData("admin_status", "-/-/-"); 
 		add.addData("admin_current_class", "-"); 
 		
-		this.admin_db.save(add.instance);
+		Response v = this.admin_db.save(add.instance);
+		this.admin_db.saveAttachment(image, "profile.png", "image/png", v.getId(), v.getRev() );		
+
 	}
 	
 	/**

@@ -1,5 +1,6 @@
 package v2.Model;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +9,7 @@ import v2.Model.JSONhandler;
 
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
+import com.cloudant.client.api.model.Response;
 import com.google.gson.JsonObject;
 
 /**
@@ -33,6 +35,8 @@ public class Students implements Runnable {
 		
 		this.dynamic = new HashMap<String, JSONhandler>();
 		this.stati   = new HashMap<String, JSONhandler>();
+		
+	
 	}
 	
 	/**
@@ -52,9 +56,9 @@ public class Students implements Runnable {
     	for( String f: list ){
     		d = new JSONhandler( dynam_db.find(JsonObject.class, f) );
     		s = new JSONhandler( stati_db.find(JsonObject.class, f) );
-    		//System.out.println(s.instance.getAsJsonObject("_attachments").getAsString() );
+
     		this.dynamic.put(f, d);
-    		this.stati.put(f, s);
+    		this.stati.put(f, s);    		
     	}
 	}
 	
@@ -80,7 +84,7 @@ public class Students implements Runnable {
 	 * @param lastname		- the new student's last name
 	 * @param timetable		- the new student's timetable
 	 */
-	public void createStudent( String macAddress, String studentId, String firstname, String lastname, ArrayList<String> timetable ){
+	public void createStudent( String macAddress, String studentId, String firstname, String lastname, ArrayList<String> timetable, InputStream image ){
 		
 		//adds the new student to the static info database
 		JSONhandler add = new JSONhandler(new JsonObject());
@@ -91,7 +95,8 @@ public class Students implements Runnable {
 		add.addData("user_number_of_absences", "0");
 		add.addData("user_number_of_lates", "0");
 		add.addData("user_timetable", timetable); 
-				
+		
+						
 		//adds the student to the dynamic database info
 		JSONhandler add_dyn = new JSONhandler(new JsonObject());
 		add_dyn.addData("_id", macAddress);
@@ -101,8 +106,10 @@ public class Students implements Runnable {
 		add_dyn.addData("user_daily_attendance", "-");
 		add_dyn.addData("rssi", "0");
 		
-		this.stati_db.save(add.instance);
+		Response v = this.stati_db.save(add.instance);
 		this.dynam_db.save(add_dyn.instance);
+		
+		this.stati_db.saveAttachment(image, "profile.png", "image/png", v.getId(), v.getRev() );		
 	}
 	
 	/**

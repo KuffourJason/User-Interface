@@ -1,5 +1,6 @@
 package v2.Controller;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -105,8 +106,8 @@ public class Controller {
 	 * @param timetable
 	 * @return
 	 */
-	public boolean createStudent(String macAddress, String studentId, String firstname, String lastname, ArrayList<String> timetable){
-		return model.newStudent(macAddress, studentId, firstname, lastname, timetable);
+	public boolean createStudent(String macAddress, String studentId, String firstname, String lastname, ArrayList<String> timetable, InputStream image){
+		return model.newStudent(macAddress, studentId, firstname, lastname, timetable, image);
 	}
 	
 	/**
@@ -117,8 +118,8 @@ public class Controller {
 	 * @param timetable
 	 * @return
 	 */
-	public boolean createAdmin( String macAddress, String adminId, String firstname, String lastname, ArrayList<String> timetable  ){
-		return model.newAdmin(macAddress, adminId, firstname, lastname, timetable);
+	public boolean createAdmin( String macAddress, String adminId, String firstname, String lastname, ArrayList<String> timetable, InputStream image  ){
+		return model.newAdmin(macAddress, adminId, firstname, lastname, timetable, image);
 	}
 	
 	public void updateConfig(String schoolEnd, String schoolStart, String firstStart, String secondStart, String luStart, String thirdStart, String fourthStart){
@@ -185,9 +186,9 @@ public class Controller {
 	}
 	
 	public void work(){
-		view.notifyAll();
-		view.tabWidget.setEnabled(true);
-		view.tabWidget.notifyAll();
+		//view.notifyAll();
+		//view.tabWidget.setEnabled(true);
+		//view.tabWidget.notifyAll();
 	}
 	
 	/**
@@ -272,6 +273,7 @@ public class Controller {
 			s.holder.lower();
 			view.stuScrollWidget.lower();
 			
+			
 		}
 	}
 	
@@ -344,7 +346,12 @@ public class Controller {
 			s.p2.connectSlotsByName();
 			s.p3.connectSlotsByName();
 			s.p4.connectSlotsByName();
-			s.cStatus.setText(u.get(r).toString("admin_status"));
+			
+			
+			ArrayList<String> status = u.get(r).toArray("admin_status");
+			if( status.size() > 1){
+				s.cStatus.setText(status.get(0));
+			}
 			s.currclass.setText(u.get(r).toString("admin_current_class"));
 			s.location.setText(u.get(r).toString("admin_location"));
 			

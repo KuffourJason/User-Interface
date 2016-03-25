@@ -1,5 +1,6 @@
 package v2.Model;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,7 +62,7 @@ public class Model {
 	 * @param timetable	- the new admins timetable
 	 * @return	- a boolean indicating whether the update succeeded
 	 */
-	public boolean newStudent(String macAddress, String studentId, String firstname, String lastname, ArrayList<String> timetable ){
+	public boolean newStudent(String macAddress, String studentId, String firstname, String lastname, ArrayList<String> timetable, InputStream image ){
 		boolean result;
 		
 		//checks if the mac address or the admin id isn't being used
@@ -80,7 +81,7 @@ public class Model {
 					timeLoc.add(location);
 				}
 			}
-			this.students.createStudent(macAddress, studentId, firstname, lastname, timeLoc);
+			this.students.createStudent(macAddress, studentId, firstname, lastname, timeLoc, image);
 			result = true;
 		}
 		else{
@@ -97,7 +98,7 @@ public class Model {
 	 * @param timetable	- the new admins timetable
 	 * @return	- a boolean indicating whether the update succeeded
 	 */
-	public boolean newAdmin(String macAddress, String adminId, String firstname, String lastname, ArrayList<String> timetable){
+	public boolean newAdmin(String macAddress, String adminId, String firstname, String lastname, ArrayList<String> timetable, InputStream image){
 		boolean result;
 		
 		//checks if the mac address or the admin id isn't being used
@@ -117,7 +118,7 @@ public class Model {
 				}
 			}
 			
-			this.admins.createAdmin(macAddress, adminId, firstname, lastname, timeLoc);
+			this.admins.createAdmin(macAddress, adminId, firstname, lastname, timeLoc, image);
 			result = true;
 		}
 		else{

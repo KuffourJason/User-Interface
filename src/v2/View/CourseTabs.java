@@ -120,7 +120,7 @@ public class CourseTabs implements com.trolltech.qt.QUiForm<QWidget>
         idLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Course ID:", null));
         peLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Period:", null));
         locationLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Location:", null));
-        durationLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "Duration:", null));
+        durationLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "End Time:", null));
         deleteButton.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", " X", null));
         cname.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
         id.setText(com.trolltech.qt.core.QCoreApplication.translate("Form", "TextLabel", null));
