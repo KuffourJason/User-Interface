@@ -117,7 +117,7 @@ public class Students implements Runnable {
 	 * @return - a boolean indicating the id is already in use
 	 */
 	public boolean isValidId(String id){
-		return this.stati_db.findByIndex("\"selector\": { \"user_id\": \" "+ id + "\" }" , JsonObject.class).isEmpty();
+		return this.stati_db.findByIndex("\"selector\": { \"user_id\":\""+ id + "\" }" , JsonObject.class).isEmpty();
 	}
 	
 	/**
@@ -131,6 +131,22 @@ public class Students implements Runnable {
 			return false;
 		}
 		return true;
+	}
+	
+	public ArrayList<JSONhandler>  getStudent(String id, String crit){
+		ArrayList<JSONhandler> t = new ArrayList<JSONhandler>();
+		
+		if( crit.equals("tag") ){
+			t.add( this.dynamic.get(id) );
+			t.add(this.stati.get(id) );
+		}
+		else{
+			JSONhandler st = new JSONhandler(this.stati_db.findByIndex("\"selector\": { \"user_id\":\""+ id + "\" }" , JsonObject.class).get(0));
+			JSONhandler dy = this.dynamic.get( st.toString("_id") );
+			t.add(dy);
+			t.add(st);
+		}
+		return t;
 	}
 	
 	/**

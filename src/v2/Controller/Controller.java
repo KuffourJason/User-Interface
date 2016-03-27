@@ -185,6 +185,10 @@ public class Controller {
 		this.studentDisplay();
 	}
 	
+	public ArrayList<JSONhandler> search( String db, String id, String crit){
+		return model.search(db, id,  crit);
+	}
+	
 	public void work(){
 		//view.notifyAll();
 		//view.tabWidget.setEnabled(true);

@@ -244,6 +244,53 @@ public class Model {
 		this.config.update(schoolEnd, schoolStart, firstStart, secondStart, luStart, thirdStart, fourthStart);			
 	}
 	
+	public ArrayList<JSONhandler> search(String db, String id, String criteria){
+		ArrayList<JSONhandler> result = new ArrayList<JSONhandler>();
+		
+		//if the person is searching for a student
+		if(db.equals("student")){
+			
+			//checks whether they are searching by id or tag id
+			if( criteria.equals("Student ID") ){
+				if(!this.students.isValidId(id) ){	//checks if the id is being used
+					result = this.students.getStudent(id, "id");
+				}
+				else{  }
+			}
+			else{
+				if(!this.students.isValidMac(id) ){ //checks if the tag id is being used
+					result = this.students.getStudent(id, "tag");
+				}
+				else{	 }
+			}
+		}
+		else if(db.equals("admin")){
+			
+			//checks whether they are searching by id or tag id
+			if( criteria.equals("Admin ID") ){
+				if(!this.admins.isValidId(id) ){	//checks if the id is being used
+					result.add(this.admins.getAdmin(id, "id"));
+				}
+				else{  }
+				
+			}
+			else{
+				if(!this.admins.isValidMac(id) ){	//checks if the tag id is being used
+					result.add(this.admins.getAdmin(id, "tag"));
+				}
+				else{}
+			}
+		}
+		else{
+			if(!this.courses.isValid(id) ){
+				result.add( this.courses.getCourse(id) );
+			}
+			else{  }
+		}
+		
+		return result;
+	}
+	
 	public Map<String, String> getConfig(){
 		return this.config.getConfig();
 	}
@@ -263,4 +310,5 @@ public class Model {
 	public void refreshStudentData(){
 		this.students.run();
 	}
+
 }

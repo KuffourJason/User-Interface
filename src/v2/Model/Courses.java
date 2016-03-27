@@ -101,6 +101,10 @@ public class Courses implements Runnable {
 		return this.courses;
 	}
 	
+	public JSONhandler getCourse(String id){
+		return this.courses.get(id);
+	}
+	
 	public Map<String, String> getPeriods( int period ){
 		Map<String, String> result = new HashMap<String, String>();
 		for( String key: courses.keySet() ){

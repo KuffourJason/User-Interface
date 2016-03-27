@@ -41,6 +41,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public QScrollArea adminScroll;
     public QVBoxLayout verticalLayout_4;
     public QPushButton addAdminButton;
+    public QLabel bannerLabel;
 
     public QScrollArea couScroll;
     
@@ -59,6 +60,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public New_student ns;
     public New_admin na;
     public New_course nc;
+    public SearchDialog sear;
     
     public MainView() { 
     	super(); 
@@ -66,6 +68,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     	this.nc = new New_course();
     	this.na = new New_admin();
     	this.ns = new New_student();
+    	this.sear = new SearchDialog();
     }
 
     public void setupUi(QMainWindow MainWindow)
@@ -197,6 +200,18 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
 				"	color: rgb(255, 255, 255);\n"+
 				"	font: 13pt \"MS Shell Dlg 2\";\n"+
 				"}");
+        
+        bannerLabel = new QLabel(loginFormWidget);
+        bannerLabel.setObjectName("bannerLabel");
+        bannerLabel.setGeometry(new QRect(190, 80, 381, 81));
+        bannerLabel.setStyleSheet("#bannerLabel{\n"+
+				"	text-decoration: underline;\n"+
+				"	font: 8pt \"MS Shell Dlg 2\";\n"+
+				"	font: 23pt \"MS Shell Dlg 2\";\n"+
+				"	color: white;\n"+
+				"}\n"+
+				"");
+        
         bottomBar = new QWidget(eotImage);
         bottomBar.setObjectName("bottomBar");
         bottomBar.setGeometry(new QRect(10, 510, 701, 101));
@@ -463,6 +478,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
 
     void retranslateUi(QMainWindow MainWindow)
     {
+    	searchButton.clicked.connect(this, "searchDia()");
     	settingButton.clicked.connect(this, "display()");
     	actionSet.triggered.connect(this, "display()");
     	
@@ -484,6 +500,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         loginButton.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Login", null));
         backlabel.setText("");
         invalidLogin.setText("");
+        bannerLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Bluetooth Security Solution", null));
         logoutButton.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "logout", null));
         refreshButton.setWhatsThis(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<html><head/><body><p>Refresh the list currently being displayed</p></body></html>", null));
         searchButton.setWhatsThis(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<html><head/><body><p>Search for a specific person</p></body></html>", null));
@@ -548,6 +565,26 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     	addC.exec();
     }
     
+    public void searchDia(){
+    	QDialog search = new QDialog();
+    	search.connectSlotsByName();
+    	this.sear.setupUi(search);
+    	
+    	if( this.tabWidget.currentIndex() == 0){
+    		this.sear.titleLabel.setText("Admin Search");
+    		this.sear.criteriaList.addItem("Admin ID");
+    		this.sear.criteriaList.addItem("Tag ID");
+    	}
+    	else if(this.tabWidget.currentIndex() == 1){
+    		this.sear.titleLabel.setText("Course Search");
+    		this.sear.criteriaList.addItem("Course ID");
+    	}
+    	else{
+    		this.sear.criteriaList.addItem("Student ID");
+    		this.sear.criteriaList.addItem("Tag ID");
+    	}
+    	search.exec();
+    }
     /**
      * 
      */
