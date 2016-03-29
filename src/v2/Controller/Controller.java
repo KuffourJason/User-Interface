@@ -172,6 +172,11 @@ public class Controller {
 		this.classDisplay();
 	}
 	
+	public void reset(){
+		model.reset();
+		this.updateStudentView();
+	}
+	
 	/**
 	 * 
 	 */
@@ -225,11 +230,13 @@ public class Controller {
 	 */
 	public void studentDisplay(){
 		Map<String, ArrayList<JSONhandler>> t = model.retrieveStudents();
+		StudentTabs s;
 		for( String r: t.keySet() ){
 			
 			if( t.get(r).get(1).toString("user_first_name").equals("nothing")) continue;
-			StudentTabs s = new StudentTabs();
+			s = new StudentTabs();
 			s.setupUi(view.stuScrollWidget);
+			s.expand = false;
 		
    		    s.fname.connectSlotsByName();
    		    s.lname.connectSlotsByName();
@@ -274,10 +281,9 @@ public class Controller {
 				s.p3.setText(time[4]);
 				s.p4.setText(time[6]);
 			}
+			//s.expandButton.clicked.connect(s, "big()");
 			s.holder.lower();
 			view.stuScrollWidget.lower();
-			
-			
 		}
 	}
 	
@@ -287,11 +293,12 @@ public class Controller {
 	public void classDisplay(){
 		Map<String, JSONhandler> v = model.retrieveCourses();
 		Map<String, String> info = this.getConfigInfo();
+		CourseTabs s;
 		
 		for( String r: v.keySet() ){
 
 			if( v.get(r).toString("class_name").equals("nothing")) continue;
-			CourseTabs s = new CourseTabs();
+			s = new CourseTabs();
 			s.setupUi(view.cScrollWidget );
    		    s.cname.connectSlotsByName();
    		    s.id.connectSlotsByName();
@@ -330,10 +337,12 @@ public class Controller {
 	 */
 	public void adminDisplay(){
 		Map<String, JSONhandler> u = Controller.getInstance().model.retrieveAdmin();
+		AdminTabs s;
+		
 		for( String r: u.keySet() ){
 			
 			if( u.get(r).toString("admin_first_name").equals("nothing")) continue;
-			AdminTabs s = new AdminTabs();
+			s = new AdminTabs();
 			s.setupUi(view.adminScrollWidget );
 			
    		    s.fname.connectSlotsByName();

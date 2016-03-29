@@ -39,12 +39,13 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     
     public QLabel label;
     
-    private boolean expand;
+    public boolean expand;
 
-    public StudentTabs() { super(); expand=false;}
+    public StudentTabs() { super(); expand=false; }
 
     public void setupUi(QWidget Form)
     {
+    	expand=false;
         holder = new QWidget(Form);
         Form.layout().addWidget(holder);
         holder.setObjectName("holder");
@@ -204,22 +205,25 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
         label.setPixmap(new QPixmap(("classpath:admin_resource/logout.png")));
         label.setScaledContents(true);
         */
+    	
+    	this.expandButton.raise();
+    	this.deleteButton.raise();
+
+    	
+        retranslateUi(Form);
+
+    } // setupUi
+
+    public void retranslateUi(QWidget Form)
+    {
+        this.expandButton.connectSlotsByName();
+        this.deleteButton.connectSlotsByName();
         
     	this.expandButton.clicked.connect(this, "big()");
     	this.deleteButton.clicked.connect(this, "delete()");
 
-        retranslateUi(Form);
-
-        //Form.connectSlotsByName();
-    } // setupUi
-
-    void retranslateUi(QWidget Form)
-    {
-    	this.tAbsentLabel.hide();
-    	this.tLatesLabel.hide();
-    	this.absents.hide();
-    	this.lates.hide();
-
+    	expand=false;
+    	
     	this.expandButton.raise();
     	this.deleteButton.raise();
     	holder.lower();
@@ -277,6 +281,7 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     }
     
     public void big(){
+    	System.out.println("hello world");
     	if( !expand ){
         	holder.setFixedHeight(215);
         	this.tAbsentLabel.show();

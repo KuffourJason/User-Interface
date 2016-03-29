@@ -36,6 +36,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     public QToolButton refreshButton;
     public QToolButton searchButton;
     public QToolButton settingButton;
+    public QToolButton resetButton;
     public QToolButton fillButton;
     public QTabWidget tabWidget;
     public QScrollArea adminScroll;
@@ -259,6 +260,15 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
 				"QToolButton#settingButton:hover{\n"+
 				"	background: rgba(52, 52, 52, 255);\n"+
 				"}\n"+
+				"QToolButton#resetButton:hover{\n"+
+				"	background: rgba(52, 52, 52, 255);\n"+
+				"}\n"+
+				"\n"+
+				"QToolButton#resetButton{\n"+
+				"	border-style: solid;\n"+
+				"    background: rgba(52, 52, 52, 155);\n"+
+				"    color: white;\n"+
+				"}\n"+
 				"\n"+
 				"#fillButton{\n"+
 				"	background: rgba(52, 52, 52, 55);\n"+
@@ -268,13 +278,21 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         logoutButton.setGeometry(new QRect(610, 0, 71, 41));
         logoutButton.setPopupMode(com.trolltech.qt.gui.QToolButton.ToolButtonPopupMode.InstantPopup);
         logoutButton.setIcon(new QIcon(new QPixmap("classpath:admin_resource/logout.png")));
+       
         refreshButton = new QToolButton(bottomBar);
         refreshButton.setObjectName("refreshButton");
         refreshButton.setGeometry(new QRect(70, 0, 81, 41));
         refreshButton.setStyleSheet("");
         refreshButton.setIcon(new QIcon(new QPixmap("classpath:admin_resource/refesh_good.png")));			///////////////////////////////////////////////////
-       
         refreshButton.setCheckable(false);
+        
+        resetButton = new QToolButton(bottomBar);
+        resetButton.setObjectName("resetButton");
+        resetButton.setGeometry(new QRect(540, 0, 71, 41));
+        resetButton.setPopupMode(com.trolltech.qt.gui.QToolButton.ToolButtonPopupMode.InstantPopup);
+        resetButton.setIcon(new QIcon(new QPixmap("classpath:admin_resource/reset.png")));
+        resetButton.raise();
+       
         searchButton = new QToolButton(bottomBar);
         searchButton.setObjectName("searchButton");
         searchButton.setGeometry(new QRect(0, 0, 71, 41));
@@ -285,12 +303,14 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         settingButton.setGeometry(new QRect(150, 0, 71, 41));
         settingButton.setIcon(new QIcon(new QPixmap("classpath:admin_resource/save_icon.png")));								/////////////////////				
         settingButton.setPopupMode(com.trolltech.qt.gui.QToolButton.ToolButtonPopupMode.InstantPopup);
+       
         fillButton = new QToolButton(bottomBar);
         fillButton.setObjectName("fillButton");
         fillButton.setEnabled(false);
-        fillButton.setGeometry(new QRect(220, 0, 391, 41));
+        fillButton.setGeometry(new QRect(220, 0, 320, 41));
         fillButton.setStyleSheet("");
         fillButton.setPopupMode(com.trolltech.qt.gui.QToolButton.ToolButtonPopupMode.InstantPopup);
+        
         tabWidget = new QTabWidget(eotImage);
         tabWidget.setObjectName("tabWidget");
         tabWidget.setGeometry(new QRect(-10, 10, 721, 561));
@@ -473,6 +493,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         this.loginForm();
         actionExit.triggered.connect(MainWindow, "close()"); //connect menu exit button to shutdown software
         actionLogout.triggered.connect(this, "loginForm()");
+        
         MainWindow.connectSlotsByName();
     } 
 
@@ -481,6 +502,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     	searchButton.clicked.connect(this, "searchDia()");
     	settingButton.clicked.connect(this, "display()");
     	actionSet.triggered.connect(this, "display()");
+    	resetButton.clicked.connect(this, "reset()");
     	
     	this.refreshButton.clicked.connect(this, "refresh()");
     	this.addStu.clicked.connect(this, "addStudent()");;
@@ -501,6 +523,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         backlabel.setText("");
         invalidLogin.setText("");
         bannerLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Bluetooth Security Solution", null));
+        resetButton.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "reset", null));
         logoutButton.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "logout", null));
         refreshButton.setWhatsThis(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<html><head/><body><p>Refresh the list currently being displayed</p></body></html>", null));
         searchButton.setWhatsThis(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<html><head/><body><p>Search for a specific person</p></body></html>", null));
@@ -535,6 +558,10 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
     
     public void refresh(){
     	Controller.getInstance().refresh(this.tabWidget.currentIndex());
+    }
+    
+    public void reset(){
+    	Controller.getInstance().reset();
     }
     
     public void display(){

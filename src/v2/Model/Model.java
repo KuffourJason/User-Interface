@@ -18,12 +18,13 @@ public class Model {
 	private Courses courses;	//Instance to handle courses crap
 	private Admins admins;		//instance to handle admins crap
 	private Config config;		//instance to handle configurations
+	private CloudantClient account;
 	
 	/**
 	 * The constructor connects to the cloudant database and begins pulling all the information from all 4 databases
 	 */
 	public Model(){
-		CloudantClient account = new CloudantClient("eyeofthetiger", "eyeofthetiger", "eng40000");
+		this.account = new CloudantClient("eyeofthetiger", "eyeofthetiger", "eng40000");
 		this.students = new Students(account);
 		this.courses = new Courses(account);
 		this.admins = new Admins(account);
@@ -146,6 +147,17 @@ public class Model {
 			result = false;
 		}
 		return result;
+	}
+	
+	public void reset(){
+		Reset reset = new Reset(this.students.getDynamicInfo(), this.account);
+		
+		if(	reset.reset() ){
+			System.out.println("yeah boy");
+		}
+		else{
+			System.out.println("crap");
+		}
 	}
 	
 	/**
