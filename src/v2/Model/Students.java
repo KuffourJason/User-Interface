@@ -101,6 +101,11 @@ public class Students implements Runnable {
 		JSONhandler add_dyn = new JSONhandler(new JsonObject());
 		add_dyn.addData("_id", macAddress);
 		add_dyn.addData("user_status", "ABSENT/-/-");
+		
+		///////////////////
+		//////////////////// add entry and exit times here
+		///////////////////
+		
 		add_dyn.addData("user_current_class", "-");
 		add_dyn.addData("user_location", "-");
 		add_dyn.addData("user_daily_attendance", "-");

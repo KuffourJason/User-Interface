@@ -270,6 +270,12 @@ public class Controller {
 				s.entryTime.setText(status.get(1));
 				s.exitTime.setText(status.get(2));
 			}
+			
+			
+			/////////////////////
+			/////////////////////	Change user status here
+			/////////////////////
+			
 			s.currClass.setText(t.get(r).get(0).toString("user_current_class"));
 			s.curLocation.setText(t.get(r).get(0).toString("user_location"));
 			s._id = t.get(r).get(0).toString("_id");

@@ -270,13 +270,13 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     		t.setText("The deletion was a success");
     		t.setWindowTitle("Success");
     		t.exec();
-    		Controller.getInstance().work();
+    		//Controller.getInstance().work();
     	}
     	else{
     		t.setText("The deletion failed");
     		t.setWindowTitle("Failed");
     		t.exec();
-    		Controller.getInstance().work();
+    		//Controller.getInstance().work();
     	}
     }
     
