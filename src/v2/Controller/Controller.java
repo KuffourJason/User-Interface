@@ -331,11 +331,11 @@ public class Controller {
 			}
 			else if( v.get(r).toString("class_period").equals("2") ){
 				s.start.setText(info.get("second"));
-				s.duration.setText(info.get("third") );
+				s.duration.setText(info.get("lunchStart") );
 			}
 			else if( v.get(r).toString("class_period").equals("3") ){
 				s.start.setText(info.get("third"));
-				s.duration.setText(info.get("lunchStart") );
+				s.duration.setText(info.get("fourth") );
 			}
 			else if( v.get(r).toString("class_period").equals("4") ){
 				s.start.setText(info.get("fourth"));
