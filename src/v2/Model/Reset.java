@@ -21,7 +21,9 @@ public class Reset {
 		Boolean success = true;
 		
 		for(String t: stu.keySet() ){
-			stu.get(t).addData("user_status", "ABSENT/-/-");
+			stu.get(t).addData("user_status", "ABSENT");
+			stu.get(t).addData("entry", "-");
+			stu.get(t).addData("exit", "-");
 			stu.get(t).addData("user_current_class", "-");
 			stu.get(t).addData("user_location", "-");
 			

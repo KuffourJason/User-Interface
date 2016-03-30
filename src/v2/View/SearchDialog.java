@@ -191,6 +191,8 @@ public class SearchDialog implements com.trolltech.qt.QUiForm<QDialog>
     			output = output + "\n" + "Student id           : " + t.get(1).toString("user_id");
     			output = output + "\n" + "Tag id               : " + t.get(0).toString("_id");
     			output = output + "\n" + "Student's status    : " + t.get(0).toString("user_status");
+    			output = output + "\n" + "Student's status    : " + t.get(0).toString("entry");
+    			output = output + "\n" + "Student's status    : " + t.get(0).toString("exit");
     			output = output + "\n" + "Student's location : " + t.get(0).toString("user_current_location");
     			output = output + "\n" + "Student's class     : " + t.get(0).toString("user_current_class");
     			

@@ -100,11 +100,13 @@ public class Students implements Runnable {
 		//adds the student to the dynamic database info
 		JSONhandler add_dyn = new JSONhandler(new JsonObject());
 		add_dyn.addData("_id", macAddress);
-		add_dyn.addData("user_status", "ABSENT/-/-");
+		add_dyn.addData("user_status", "ABSENT");
 		
-		///////////////////
+		/////////////////// add_dyn.addData("user_status", "ABSENT/-/-");
 		//////////////////// add entry and exit times here
 		///////////////////
+		add_dyn.addData("entry", "-");
+		add_dyn.addData("exit", "-");
 		
 		add_dyn.addData("user_current_class", "-");
 		add_dyn.addData("user_location", "-");

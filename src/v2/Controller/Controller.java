@@ -175,6 +175,12 @@ public class Controller {
 	public void reset(){
 		model.reset();
 		this.updateStudentView();
+		
+		QMessageBox t = new QMessageBox();
+		t.setWindowIcon(new QIcon(new QPixmap("classpath:admin_resource/eot_icon.png")));
+		t.setText("Status cleared");
+		t.setWindowTitle("Status cleared");
+		t.exec();
 	}
 	
 	/**
@@ -264,12 +270,12 @@ public class Controller {
 			*/
 			s.p4.connectSlotsByName();
 			
-			ArrayList<String> status = t.get(r).get(0).toArray("user_status");
-			if( status.size() > 1){
-				s.cStatus.setText(status.get(0));
-				s.entryTime.setText(status.get(1));
-				s.exitTime.setText(status.get(2));
-			}
+			//ArrayList<String> status = t.get(r).get(0).toArray("user_status");
+			//if( status.size() > 1){
+				s.cStatus.setText(t.get(r).get(0).toString("user_status"));
+				s.entryTime.setText(t.get(r).get(0).toString("entry"));
+				s.exitTime.setText(t.get(r).get(0).toString("exit"));
+			//}
 			
 			
 			/////////////////////
