@@ -281,7 +281,6 @@ public class StudentTabs implements com.trolltech.qt.QUiForm<QWidget>
     }
     
     public void big(){
-    	System.out.println("hello world");
     	if( !expand ){
         	holder.setFixedHeight(215);
         	this.tAbsentLabel.show();

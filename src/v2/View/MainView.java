@@ -457,7 +457,7 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         stuScroll.setAlignment(com.trolltech.qt.core.Qt.AlignmentFlag.createQFlags(com.trolltech.qt.core.Qt.AlignmentFlag.AlignLeft,com.trolltech.qt.core.Qt.AlignmentFlag.AlignTop));
         stuScrollWidget = new QWidget();
         stuScrollWidget.setObjectName("stuScrollWidget");
-        stuScrollWidget.setGeometry(new QRect(0, 0, 639, 329));
+        stuScrollWidget.setGeometry(new QRect(0, 0, 639, 629));
         verticalLayout = new QVBoxLayout(stuScrollWidget);
         verticalLayout.setSpacing(0);
         verticalLayout.setObjectName("verticalLayout");
@@ -487,8 +487,9 @@ public class MainView implements com.trolltech.qt.QUiForm<QMainWindow>
         loginButton.clicked.connect(this, "login()");
         logoutButton.clicked.connect(loginFormWidget, "show()");
         passText.returnPressed.connect(this, "login()");
-        tabWidget.setCurrentIndex(0);
+        tabWidget.setCurrentIndex(2);
         bottomBar.raise();	//raises the bottom bar
+        
         
         this.loginForm();
         actionExit.triggered.connect(MainWindow, "close()"); //connect menu exit button to shutdown software

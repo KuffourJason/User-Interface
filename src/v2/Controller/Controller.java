@@ -124,6 +124,7 @@ public class Controller {
 	
 	public void updateConfig(String schoolEnd, String schoolStart, String firstStart, String secondStart, String luStart, String thirdStart, String fourthStart){
 		model.updateConfig( schoolEnd, schoolStart, firstStart, secondStart, luStart, thirdStart, fourthStart);
+		this.model.getConfig();
 	}
 	
 	public Map<String, String> getConfigInfo(){
@@ -272,7 +273,22 @@ public class Controller {
 			
 			//ArrayList<String> status = t.get(r).get(0).toArray("user_status");
 			//if( status.size() > 1){
-				s.cStatus.setText(t.get(r).get(0).toString("user_status"));
+				String status = t.get(r).get(0).toString("user_status");
+				s.cStatus.setText(status);
+				
+				if( status.equals("PRESENT")){
+					s.cStatus.setStyleSheet("QLabel{ font: 16pt \"Calibri\";  color: green;}");
+					s.curLocation.setStyleSheet("QLabel{ font: 16pt \"Calibri\";  color: green;}");
+				}
+				else if( status.equals("LATE") ){
+					s.cStatus.setStyleSheet("QLabel{ font: 16pt \"Calibri\";  color: yellow;}");
+					s.curLocation.setStyleSheet("QLabel{ font: 16pt \"Calibri\";  color: green;}");
+				}
+				else{
+					s.cStatus.setStyleSheet("QLabel{ font: 16pt \"Calibri\";  color: red;}");
+					s.curLocation.setStyleSheet("QLabel{ font: 16pt \"Calibri\";  color: red;}");
+				}
+				
 				s.entryTime.setText(t.get(r).get(0).toString("entry"));
 				s.exitTime.setText(t.get(r).get(0).toString("exit"));
 			//}

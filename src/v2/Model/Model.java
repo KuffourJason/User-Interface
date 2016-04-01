@@ -253,7 +253,8 @@ public class Model {
 	 * @param fourthStart
 	 */
 	public void updateConfig(String schoolEnd, String schoolStart,  String firstStart,  String secondStart, String luStart, String thirdStart, String fourthStart){
-		this.config.update(schoolEnd, schoolStart, firstStart, secondStart, luStart, thirdStart, fourthStart);			
+		this.config.update(schoolEnd, schoolStart, firstStart, secondStart, luStart, thirdStart, fourthStart);		
+		this.config.getData();
 	}
 	
 	public ArrayList<JSONhandler> search(String db, String id, String criteria){

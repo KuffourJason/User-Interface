@@ -300,7 +300,7 @@ public class Settings implements com.trolltech.qt.QUiForm<QDialog>
         fourthtime.setTime(QTime.fromString(da.get("fourth"), "hh:mm"));
         endEdit.setTime(QTime.fromString(da.get("end"), "hh:mm"));
         lunchEndEdit.setTime(QTime.fromString(da.get("third"), "hh:mm"));
-        lunchStartEdit.setTime(QTime.fromString(da.get("lunch_start"), "hh:mm"));
+        lunchStartEdit.setTime(QTime.fromString(da.get("lunchStart"), "hh:mm"));
         
     } // retranslateUi
 

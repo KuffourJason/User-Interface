@@ -188,7 +188,9 @@ public class New_student implements com.trolltech.qt.QUiForm<QDialog>
     
  public void uploadIm(){
 	 this.filename = QFileDialog.getOpenFileName(m,"Open Image", "/home", new QFileDialog.Filter("Image Files (*.png *.jpg *.bmp)"));
-	 imStat.setText("Image Uploaded");
+	 if(!this.filename.isEmpty()){
+		 imStat.setText("Image Uploaded");
+	 }
  }
  
  public void check(){
