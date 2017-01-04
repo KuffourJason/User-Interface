@@ -9,7 +9,7 @@
     * [Features](#headers) <br/>
     * [Design](#headers) <br/>
 * [Used Libraries](#headers) <br/>
-* [Further Notes](#headers) <br/>
+* [Further Notes](#fn) <br/>
 
 <a name="headers"/>
 ## Background
@@ -65,10 +65,11 @@ The second version was implemented using the QtJambi UI framework and was comple
 
 <a name="headers"/>
 ## Used Libraries
+
 * Cloudant library (Java)
 * QtJambi (Java UI framework)
 
-<a name="headers"/>
+<a name="fn"/>
 ## Further Notes
 
 For further details regarding this Engineering Capstone Project, please read the attached final report in the repository. See sections 1, 3.1 and 4.1 
