@@ -72,4 +72,6 @@ The second version was implemented using the QtJambi UI framework and was comple
 <a name="fn"/>
 ## Further Notes
 
-For further details regarding this Engineering Capstone Project, please read the attached final report in the repository. See sections 1, 3.1 and 4.1 
+For further details regarding this Engineering Capstone Project, please read the attached final report in the repository. See sections 1, 3.1, 4.1 and 5.1
+
+[Final Report] (Final Report.docx)
