@@ -62,4 +62,4 @@ The second version was implemented using the QtJambi UI framework and was comple
 
 For further details regarding this Engineering Capstone Project, please read the attached final report in the repository. See sections 1, 3.1, 4.1 and 5.1
 
-[Final Report.docx] (Final Report.docx)
+[Final Report](https://github.com/KuffourJason/MainProject/blob/master/Final%20Report.docx)
